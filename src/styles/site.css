@@ -2599,3 +2599,6 @@ body { line-height: 1.65; }
 .nav__top, .brand__name, .header-cta, .btn-cta { white-space: nowrap; }
 .brand { flex-shrink: 0; }
 @media (max-width: 1240px) { .nav__top { padding-left: 10px; padding-right: 10px; font-size: 15px; } .nav__top::after { left: 10px; right: 10px; } }
+.stile--cta .btn-cta { align-self: flex-start; }
+.btn-cta--plain { padding: 16px 30px; }
+.btn-cta--plain.btn-cta--sm { padding: 12px 24px; }
