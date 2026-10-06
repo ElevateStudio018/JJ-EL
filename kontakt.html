@@ -4,190 +4,106 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kontakt — JJ El &amp; Entreprenad AB</title>
-    <meta name="description" content="Kontakta JJ El &amp; Entreprenad AB för offertförfrågan eller frågor om ett pågående ärende. Gustavsbergsvägen 8, 442 53 Ytterby." />
-    <meta name="theme-color" content="#0B1113" />
+    <meta name="description" content="Kontakta JJ El &amp; Entreprenad AB för offertförfrågan eller felanmälan. Gustavsbergsvägen 8, 442 53 Ytterby." />
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="preconnect" href="https://images.pexels.com" crossorigin />
-    <link rel="preload" as="image" data-px-preload="7359568" fetchpriority="high" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kontakt — JJ El &amp; Entreprenad AB" />
-    <meta property="og:description" content="Gustavsbergsvägen 8, 442 53 Ytterby." />
-    <meta property="og:image" content="https://images.pexels.com/photos/7359568/pexels-photo-7359568.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
+    <meta property="og:description" content="Kontakta JJ El &amp; Entreprenad AB för offertförfrågan eller felanmälan. Gustavsbergsvägen 8, 442 53 Ytterby." />
+    <meta property="og:image" content="https://images.pexels.com/photos/6301185/pexels-photo-6301185.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body class="is-loading">
+  <body>
     <a class="skip-link" href="#main">Hoppa till innehåll</a>
-
-    <header class="header" data-header>
-      <div class="header__inner">
-        <a class="logo" href="index.html" aria-label="JJ El & Entreprenad AB — startsida">
-          <img class="logo__mark" src="jj-el-logo.png" alt="" aria-hidden="true" width="30" height="30" />
-          <span class="logo__word">JJ El</span>
-          <span class="logo__sub">&amp; Entreprenad<br />AB</span>
-        </a>
-        <nav class="nav" aria-label="Huvudmeny">
-          <ul>
-            <li><a href="index.html" class="nav__link">Hem</a></li>
-            <li><a href="tjanster.html" class="nav__link">Tjänster</a></li>
-            <li><a href="omdomen.html" class="nav__link">Omdömen</a></li>
-            <li><a href="process.html" class="nav__link">Så går det till</a></li>
-            <li><a href="om-oss.html" class="nav__link">Om oss</a></li>
-            <li><a href="kontakt.html" class="nav__link is-active">Kontakt</a></li>
-          </ul>
-        </nav>
-        <button class="btn-text header__cta" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
-          <span class="sr-only">Meny</span><span class="menu-toggle__bars" aria-hidden="true"></span>
-        </button>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="brand" href="index.html" aria-label="JJ El &amp; Entreprenad AB — startsida"><img src="jj-el-logo.png" alt="JJ El &amp; Entreprenad AB" width="58" height="58" /></a>
+        <nav aria-label="Huvudmeny"><ul class="nav"><li><a class="nav__top" href="tjanster.html" aria-haspopup="true">Tjänster <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="tjanster.html">Alla tjänster</a></li><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li><li><a href="tjanster.html#styr-och-reglerteknik">Styr- &amp; reglerteknik</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li></ul></li><li><a class="nav__top" href="process.html" aria-haspopup="true">Anlita oss <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="process.html">Så går det till</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></li><li><a class="nav__top" href="om-oss.html" aria-haspopup="true">Om oss <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></li><li><a class="nav__top is-active" href="kontakt.html">Kontakt</a></li></ul></nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
       </div>
+      <nav class="mobile-panel" id="mobilmeny" aria-label="Mobilmeny"><ul><li><a href="tjanster.html">Tjänster</a><ul class="sub"><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li><li><a href="tjanster.html#styr-och-reglerteknik">Styr- &amp; reglerteknik</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li></ul></li><li><a href="process.html">Anlita oss</a><ul class="sub"><li><a href="omdomen.html">Omdömen</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></li><li><a href="om-oss.html">Om oss</a><ul class="sub"><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
     </header>
-
-    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
-      <nav aria-label="Mobilmeny">
-        <ol>
-          <li><a href="index.html"><span>01</span>Hem</a></li>
-          <li><a href="tjanster.html"><span>02</span>Tjänster</a></li>
-          <li><a href="omdomen.html"><span>03</span>Omdömen</a></li>
-          <li><a href="process.html"><span>04</span>Så går det till</a></li>
-          <li><a href="om-oss.html"><span>05</span>Om oss</a></li>
-          <li><a href="kontakt.html"><span>06</span>Kontakt</a></li>
-        </ol>
-      </nav>
-      <button class="btn btn--light btn--block" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
-      <p class="mobile-menu__foot mono">070-910 75 07 · jesper@jjel.se</p>
-    </div>
-
     <main id="main">
-      <section class="shero" data-theme="dark" aria-labelledby="shero-title">
-        <div class="shero__media" data-hero-media-s>
-          <img class="ph" data-px="7359568" data-ar="16/10" sizes="100vw" alt="Elektriker inspekterar en säkringsskåp" fetchpriority="high" decoding="async" />
-        </div>
-        <div class="shero__shade" aria-hidden="true"></div>
-        <div class="wrap shero__inner">
-          <p class="eyebrow">Kontakt</p>
-          <h1 class="display shero__title" id="shero-title">Kontakta<br />oss.</h1>
-          <p class="breadcrumb mono"><a href="index.html">Hem</a> / Kontakt</p>
+      <section class="hero">
+        <img data-px="6301185" data-ar="16/7" sizes="100vw" alt="Modernt kök med pendellampor" fetchpriority="high" decoding="async" />
+        <div class="wrap hero__inner">
+          <h1>Kontakta oss</h1>
+          <div class="hero__rule"></div>
+          <p class="crumbs"><a href="index.html">Hem</a> » Kontakt</p>
         </div>
       </section>
-
-      <section data-theme="light" style="padding-block: clamp(56px, 9vh, 112px);">
-        <div class="wrap" style="max-width: 640px; margin-bottom: 48px;">
-          <p data-reveal>Har du frågor om ett elarbete, vill lämna en offertförfrågan eller har ett akut elfel? Du är varmt välkommen att höra av dig — vi återkommer så snart vi kan.</p>
-        </div>
-
+      <section class="section">
         <div class="wrap">
-          <div class="contact-grid" style="margin-bottom: 20px;">
-            <div class="contact-card contact-card--sage" data-reveal>
-              <h3>Offertförfrågan</h3>
-              <p>Berätta om ert elarbete så återkommer vi så snart vi kan med ett första förslag.</p>
-              <button type="button" class="btn btn--dark" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
-            </div>
-            <div class="contact-card contact-card--sand" data-reveal>
-              <h3>Akut elfel</h3>
-              <p>Gäller det något som inte fungerar som det ska? Ring oss direkt så hjälper vi er.</p>
-              <a class="btn btn--light" href="tel:+46709107507">070-910 75 07</a>
-            </div>
+          <p class="lead" style="max-width:500px">Har du frågor om ett elarbete eller vill ha en offert? Du är alltid varmt välkommen att kontakta oss. Nedan hittar du rätt väg in beroende på vilket ärende du har.</p>
+        </div>
+        <div class="wrap ccards mt-36">
+          <div class="ccard" id="offert">
+            <h3>Offertförfrågan</h3>
+            <p>Berätta kort om vad du behöver hjälp med — vilken typ av elarbete, var och ungefär när — så återkommer vi så snart vi kan.</p>
+            <p class="mail">Mail: <a href="mailto:jesper@jjel.se">jesper@jjel.se</a></p>
+            <a class="btn" href="mailto:jesper@jjel.se?subject=Offertf%C3%B6rfr%C3%A5gan">Skicka förfrågan</a>
           </div>
-
-          <div class="contact-card contact-card--media" data-reveal>
-            <div class="contact-card__body">
-              <h3>Besök oss</h3>
-              <p>Vi utgår från Ytterby, strax utanför Kungälv, och är verksamma i hela Västra Götaland.</p>
-              <p class="mono" style="color: var(--ink);">Gustavsbergsvägen 8, 442 53 Ytterby</p>
-              <a class="link-arrow" href="https://maps.app.goo.gl/MB4G1n2Hd1wPZ4757" rel="noopener" target="_blank" style="margin-top: 16px;">Visa på Google Maps <span class="arrow" aria-hidden="true">→</span></a>
-            </div>
-            <img src="images/jobb-elcentral.jpg" alt="Elcentral med prydligt dragna kablar, utfört av JJ El" loading="lazy" decoding="async" />
+          <div class="ccard" id="felanmalan">
+            <h3>Akut elfel och felanmälan</h3>
+            <p>Gäller det något som inte fungerar som det ska? Ring oss direkt så hjälper vi dig.</p>
+            <a class="btn" href="tel:+46709107507">070-910 75 07</a>
+          </div>
+          <div class="ccard">
+            <h3>Serviceavtal</h3>
+            <p>Vill ni ha en fast elpartner för löpande service och underhåll? Läs mer om serviceavtal.</p>
+            <a class="btn" href="tjanster.html#serviceavtal">Serviceavtal</a>
+          </div>
+          <div class="ccard">
+            <h3>Omdömen</h3>
+            <p>4,7 av 5 på Reco med 15 omdömen från verifierade kunder, och 5,0 av 5 på Google.</p>
+            <a class="btn" href="omdomen.html">Läs omdömen</a>
           </div>
         </div>
       </section>
 
-      <section data-theme="light" style="padding-bottom: clamp(64px, 10vh, 128px);">
-        <div class="wrap grid">
-          <div style="grid-column: 1 / 5;" data-reveal>
-            <p class="mono" style="color: var(--muted); margin-bottom: 8px;">Telefon</p>
-            <a class="h3" style="display:block; font-size: 22px;" href="tel:+46709107507">070-910 75 07</a>
+      <section class="section--tight">
+        <div class="wrap"><div class="csplit">
+          <div class="csplit__body">
+            <h3>Verksamhetsområde</h3>
+            <p>Vi är baserade i Ytterby och utför installationer inom hela Västra Götaland.</p>
+            <a class="btn" href="https://maps.app.goo.gl/MB4G1n2Hd1wPZ4757" rel="noopener" target="_blank">Visa på kartan</a>
           </div>
-          <div style="grid-column: 5 / 9;" data-reveal>
-            <p class="mono" style="color: var(--muted); margin-bottom: 8px;">E-post</p>
-            <a class="h3" style="display:block; font-size: 22px;" href="mailto:jesper@jjel.se">jesper@jjel.se</a>
+          <img data-px="3747103" data-ar="4/3" sizes="(min-width: 900px) 50vw, 100vw" alt="Belysning i kontorsmiljö" loading="lazy" decoding="async" />
+        </div></div>
+      </section>
+
+      <section class="section" style="padding-top:30px">
+        <div class="wrap"><div class="csplit csplit--cream">
+          <div class="csplit__body">
+            <h3>Kontaktuppgifter</h3>
+            <p class="big"><a href="mailto:jesper@jjel.se">jesper@jjel.se</a><br /><a href="tel:+46709107507">070-910 75 07</a></p>
+            <p class="big" style="margin-top:16px">Gustavsbergsvägen 8<br />442 53 Ytterby</p>
           </div>
-          <div style="grid-column: 9 / 13;" data-reveal>
-            <p class="mono" style="color: var(--muted); margin-bottom: 8px;">Omdömen</p>
-            <a class="h3" style="display:block; font-size: 22px;" href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco ↗</a>
-          </div>
-        </div>
+          <img src="images/jobb-elcentral.jpg" alt="Elcentral med prydligt dragna kablar, utfört av JJ El" loading="lazy" decoding="async" />
+        </div></div>
       </section>
     </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer footer--compact" data-theme="dark">
+    <footer class="site-footer">
       <div class="wrap">
-        <div class="footer__grid">
-          <div class="footer__brand">
-            <a class="logo" href="index.html" aria-label="JJ El & Entreprenad AB">
-              <img class="logo__mark" src="jj-el-logo.png" alt="" aria-hidden="true" width="30" height="30" />
-              <span class="logo__word">JJ El</span>
-            </a>
-            <p>Säkra EL-installationer för hem, företag &amp; fastigheter.</p>
+        <div class="footer-cols">
+          <div>
+            <h4>Kontakta oss</h4>
+            <ul><li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li><li><a href="tel:+46709107507">070-910 75 07</a></li></ul>
+            <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
-          <div class="footer__col">
-            <h2 class="mono">Kontakt</h2>
-            <ul>
-              <li><a href="tel:+46709107507">070-910 75 07</a></li>
-              <li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <h2 class="mono">Adress</h2>
-            <ul class="footer__offices">
-              <li><b>JJ El &amp; Entreprenad AB</b> — Gustavsbergsvägen 8, 442 53 Ytterby</li>
-              <li>Verksamma i hela Västra Götaland</li>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <h2 class="mono">Omdömen</h2>
-            <ul>
-              <li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco ↗</a></li>
-              <li><a href="https://maps.app.goo.gl/MB4G1n2Hd1wPZ4757" rel="noopener" target="_blank">Google Maps ↗</a></li>
-            </ul>
-          </div>
+          <div><h4>Tjänster</h4><ul><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li></ul></div>
+          <div><h4>Anlita oss</h4><ul><li><a href="process.html">Processen</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></div>
+          <div><h4>Om oss</h4><ul><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></div>
+          <div><h4>Kontakt</h4><ul><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#felanmalan">Felanmälan</a></li><li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco</a></li></ul></div>
+          <div><h4>Om JJ El</h4><p>JJ El &amp; Entreprenad AB utför professionella elinstallationer för privatpersoner, företag och fastighetsägare — med fokus på kvalitet, säkerhet och kundnöjdhet i hela Västra Götaland.</p></div>
         </div>
-        <div class="footer__legal mono">
-          <span>© 2026 JJ El &amp; Entreprenad AB</span>
+        <div class="footer-bottom">
+          <div class="social"><a href="https://www.instagram.com/jj_el_entreprenad_ab/" rel="noopener" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
           <a href="integritetspolicy.html">Integritetspolicy</a>
-          <a href="cookies.html">Cookies</a>
-          <span>Foto: JJ El &amp; Pexels</span>
-          <a href="index.html" class="footer__top">Till startsidan ↑</a>
         </div>
       </div>
     </footer>
-
-    <!-- ============ OFFERT DRAWER ============ -->
-    <div class="drawer" data-drawer hidden>
-      <div class="drawer__backdrop" data-close-drawer></div>
-      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-        <button class="drawer__close" data-close-drawer aria-label="Stäng">×</button>
-        <p class="eyebrow">Begär offert</p>
-        <h2 class="h3" id="drawer-title">Berätta om<br />ert elarbete.</h2>
-        <form class="form" data-offert-form novalidate>
-          <fieldset class="form__types">
-            <legend class="mono">Typ av ärende</legend>
-            <label><input type="radio" name="typ" value="Elinstallation" checked /><span>Elinstallation</span></label>
-            <label><input type="radio" name="typ" value="Felsökning" /><span>Felsökning</span></label>
-            <label><input type="radio" name="typ" value="Laddbox" /><span>Laddbox</span></label>
-            <label><input type="radio" name="typ" value="Annat" /><span>Annat</span></label>
-          </fieldset>
-          <label class="field"><span class="mono">Namn</span><input name="namn" required autocomplete="name" /></label>
-          <label class="field"><span class="mono">Företag / organisation</span><input name="foretag" autocomplete="organization" /></label>
-          <label class="field"><span class="mono">E-post</span><input name="epost" type="email" required autocomplete="email" /></label>
-          <label class="field"><span class="mono">Kort om ärendet</span><textarea name="meddelande" rows="3"></textarea></label>
-          <button class="btn btn--dark btn--block" type="submit">Skicka förfrågan <span class="arrow" aria-hidden="true">→</span></button>
-          <p class="form__status mono" role="status" aria-live="polite" data-form-status></p>
-        </form>
-      </div>
-    </div>
-
-    <div class="cursor mono" aria-hidden="true" data-cursor-el><span data-cursor-label></span></div>
-    <script type="module" src="/src/page.js"></script>
+    <button class="totop" aria-label="Till toppen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    <script type="module" src="/src/site.js"></script>
   </body>
 </html>

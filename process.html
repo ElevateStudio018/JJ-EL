@@ -4,205 +4,162 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Så går det till — JJ El &amp; Entreprenad AB</title>
-    <meta name="description" content="Från första kontakt till färdigt elarbete — så arbetar JJ El &amp; Entreprenad AB med varje uppdrag." />
-    <meta name="theme-color" content="#0B1113" />
+    <meta name="description" content="Från första kontakt till färdig installation — så arbetar JJ El &amp; Entreprenad AB, steg för steg." />
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="preconnect" href="https://images.pexels.com" crossorigin />
-    <link rel="preload" as="image" data-px-preload="9800009" fetchpriority="high" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Så går det till — JJ El &amp; Entreprenad AB" />
-    <meta property="og:description" content="Från första kontakt till färdigt elarbete." />
-    <meta property="og:image" content="https://images.pexels.com/photos/9800009/pexels-photo-9800009.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
+    <meta property="og:description" content="Från första kontakt till färdig installation — så arbetar JJ El &amp; Entreprenad AB, steg för steg." />
+    <meta property="og:image" content="https://images.pexels.com/photos/10099335/pexels-photo-10099335.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body class="is-loading">
+  <body>
     <a class="skip-link" href="#main">Hoppa till innehåll</a>
-
-    <header class="header" data-header>
-      <div class="header__inner">
-        <a class="logo" href="index.html" aria-label="JJ El & Entreprenad AB — startsida">
-          <img class="logo__mark" src="jj-el-logo.png" alt="" aria-hidden="true" width="30" height="30" />
-          <span class="logo__word">JJ El</span>
-          <span class="logo__sub">&amp; Entreprenad<br />AB</span>
-        </a>
-        <nav class="nav" aria-label="Huvudmeny">
-          <ul>
-            <li><a href="index.html" class="nav__link">Hem</a></li>
-            <li><a href="tjanster.html" class="nav__link">Tjänster</a></li>
-            <li><a href="omdomen.html" class="nav__link">Omdömen</a></li>
-            <li><a href="process.html" class="nav__link is-active">Så går det till</a></li>
-            <li><a href="om-oss.html" class="nav__link">Om oss</a></li>
-            <li><a href="kontakt.html" class="nav__link">Kontakt</a></li>
-          </ul>
-        </nav>
-        <button class="btn-text header__cta" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
-          <span class="sr-only">Meny</span><span class="menu-toggle__bars" aria-hidden="true"></span>
-        </button>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="brand" href="index.html" aria-label="JJ El &amp; Entreprenad AB — startsida"><img src="jj-el-logo.png" alt="JJ El &amp; Entreprenad AB" width="58" height="58" /></a>
+        <nav aria-label="Huvudmeny"><ul class="nav"><li><a class="nav__top" href="tjanster.html" aria-haspopup="true">Tjänster <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="tjanster.html">Alla tjänster</a></li><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li><li><a href="tjanster.html#styr-och-reglerteknik">Styr- &amp; reglerteknik</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li></ul></li><li><a class="nav__top is-active" href="process.html" aria-haspopup="true">Anlita oss <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="process.html">Så går det till</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></li><li><a class="nav__top" href="om-oss.html" aria-haspopup="true">Om oss <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a><ul class="dropdown"><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></li><li><a class="nav__top" href="kontakt.html">Kontakt</a></li></ul></nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
       </div>
+      <nav class="mobile-panel" id="mobilmeny" aria-label="Mobilmeny"><ul><li><a href="tjanster.html">Tjänster</a><ul class="sub"><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li><li><a href="tjanster.html#styr-och-reglerteknik">Styr- &amp; reglerteknik</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li></ul></li><li><a href="process.html">Anlita oss</a><ul class="sub"><li><a href="omdomen.html">Omdömen</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></li><li><a href="om-oss.html">Om oss</a><ul class="sub"><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
     </header>
-
-    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
-      <nav aria-label="Mobilmeny">
-        <ol>
-          <li><a href="index.html"><span>01</span>Hem</a></li>
-          <li><a href="tjanster.html"><span>02</span>Tjänster</a></li>
-          <li><a href="omdomen.html"><span>03</span>Omdömen</a></li>
-          <li><a href="process.html"><span>04</span>Så går det till</a></li>
-          <li><a href="om-oss.html"><span>05</span>Om oss</a></li>
-          <li><a href="kontakt.html"><span>06</span>Kontakt</a></li>
-        </ol>
-      </nav>
-      <button class="btn btn--light btn--block" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
-      <p class="mobile-menu__foot mono">070-910 75 07 · jesper@jjel.se</p>
-    </div>
-
     <main id="main">
-      <section class="shero" data-theme="dark" aria-labelledby="shero-title">
-        <div class="shero__media" data-hero-media-s>
-          <img class="ph" data-px="9800009" data-ar="16/10" sizes="100vw" alt="Elbil som laddas utomhus" fetchpriority="high" decoding="async" />
-        </div>
-        <div class="shero__shade" aria-hidden="true"></div>
-        <div class="wrap shero__inner">
-          <p class="eyebrow">Processen</p>
-          <h1 class="display shero__title" id="shero-title">Så går<br />det till.</h1>
-          <p class="shero__lead">Från första kontakt till färdigt elarbete — enkelt och tydligt genom hela vägen.</p>
-          <p class="breadcrumb mono"><a href="index.html">Hem</a> / Så går det till</p>
+      <section class="hero">
+        <img data-px="10099335" data-ar="16/7" sizes="100vw" alt="Ljust modernt kök med belysning" fetchpriority="high" decoding="async" />
+        <div class="wrap hero__inner">
+          <h1>Så går det till</h1>
+          <div class="hero__rule"></div>
+          <p class="crumbs"><a href="index.html">Hem</a> » Processen</p>
         </div>
       </section>
-
-      <section data-theme="light">
+      <section class="section section--tint">
         <div class="wrap">
-          <div class="process-grid" style="padding-block: clamp(56px, 9vh, 112px);">
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16v16H4z M4 9h16 M9 4v16" /></svg></span>
-            <div>
-              <h3>01 / Kontakt</h3>
-              <p>Ni hör av er med en förfrågan — per telefon, mejl eller offertformuläret. Vi återkommer så snart vi kan.</p>
+          <p class="lead">Att anlita JJ El ska vara enkelt och tryggt — från första kontakt till färdig installation. Här beskriver vi hur ett uppdrag går till, steg för steg.</p>
+          <div class="steps"><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M7 3h8l4 4v14H7z M15 3v4h4 M10 12h6 M10 16h6"/></svg><div><h3>1. Kontakt</h3><p>Ni hör av er med en förfrågan — per telefon, mejl eller via kontaktsidan. Vi återkommer så snart vi kan för att höra mer om vad ni behöver hjälp med.</p></div></div><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z M20 20l-4-4"/></svg><div><h3>2. Bedömning</h3><p>Vid behov gör vi en bedömning på plats, eller utifrån bilder och en beskrivning av vad som behöver göras.</p></div></div><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg><div><h3>3. Offert</h3><p>Ni får en tydlig offert med pris och omfattning innan arbetet startar, så att ni vet vad som ingår.</p></div></div><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5"/></svg><div><h3>4. Bokning</h3><p>Vi bokar en tid som passar er. Vid akuta ärenden försöker vi komma så snart som möjligt.</p></div></div><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 1-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 1 5.3-5.3l-2.5 2.5-2-.5-.5-2z"/></svg><div><h3>5. Utförande</h3><p>Arbetet utförs korrekt och effektivt, med kvalitet och säkerhet i fokus — från planering till färdig installation.</p></div></div><div class="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg><div><h3>6. Uppföljning</h3><p>Vi går igenom det utförda arbetet tillsammans med er och finns kvar om något behöver åtgärdas efteråt.</p></div></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2 class="title title--center">Våra tjänster</h2>
+          <div class="carousel">
+            <div class="carousel__track">
+          <article class="card" data-cat="installation">
+            <div class="card__img"><img data-px="4792521" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Elektriker monterar en taklampa" loading="lazy" decoding="async" /><span class="tag">Installation</span></div>
+            <div class="card__body">
+              <h3>Elinstallationer</h3>
+              <p class="card__sub">Bostäder, företag &amp; fastigheter</p>
+              <p class="card__text">Nyinstallationer och elinstallationer i samband med renoveringar — från enstaka uttag till en komplett elanläggning. Arbetet planeras och utförs noggrant, med kvalitet och säkerhet i varje steg.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, företag, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Nyinstallation, renovering</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#elinstallationer">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.3-4.3" /></svg></span>
-            <div>
-              <h3>02 / Bedömning</h3>
-              <p>Vid behov gör vi en bedömning på plats, eller utifrån bilder och en beskrivning av vad som behöver göras.</p>
+          </article>
+          <article class="card" data-cat="service">
+            <div class="card__img"><img data-px="34054464" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Elektriker felsöker en elcentral med multimeter" loading="lazy" decoding="async" /><span class="tag">Service</span></div>
+            <div class="card__body">
+              <h3>Elservice</h3>
+              <p class="card__sub">Felsökning &amp; underhåll</p>
+              <p class="card__text">Något som inte fungerar som det ska? Vi felsöker el snabbt och säkert och hjälper er med underhåll av elanläggningar och elrelaterade installationer.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, företag, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Felsökning, underhåll</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#elservice">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3h8l4 4v14H7z M15 3v4h4 M9 13h6 M9 17h6" /></svg></span>
-            <div>
-              <h3>03 / Offert</h3>
-              <p>Ni får en tydlig offert med pris och omfattning innan arbetet startar — inga överraskningar på slutnotan.</p>
+          </article>
+          <article class="card" data-cat="installation">
+            <div class="card__img"><img src="images/jobb-forvaring.jpg" alt="Inbyggd förvaring med integrerad LED-belysning, utfört av JJ El" loading="lazy" decoding="async" /><span class="tag">Installation</span></div>
+            <div class="card__body">
+              <h3>Smarta hem</h3>
+              <p class="card__sub">Smarta tekniska lösningar</p>
+              <p class="card__text">Elinstallationer för smarta hem — styrning av belysning och andra funktioner, med smarta och hållbara lösningar anpassade efter dagens krav och framtidens behov.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Nyinstallation, uppgradering</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#smarta-hem">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20V10l8-6 8 6v10 M9 20v-6h6v6" /></svg></span>
-            <div>
-              <h3>04 / Bokning</h3>
-              <p>Vi bokar en tid som passar er. Vid akuta ärenden försöker vi komma så snart som möjligt.</p>
+          </article>
+          <article class="card" data-cat="installation">
+            <div class="card__img"><img data-px="9800009" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Elbil som laddas" loading="lazy" decoding="async" /><span class="tag">Installation</span></div>
+            <div class="card__body">
+              <h3>Laddbox</h3>
+              <p class="card__sub">Laddning av elbil</p>
+              <p class="card__text">Installation av laddbox för elbil — hemma vid villan, i bostadsrättsföreningen eller på arbetsplatsen.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, företag, BRF</dd></div><div><dt>Typ av uppdrag</dt><dd>Installation</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#laddbox">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18 M5 20V9l4-3 4 3v11 M13 20v-7h6v7" /></svg></span>
-            <div>
-              <h3>05 / Utförande</h3>
-              <p>Arbetet utförs korrekt och effektivt, med fokus på kvalitet och säkerhet i varje steg.</p>
+          </article>
+          <article class="card" data-cat="teknik">
+            <div class="card__img"><img data-px="4508748" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Strukturerad nätverkskabling" loading="lazy" decoding="async" /><span class="tag">Teknik</span></div>
+            <div class="card__body">
+              <h3>Data &amp; nät</h3>
+              <p class="card__sub">Nätverksinstallationer</p>
+              <p class="card__text">Installation av data och nät, så att hemmet eller verksamheten får en stabil grund för uppkoppling.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, företag, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Nyinstallation, utbyggnad</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#data-nat">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
-          <div class="process-step" data-reveal>
-            <span class="process-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12l5 5L20 6" /></svg></span>
-            <div>
-              <h3>06 / Uppföljning</h3>
-              <p>Vi går igenom det utförda arbetet tillsammans med er och finns kvar om något behöver åtgärdas efteråt.</p>
+          </article>
+          <article class="card" data-cat="teknik">
+            <div class="card__img"><img data-px="17536106" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Väggmonterad styrpanel för smart hem" loading="lazy" decoding="async" /><span class="tag">Teknik</span></div>
+            <div class="card__body">
+              <h3>Styr- &amp; reglerteknik</h3>
+              <p class="card__sub">Klimat- &amp; värmeanläggningar</p>
+              <p class="card__text">Installation av styr- och reglerteknik för klimat- och värmeanläggningar, för en jämnare inomhusmiljö.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Privat, företag, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Installation</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#styr-och-reglerteknik">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
             </div>
-          </div>
+          </article>
+          <article class="card" data-cat="service">
+            <div class="card__img"><img data-px="7359568" data-ar="16/9.4" sizes="(min-width: 900px) 33vw, 85vw" alt="Elektriker inspekterar ett elskåp" loading="lazy" decoding="async" /><span class="tag">Service</span></div>
+            <div class="card__body">
+              <h3>Serviceavtal</h3>
+              <p class="card__sub">Löpande service &amp; underhåll</p>
+              <p class="card__text">Ett serviceavtal ger er en fast elpartner för löpande service och underhåll av er elanläggning. Hör av er så tar vi fram ett upplägg som passar er.</p>
+              <dl class="facts"><div><dt>Kunder</dt><dd>Företag, fastighetsägare</dd></div><div><dt>Typ av uppdrag</dt><dd>Löpande service</dd></div><div><dt>Område</dt><dd>Västra Götaland</dd></div></dl>
+              <a class="btn btn--navy" href="tjanster.html#serviceavtal">Läs mer <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M1 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            </div>
+          </article>
+            </div>
+            <button class="carousel__btn carousel__btn--prev" aria-label="Föregående"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="carousel__btn carousel__btn--next" aria-label="Nästa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
       </section>
 
-      <section class="cta" data-theme="dark" aria-labelledby="pcta-title">
-        <div class="cta__media" data-cta-media>
-          <img class="ph" data-px="17924298" data-ar="16/9" sizes="100vw" alt="Elektriker arbetar med en säkringsskåp" loading="lazy" decoding="async" />
-        </div>
-        <div class="cta__shade" aria-hidden="true"></div>
-        <div class="wrap cta__inner">
-          <p class="eyebrow" data-reveal>Redo att börja?</p>
-          <h2 class="display cta__title" id="pcta-title" data-split>Låt oss prata<br />om ert elarbete.</h2>
-          <p class="cta__text" data-reveal>Vi återkommer så snart vi kan med ett första förslag.</p>
-          <div data-reveal><button class="btn btn--xl btn--light" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button></div>
+      <section class="section" style="padding-top:20px">
+        <div class="wrap tiles">
+          <a class="tile" href="process.html">
+            <img data-px="10099335" data-ar="16/10.5" sizes="(min-width: 900px) 50vw, 100vw" alt="Ljust modernt kök med belysning" loading="lazy" decoding="async" />
+            <div class="tile__body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M7 3h8l4 4v14H7z M15 3v4h4 M10 12h6 M10 16h6"/></svg><div><h3>Så går det till</h3><p>Läs mer om hur vi arbetar.</p></div></div>
+          </a><a class="tile" href="omdomen.html">
+            <img data-px="17644158" data-ar="16/10.5" sizes="(min-width: 900px) 50vw, 100vw" alt="Moderna bostadshus" loading="lazy" decoding="async" />
+            <div class="tile__body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.4 5.6 6.1.6-4.6 4 1.4 6-5.3-3.2-5.3 3.2 1.4-6-4.6-4 6.1-.6z"/></svg><div><h3>Omdömen</h3><p>Läs vad våra kunder säger.</p></div></div>
+          </a><a class="tile" href="tjanster.html#serviceavtal">
+            <img data-px="14319099" data-ar="16/10.5" sizes="(min-width: 900px) 50vw, 100vw" alt="Elektriker åtgärdar ett elskåp" loading="lazy" decoding="async" />
+            <div class="tile__body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3l8 3.5v5.5c0 4.6-3.4 8.3-8 9-4.6-.7-8-4.4-8-9V6.5z M8.5 12l2.5 2.5 4.5-5"/></svg><div><h3>Serviceavtal</h3><p>Läs mer om löpande service.</p></div></div>
+          </a><a class="tile" href="kontakt.html">
+            <img data-px="3747103" data-ar="16/10.5" sizes="(min-width: 900px) 50vw, 100vw" alt="Belysning i kontorsmiljö" loading="lazy" decoding="async" />
+            <div class="tile__body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><div><h3>Kontakt</h3><p>Kom i kontakt med oss.</p></div></div>
+          </a>
         </div>
       </section>
     </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer footer--compact" data-theme="dark">
+    <footer class="site-footer">
       <div class="wrap">
-        <div class="footer__grid">
-          <div class="footer__brand">
-            <a class="logo" href="index.html" aria-label="JJ El & Entreprenad AB">
-              <img class="logo__mark" src="jj-el-logo.png" alt="" aria-hidden="true" width="30" height="30" />
-              <span class="logo__word">JJ El</span>
-            </a>
-            <p>Säkra EL-installationer för hem, företag &amp; fastigheter.</p>
+        <div class="footer-cols">
+          <div>
+            <h4>Kontakta oss</h4>
+            <ul><li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li><li><a href="tel:+46709107507">070-910 75 07</a></li></ul>
+            <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
-          <div class="footer__col">
-            <h2 class="mono">Kontakt</h2>
-            <ul>
-              <li><a href="tel:+46709107507">070-910 75 07</a></li>
-              <li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <h2 class="mono">Adress</h2>
-            <ul class="footer__offices">
-              <li><b>JJ El &amp; Entreprenad AB</b> — Gustavsbergsvägen 8, 442 53 Ytterby</li>
-              <li>Verksamma i hela Västra Götaland</li>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <h2 class="mono">Omdömen</h2>
-            <ul>
-              <li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco ↗</a></li>
-              <li><a href="https://maps.app.goo.gl/MB4G1n2Hd1wPZ4757" rel="noopener" target="_blank">Google Maps ↗</a></li>
-            </ul>
-          </div>
+          <div><h4>Tjänster</h4><ul><li><a href="tjanster.html#elinstallationer">Elinstallationer</a></li><li><a href="tjanster.html#elservice">Elservice</a></li><li><a href="tjanster.html#smarta-hem">Smarta hem</a></li><li><a href="tjanster.html#laddbox">Laddbox</a></li><li><a href="tjanster.html#data-nat">Data &amp; nät</a></li></ul></div>
+          <div><h4>Anlita oss</h4><ul><li><a href="process.html">Processen</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="tjanster.html#serviceavtal">Serviceavtal</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></div>
+          <div><h4>Om oss</h4><ul><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></div>
+          <div><h4>Kontakt</h4><ul><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#felanmalan">Felanmälan</a></li><li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco</a></li></ul></div>
+          <div><h4>Om JJ El</h4><p>JJ El &amp; Entreprenad AB utför professionella elinstallationer för privatpersoner, företag och fastighetsägare — med fokus på kvalitet, säkerhet och kundnöjdhet i hela Västra Götaland.</p></div>
         </div>
-        <div class="footer__legal mono">
-          <span>© 2026 JJ El &amp; Entreprenad AB</span>
+        <div class="footer-bottom">
+          <div class="social"><a href="https://www.instagram.com/jj_el_entreprenad_ab/" rel="noopener" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
           <a href="integritetspolicy.html">Integritetspolicy</a>
-          <a href="cookies.html">Cookies</a>
-          <span>Foto: JJ El &amp; Pexels</span>
-          <a href="index.html" class="footer__top">Till startsidan ↑</a>
         </div>
       </div>
     </footer>
-
-    <!-- ============ OFFERT DRAWER ============ -->
-    <div class="drawer" data-drawer hidden>
-      <div class="drawer__backdrop" data-close-drawer></div>
-      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-        <button class="drawer__close" data-close-drawer aria-label="Stäng">×</button>
-        <p class="eyebrow">Begär offert</p>
-        <h2 class="h3" id="drawer-title">Berätta om<br />ert elarbete.</h2>
-        <form class="form" data-offert-form novalidate>
-          <fieldset class="form__types">
-            <legend class="mono">Typ av ärende</legend>
-            <label><input type="radio" name="typ" value="Elinstallation" checked /><span>Elinstallation</span></label>
-            <label><input type="radio" name="typ" value="Felsökning" /><span>Felsökning</span></label>
-            <label><input type="radio" name="typ" value="Laddbox" /><span>Laddbox</span></label>
-            <label><input type="radio" name="typ" value="Annat" /><span>Annat</span></label>
-          </fieldset>
-          <label class="field"><span class="mono">Namn</span><input name="namn" required autocomplete="name" /></label>
-          <label class="field"><span class="mono">Företag / organisation</span><input name="foretag" autocomplete="organization" /></label>
-          <label class="field"><span class="mono">E-post</span><input name="epost" type="email" required autocomplete="email" /></label>
-          <label class="field"><span class="mono">Kort om ärendet</span><textarea name="meddelande" rows="3"></textarea></label>
-          <button class="btn btn--dark btn--block" type="submit">Skicka förfrågan <span class="arrow" aria-hidden="true">→</span></button>
-          <p class="form__status mono" role="status" aria-live="polite" data-form-status></p>
-        </form>
-      </div>
-    </div>
-
-    <div class="cursor mono" aria-hidden="true" data-cursor-el><span data-cursor-label></span></div>
-    <script type="module" src="/src/page.js"></script>
+    <button class="totop" aria-label="Till toppen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    <script type="module" src="/src/site.js"></script>
   </body>
 </html>
