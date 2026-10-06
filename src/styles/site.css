@@ -2602,3 +2602,5 @@ body { line-height: 1.65; }
 .stile--cta .btn-cta { align-self: flex-start; }
 .btn-cta--plain { padding: 16px 30px; }
 .btn-cta--plain.btn-cta--sm { padding: 12px 24px; }
+/* 50% dark overlay on hero images */
+.hero::after, .hero--full::after { background: rgba(10, 16, 36, 0.5); }
