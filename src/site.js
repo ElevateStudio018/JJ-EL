@@ -150,3 +150,38 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
     }
   });
 });
+
+// Process: a line fills as you scroll and each step lights up when the line reaches it.
+document.querySelectorAll('[data-progress]').forEach((box) => {
+  const line = box.querySelector('.mprocess__line');
+  const steps = [...box.querySelectorAll('.mstep')];
+  const nums = steps.map((s) => s.querySelector('.mstep__num'));
+  let len = 0;
+  let marks = [];
+  const vertical = () => matchMedia('(max-width: 900px)').matches;
+  const measure = () => {
+    const b = box.getBoundingClientRect();
+    const v = vertical();
+    const pos = nums.map((n) => {
+      const r = n.getBoundingClientRect();
+      return v ? r.top - b.top : r.left - b.left;
+    });
+    marks = pos.map((p) => p - pos[0]);
+    len = marks[marks.length - 1];
+    box.style.setProperty('--len', len + 'px');
+  };
+  const update = () => {
+    const v = vertical();
+    const r = box.getBoundingClientRect();
+    const first = nums[0].getBoundingClientRect();
+    const ref = innerHeight * 0.6;
+    const px = v ? ref - first.top - 26 : ((ref - r.top) / (innerHeight * 0.3)) * len;
+    const fill = len ? Math.min(1, Math.max(0, px / len)) : 0;
+    box.style.setProperty('--fill', fill);
+    steps.forEach((s, i) => s.classList.toggle('is-on', (v ? px : fill * len) >= marks[i] - 1 && (r.top < ref)));
+  };
+  const all = () => { measure(); update(); };
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', all);
+  all();
+});
