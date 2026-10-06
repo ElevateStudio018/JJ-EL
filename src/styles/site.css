@@ -2666,3 +2666,5 @@ body { line-height: 1.65; }
 .factlinks a { display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 700; color: var(--navy); }
 .factlinks svg { width: 16px; height: 16px; transition: transform .2s; }
 .factlinks a:hover svg { transform: translateX(4px); }
+.footer-bottom { flex-wrap: wrap; gap: 14px 24px; }
+.footer-bottom .credit { flex-basis: 100%; padding-top: 18px; border-top: 1px solid rgba(16,24,48,.1); font-size: 13px; opacity: .65; text-align: center; }
