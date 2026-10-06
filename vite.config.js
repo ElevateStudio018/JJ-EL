@@ -1,3 +1,4 @@
+import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
@@ -38,16 +39,11 @@ export default defineConfig({
     target: 'es2020',
     chunkSizeWarningLimit: 700,
     rollupOptions: {
-      input: {
-        main: resolve(import.meta.dirname, 'index.html'),
-        tjanster: resolve(import.meta.dirname, 'tjanster.html'),
-        omdomen: resolve(import.meta.dirname, 'omdomen.html'),
-        process: resolve(import.meta.dirname, 'process.html'),
-        omOss: resolve(import.meta.dirname, 'om-oss.html'),
-        kontakt: resolve(import.meta.dirname, 'kontakt.html'),
-        integritetspolicy: resolve(import.meta.dirname, 'integritetspolicy.html'),
-        cookies: resolve(import.meta.dirname, 'cookies.html'),
-      },
+      input: Object.fromEntries(
+        readdirSync(import.meta.dirname)
+          .filter((f) => f.endsWith('.html'))
+          .map((f) => [f.replace(/\.html$/, ''), resolve(import.meta.dirname, f)]),
+      ),
     },
   },
 });
