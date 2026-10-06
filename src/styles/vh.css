@@ -1,8 +1,115 @@
 /* =========================================================
-   Bygg Uppsala — shared components for secondary pages
+   JJ El & Entreprenad — shared components for secondary pages
    (filter tabs, numbered process, values box, landmark &
-   team grids, coloured contact cards)
+   team grids, coloured contact cards, review cards)
    ========================================================= */
+
+/* ---------- Review / testimonial cards ---------- */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.review-card {
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 220px;
+}
+.review-card blockquote {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0;
+}
+.review-card figcaption {
+  margin-top: auto;
+  font-size: 14px;
+  font-weight: 600;
+}
+.review-card figcaption .mono {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media (max-width: 900px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Focus / values list (om-oss.html) ---------- */
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.focus-grid li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.focus-grid svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  flex: none;
+}
+@media (max-width: 700px) {
+  .focus-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Review source grid (omdomen.html) ---------- */
+.rating-band {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.rating-card {
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  padding: clamp(28px, 4vw, 40px);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.rating-card b {
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.rating-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+.rating-card a {
+  margin-left: auto;
+}
+@media (max-width: 700px) {
+  .rating-band {
+    grid-template-columns: 1fr;
+  }
+  .rating-card {
+    flex-wrap: wrap;
+  }
+  .rating-card a {
+    margin-left: 0;
+  }
+}
 
 /* ---------- Full-bleed CTA band (process.html, tjanster.html) ---------- */
 .cta {
@@ -85,6 +192,16 @@
   background: var(--ink);
   border-color: var(--ink);
   color: var(--paper);
+}
+.tag-chip {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink);
+  margin: 0 8px 8px 0;
 }
 .filter-empty {
   padding: 80px 0;

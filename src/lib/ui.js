@@ -1,7 +1,6 @@
 import { gsap } from './scroll.js';
 import { stopScroll, startScroll } from './scroll.js';
 import { finePointer, reducedMotion } from './env.js';
-import { px } from '../data/images.js';
 
 let lastFocus = null;
 
@@ -97,77 +96,15 @@ export function initDrawer() {
     }
     const d = new FormData(form);
     const body = [
-      `Typ av projekt: ${d.get('typ')}`,
+      `Typ av ärende: ${d.get('typ')}`,
       `Namn: ${d.get('namn')}`,
       `Företag: ${d.get('foretag') || '—'}`,
       `E-post: ${d.get('epost')}`,
       '',
       d.get('meddelande') || '',
     ].join('\n');
-    window.location.href = `mailto:offert@bygguppsala.se?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
-    status.textContent = 'Ditt e-postprogram öppnas med förfrågan ifylld. Vi svarar inom två arbetsdagar.';
-  });
-}
-
-/* ---------- Film (cinematic sequence of the campaign stills) ---------- */
-const FILM = [
-  { id: 29174068, text: ['Vi bygger', 'det som räknas.'] },
-  { id: 29299826, text: ['Varje projekt börjar', 'med en ritning.'] },
-  { id: 1188532, text: ['Och med marken', 'det ska vila på.'] },
-  { id: 2323080, text: ['Stomme för stomme.'] },
-  { id: 8961159, text: ['Byggt av människor.'] },
-  { id: 31122123, text: ['För människor.'] },
-  { id: 19660456, text: ['Byggt för', 'att hålla.'] },
-];
-
-export function initFilm() {
-  const film = document.querySelector('[data-film]');
-  if (!film) return;
-  const frames = film.querySelector('[data-film-frames]');
-  const caption = film.querySelector('[data-film-caption]');
-  const bar = film.querySelector('[data-film-bar]');
-  const closeBtn = film.querySelector('[data-close-film]');
-  const DUR = 5200;
-  let idx = 0;
-  let timer = 0;
-  let barTween = null;
-
-  const show = (i) => {
-    idx = i % FILM.length;
-    [...frames.children].forEach((im, k) => im.classList.toggle('is-active', k === idx));
-    caption.innerHTML = FILM[idx].text.map((t, k) => `<span style="animation-delay:${0.25 + k * 0.1}s">${t}</span>`).join('');
-    barTween?.kill();
-    barTween = gsap.fromTo(bar, { scaleX: idx / FILM.length }, { scaleX: (idx + 1) / FILM.length, duration: DUR / 1000, ease: 'none' });
-    timer = setTimeout(() => show(idx + 1), DUR);
-  };
-
-  const open = () => {
-    lastFocus = document.activeElement;
-    if (!frames.children.length) {
-      frames.innerHTML = FILM.map((f) => `<img class="ph" src="${px(f.id, 1920, 1080)}" alt="" />`).join('');
-    }
-    film.hidden = false;
-    stopScroll();
-    requestAnimationFrame(() => film.classList.add('is-open'));
-    closeBtn.focus();
-    show(0);
-  };
-  const close = () => {
-    clearTimeout(timer);
-    barTween?.kill();
-    film.classList.remove('is-open');
-    startScroll();
-    setTimeout(() => (film.hidden = true), 700);
-    lastFocus?.focus?.();
-  };
-  document.querySelectorAll('[data-open-film]').forEach((b) => b.addEventListener('click', open));
-  closeBtn.addEventListener('click', close);
-  film.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') close();
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      closeBtn.focus();
-    }
+    window.location.href = `mailto:jesper@jjel.se?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
+    status.textContent = 'Ditt e-postprogram öppnas med förfrågan ifylld. Vi återkommer så snart vi kan.';
   });
 }
 

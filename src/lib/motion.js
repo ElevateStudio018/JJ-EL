@@ -119,7 +119,11 @@ export function scrollMotion() {
 
 /** Count-up on viewport entry. Swedish number formatting (thin space thousands). */
 export function counters() {
-  const fmt = (n, el) => (el.dataset.format === 'space' ? Math.round(n).toLocaleString('sv-SE') : String(Math.round(n)));
+  const fmt = (n, el) => {
+    if (el.dataset.format === 'space') return Math.round(n).toLocaleString('sv-SE');
+    if (el.dataset.format === 'decimal1') return n.toFixed(1).replace('.', ',');
+    return String(Math.round(n));
+  };
   document.querySelectorAll('[data-count]').forEach((el) => {
     const to = parseFloat(el.dataset.count);
     if (reducedMotion) {

@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://elevatestudio018.github.io/lir/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://elevatestudio018.github.io/lir/tjanster.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://elevatestudio018.github.io/lir/projekt.html?p=kvarteret-kajkanten</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://elevatestudio018.github.io/lir/projekt.html?p=logistikcenter-uppsala</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://elevatestudio018.github.io/lir/projekt.html?p=trafikplats-norrtull</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://elevatestudio018.github.io/lir/projekt.html?p=kontorshuset-linjalen</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevatestudio018.github.io/lir/omdomen.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://elevatestudio018.github.io/lir/process.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://elevatestudio018.github.io/lir/om-oss.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://elevatestudio018.github.io/lir/kontakt.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://elevatestudio018.github.io/lir/integritetspolicy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://elevatestudio018.github.io/lir/cookies.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
