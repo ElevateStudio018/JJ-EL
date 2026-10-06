@@ -1,4 +1,4 @@
-# LIR Bygg & Anläggning — webbplats
+# Bygg Uppsala — webbplats
 
 Premium, scroll-regisserad webbplats för ett svenskt bygg- och anläggningsföretag.
 

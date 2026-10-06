@@ -30,4 +30,18 @@ export const IMG = {
   excavator: 13098128, // Excavator at construction site
   aerialLake: 29547677, // Aerial view of calm lake and lush forest at sunrise
   timberCourtyard: 29024993, // Modern urban courtyard with trees and ivy
+
+  // Team portraits
+  pVd: 32012999, // Professional headshot, confident businessman
+  pProjektchef: 30767565, // Professional black & white portrait headshot
+  pEkonomichef: 34381970, // Professional portrait of smiling businesswoman
+  pPlatschef: 8961155, // Man in hard hat smiling, site context
+  pHr: 30004322, // Professional headshot of smiling woman
+  pAckvisition: 29852895, // Professional corporate headshot of smiling woman
+
+  // Section hero banners
+  processHero: 3862135, // Engineers looking at blueprint
+  omOssHero: 2323080, // Tower crane on building under construction
+  kontaktHero: 8961008, // Engineer with tablet on site
+  projektHero: 1188532, // Aerial — heavy equipment
 };

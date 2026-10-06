@@ -104,7 +104,7 @@ export function initDrawer() {
       '',
       d.get('meddelande') || '',
     ].join('\n');
-    window.location.href = `mailto:offert@lirbygg.se?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:offert@bygguppsala.se?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
     status.textContent = 'Ditt e-postprogram öppnas med förfrågan ifylld. Vi svarar inom två arbetsdagar.';
   });
 }

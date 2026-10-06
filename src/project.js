@@ -21,11 +21,11 @@ const idx = PROJECTS.indexOf(p);
 const next = PROJECTS[(idx + 1) % PROJECTS.length];
 const $ = (s) => document.querySelector(s);
 
-document.title = `${p.title} — LIR Bygg & Anläggning`;
+document.title = `${p.title} — Bygg Uppsala`;
 $('meta[name="description"]').setAttribute('content', p.lead);
 // Static OG tags in <head> cover link-preview crawlers (most don't run JS);
 // this keeps the tab title/description and any JS-aware unfurl in sync too.
-$('meta[property="og:title"]')?.setAttribute('content', `${p.title} — LIR Bygg & Anläggning`);
+$('meta[property="og:title"]')?.setAttribute('content', `${p.title} — Bygg Uppsala`);
 $('meta[property="og:description"]')?.setAttribute('content', p.lead);
 $('meta[property="og:image"]')?.setAttribute('content', px(p.img, 1200, 630));
 

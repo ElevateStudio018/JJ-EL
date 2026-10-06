@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Våra projekt — Bygg Uppsala</title>
+    <meta name="description" content="Bostäder, anläggning, kontor och offentliga byggnader som Bygg Uppsala bygger, har byggt eller planerar i Uppsala med omnejd." />
+    <meta name="theme-color" content="#0B1113" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://images.pexels.com" crossorigin />
+    <link rel="preload" as="image" data-px-preload="1188532" fetchpriority="high" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Våra projekt — Bygg Uppsala" />
+    <meta property="og:description" content="Bostäder, anläggning, kontor och offentliga byggnader i Uppsala med omnejd." />
+    <meta property="og:image" content="https://images.pexels.com/photos/1188532/pexels-photo-1188532.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="is-loading">
+    <a class="skip-link" href="#main">Hoppa till innehåll</a>
+
+    <header class="header" data-header>
+      <div class="header__inner">
+        <a class="logo" href="index.html" aria-label="Bygg Uppsala — startsida">
+          <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 3h6v20h20v6H3z" /><rect x="14" y="3" width="15" height="15" class="logo__accent" /></svg>
+          <span class="logo__word">Bygg Uppsala</span>
+        </a>
+        <nav class="nav" aria-label="Huvudmeny">
+          <ul>
+            <li><a href="index.html" class="nav__link">Hem</a></li>
+            <li><a href="tjanster.html" class="nav__link">Tjänster</a></li>
+            <li><a href="alla-projekt.html" class="nav__link is-active">Projekt</a></li>
+            <li><a href="process.html" class="nav__link">Så går det till</a></li>
+            <li><a href="om-oss.html" class="nav__link">Om oss</a></li>
+            <li><a href="kontakt.html" class="nav__link">Kontakt</a></li>
+          </ul>
+        </nav>
+        <button class="btn-text header__cta" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+          <span class="sr-only">Meny</span><span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav aria-label="Mobilmeny">
+        <ol>
+          <li><a href="index.html"><span>01</span>Hem</a></li>
+          <li><a href="tjanster.html"><span>02</span>Tjänster</a></li>
+          <li><a href="alla-projekt.html"><span>03</span>Projekt</a></li>
+          <li><a href="process.html"><span>04</span>Så går det till</a></li>
+          <li><a href="om-oss.html"><span>05</span>Om oss</a></li>
+          <li><a href="kontakt.html"><span>06</span>Kontakt</a></li>
+        </ol>
+      </nav>
+      <button class="btn btn--light btn--block" data-open-offert>Begär offert <span class="arrow" aria-hidden="true">→</span></button>
+      <p class="mobile-menu__foot mono">018-56 70 00 · info@bygguppsala.se</p>
+    </div>
+
+    <main id="main">
+      <section class="shero" data-theme="dark" aria-labelledby="shero-title">
+        <div class="shero__media" data-hero-media-s>
+          <img class="ph" data-px="1188532" data-ar="16/10" sizes="100vw" alt="Flygbild över anläggningsarbete med tunga maskiner" fetchpriority="high" decoding="async" />
+        </div>
+        <div class="shero__shade" aria-hidden="true"></div>
+        <div class="wrap shero__inner">
+          <p class="eyebrow">Projekt</p>
+          <h1 class="display shero__title" id="shero-title">Våra<br />projekt.</h1>
+          <p class="breadcrumb mono"><a href="index.html">Hem</a> / Våra projekt</p>
+        </div>
+      </section>
+
+      <div class="filter-bar">
+        <div class="wrap filter-tabs" role="tablist" aria-label="Filtrera projekt" data-filter-tabs>
+          <button type="button" role="tab" aria-selected="true" data-filter="Alla" class="is-active">Alla projekt</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="Pågående">Pågående</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="Kommande">Kommande</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="Färdigställd">Färdigställda</button>
+        </div>
+      </div>
+
+      <section class="projects" data-theme="light" aria-label="Projektlista">
+        <div class="wrap">
+          <div class="pgrid" data-project-grid></div>
+          <p class="filter-empty mono" data-filter-empty hidden>Inga projekt matchar filtret just nu.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer footer--compact" data-theme="dark">
+      <div class="wrap">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a class="logo" href="index.html" aria-label="Bygg Uppsala">
+              <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 3h6v20h20v6H3z" /><rect x="14" y="3" width="15" height="15" class="logo__accent" /></svg>
+              <span class="logo__word">Bygg Uppsala</span>
+            </a>
+            <p>Byggt för att hålla. Sedan 1998.</p>
+          </div>
+          <div class="footer__col">
+            <h2 class="mono">Kontakt</h2>
+            <ul>
+              <li><a href="tel:+4618567000">018-56 70 00</a></li>
+              <li><a href="mailto:info@bygguppsala.se">info@bygguppsala.se</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="mono">Kontor</h2>
+            <ul class="footer__offices">
+              <li><b>Huvudkontor</b> — Kungsgatan 57, Uppsala</li>
+              <li><b>Maskindepå</b> — Danmarksgatan 12, Boländerna</li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="mono">Följ oss</h2>
+            <ul>
+              <li><a href="https://www.linkedin.com" rel="noopener" target="_blank">LinkedIn ↗</a></li>
+              <li><a href="https://www.instagram.com" rel="noopener" target="_blank">Instagram ↗</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__legal mono">
+          <span>© 2026 Bygg Uppsala AB</span>
+          <a href="integritetspolicy.html">Integritetspolicy</a>
+          <a href="cookies.html">Cookies</a>
+          <span>Fotografi: Pexels</span>
+          <a href="index.html" class="footer__top">Till startsidan ↑</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============ OFFERT DRAWER ============ -->
+    <div class="drawer" data-drawer hidden>
+      <div class="drawer__backdrop" data-close-drawer></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <button class="drawer__close" data-close-drawer aria-label="Stäng">×</button>
+        <p class="eyebrow">Begär offert</p>
+        <h2 class="h3" id="drawer-title">Berätta om<br />ert projekt.</h2>
+        <form class="form" data-offert-form novalidate>
+          <fieldset class="form__types">
+            <legend class="mono">Typ av projekt</legend>
+            <label><input type="radio" name="typ" value="Byggnation" checked /><span>Byggnation</span></label>
+            <label><input type="radio" name="typ" value="Anläggning" /><span>Anläggning</span></label>
+            <label><input type="radio" name="typ" value="Renovering" /><span>Renovering</span></label>
+            <label><input type="radio" name="typ" value="Annat" /><span>Annat</span></label>
+          </fieldset>
+          <label class="field"><span class="mono">Namn</span><input name="namn" required autocomplete="name" /></label>
+          <label class="field"><span class="mono">Företag / organisation</span><input name="foretag" autocomplete="organization" /></label>
+          <label class="field"><span class="mono">E-post</span><input name="epost" type="email" required autocomplete="email" /></label>
+          <label class="field"><span class="mono">Kort om projektet</span><textarea name="meddelande" rows="3"></textarea></label>
+          <button class="btn btn--dark btn--block" type="submit">Skicka förfrågan <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form__status mono" role="status" aria-live="polite" data-form-status></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="ptrans" aria-hidden="true" data-ptrans></div>
+    <div class="cursor mono" aria-hidden="true" data-cursor-el><span data-cursor-label></span></div>
+    <script type="module" src="/src/alla-projekt.js"></script>
+  </body>
+</html>

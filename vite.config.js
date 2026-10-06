@@ -41,7 +41,11 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         projekt: resolve(import.meta.dirname, 'projekt.html'),
+        allaProjekt: resolve(import.meta.dirname, 'alla-projekt.html'),
         tjanster: resolve(import.meta.dirname, 'tjanster.html'),
+        process: resolve(import.meta.dirname, 'process.html'),
+        omOss: resolve(import.meta.dirname, 'om-oss.html'),
+        kontakt: resolve(import.meta.dirname, 'kontakt.html'),
         integritetspolicy: resolve(import.meta.dirname, 'integritetspolicy.html'),
         cookies: resolve(import.meta.dirname, 'cookies.html'),
       },

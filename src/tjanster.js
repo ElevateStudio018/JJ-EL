@@ -3,6 +3,7 @@ import '@fontsource/geist-mono/400.css';
 import './styles/base.css';
 import './styles/sections.css';
 import './styles/services.css';
+import './styles/vh.css';
 
 import { initSmoothScroll, gsap, ScrollTrigger } from './lib/scroll.js';
 import { genericReveals } from './lib/motion.js';
