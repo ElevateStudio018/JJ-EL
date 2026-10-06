@@ -1,7 +1,7 @@
-import '@fontsource/lato/400.css';
-import '@fontsource/lato/400-italic.css';
-import '@fontsource/lato/700.css';
-import '@fontsource/lato/700-italic.css';
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/700.css';
+import '@fontsource/plus-jakarta-sans/800.css';
 import './styles/site.css';
 
 // FormSubmit relays the form as an e-mail to this address (no account needed).
@@ -42,6 +42,13 @@ document.querySelectorAll('.carousel').forEach((c) => {
   const step = () => (track.firstElementChild?.getBoundingClientRect().width || 300) + 22;
   c.querySelector('.carousel__btn--prev')?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
   c.querySelector('.carousel__btn--next')?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  const count = c.querySelector('[data-count]');
+  if (count) {
+    const total = track.children.length;
+    const upd = () => (count.textContent = `${Math.round(track.scrollLeft / step()) + 1} / ${total}`);
+    track.addEventListener('scroll', upd, { passive: true });
+    upd();
+  }
 });
 
 const filterBtns = document.querySelectorAll('[data-filter]');
