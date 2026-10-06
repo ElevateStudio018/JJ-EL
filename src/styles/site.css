@@ -2641,3 +2641,28 @@ body { line-height: 1.65; }
 .hero__slides img.is-active { opacity: 1; animation: heroZoom 9s ease-out forwards; }
 @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.07); } }
 @media (prefers-reduced-motion: reduce) { .hero__slides img.is-active { animation: none; } }
+
+/* ---------- Hero secondary button ---------- */
+.btn-ghost { display: inline-flex; align-items: center; padding: 16px 28px; border: 1.5px solid rgba(255,255,255,.7); border-radius: 999px; color: #fff; font-size: 17px; font-weight: 700; white-space: nowrap; transition: background .2s, color .2s; }
+.btn-ghost:hover { background: #fff; color: var(--navy); }
+
+/* ---------- Explore band ---------- */
+.xband { background: var(--tint, #f4f5f8); }
+.xgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.xcard { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 26px 24px 64px; border-radius: 14px; background: #fff; color: var(--ink); box-shadow: 0 1px 0 rgba(16,24,48,.06); transition: transform .25s, box-shadow .25s; }
+.xcard:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(16,24,48,.12); }
+.xcard__ic { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 8px; border-radius: 12px; background: var(--navy); color: #fff; }
+.xcard__ic svg { width: 22px; height: 22px; }
+.xcard__t { font-size: 19px; font-weight: 800; }
+.xcard__d { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.xcard__go { position: absolute; left: 24px; bottom: 22px; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--tint, #eef0f5); color: var(--navy); transition: background .2s, color .2s; }
+.xcard__go svg { width: 16px; height: 16px; }
+.xcard:hover .xcard__go { background: var(--navy); color: #fff; }
+@media (max-width: 1000px) { .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .xgrid { grid-template-columns: 1fr; gap: 12px; } .xcard { padding: 20px 20px 20px 84px; min-height: 0; } .xcard__ic { position: absolute; left: 20px; top: 20px; } .xcard__go { left: auto; right: 18px; bottom: auto; top: 50%; transform: translateY(-50%); } .xcard__d { padding-right: 36px; } }
+
+/* ---------- Factbox quick links ---------- */
+.factlinks { list-style: none; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(16,24,48,.1); display: grid; gap: 10px; }
+.factlinks a { display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 700; color: var(--navy); }
+.factlinks svg { width: 16px; height: 16px; transition: transform .2s; }
+.factlinks a:hover svg { transform: translateX(4px); }
