@@ -185,3 +185,17 @@ document.querySelectorAll('[data-progress]').forEach((box) => {
   addEventListener('resize', all);
   all();
 });
+
+// Hero slideshow: crossfade every 8 s.
+document.querySelectorAll('[data-slides]').forEach((box) => {
+  const imgs = [...box.querySelectorAll('img')];
+  let i = 0;
+  imgs[0]?.classList.add('is-active');
+  if (imgs.length < 2) return;
+  setInterval(() => {
+    if (document.hidden) return;
+    imgs[i].classList.remove('is-active');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('is-active');
+  }, 8000);
+});
