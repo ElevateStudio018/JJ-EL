@@ -2668,3 +2668,9 @@ body { line-height: 1.65; }
 .factlinks a:hover svg { transform: translateX(4px); }
 .footer-bottom { flex-wrap: wrap; gap: 14px 24px; }
 .footer-bottom .credit { flex-basis: 100%; padding-top: 18px; border-top: 1px solid rgba(16,24,48,.1); font-size: 13px; opacity: .65; text-align: center; }
+.footer-bottom .credit { margin: 0; }
+.credit a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; color: inherit; transition: opacity .2s; }
+.footer-bottom .credit { opacity: 1; }
+.credit a { opacity: .55; }
+.credit a:hover { opacity: 1; }
+.credit__mark { display: block; width: 16px; height: 16px; flex-shrink: 0; background: currentColor; -webkit-mask: url('/elevate-mark.png') center / contain no-repeat; mask: url('/elevate-mark.png') center / contain no-repeat; }
