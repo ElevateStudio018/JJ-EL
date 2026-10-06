@@ -46,7 +46,7 @@
         </nav>
         <div class="header-actions">
           <a class="header-phone" href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>070-910 75 07</span></a>
-          <a class="btn btn--solid" href="kontakt.html#offert">Begär offert</a>
+          <a class="btn-cta btn-cta--sm" href="kontakt.html#offert"><span>Begär offert</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
         <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path class="i-open" d="M3 6h18M3 12h18M3 18h18"/><path class="i-close" d="M5 5l14 14M19 5L5 19"/></svg></button>
       </div>
@@ -161,6 +161,11 @@
             <span class="eyebrow">Kostnadsförslag</span>
             <h2>Berätta om ditt elarbete</h2>
             <p>Oavsett om det gäller en nyinstallation, felsökning eller en laddbox — skicka en förfrågan så återkommer vi så snart vi kan.</p>
+            <ul class="offert__perks">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Snabb återkoppling på din förfrågan</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Tydlig offert innan arbetet startar</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Privat, företag och fastighetsägare</li>
+            </ul>
             <div class="offert__contact">
               <a href="tel:+46709107507"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span><span><small>Ring oss</small>070-910 75 07</span></a>
               <a href="mailto:jesper@jjel.se"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg></span><span><small>Mejla oss</small>jesper@jjel.se</span></a>
@@ -169,20 +174,24 @@
           </div>
           <div data-reveal><div class="form-card">
             <h3>Begär offert</h3>
-            <p>Fyll i formuläret så återkommer vi så snart vi kan. Fält markerade med * är obligatoriska.</p>
+            <p>Beskriv ditt ärende så återkommer vi så snart vi kan.</p>
             <form data-offert novalidate>
+              <fieldset class="chips">
+                <legend>Vad gäller det?</legend>
+                <div class="chips__list"><label class="chip"><input type="radio" name="tjanst" value="Elinstallationer" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Elinstallationer</span></label><label class="chip"><input type="radio" name="tjanst" value="Elservice" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 1-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 1 5.3-5.3l-2.5 2.5-2-.5-.5-2z"/></svg>Elservice</span></label><label class="chip"><input type="radio" name="tjanst" value="Smarta hem" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6 M10 21h4 M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>Smarta hem</span></label><label class="chip"><input type="radio" name="tjanst" value="Laddbox" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 16h14v-4l-2-5H7l-2 5z M5 16v3h3v-3 M16 16v3h3v-3 M7 12h10 M12 3l-1.5 3h3L12 9"/></svg>Laddbox</span></label><label class="chip"><input type="radio" name="tjanst" value="Data &amp; nät" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3v6 M5 15v-3h14v3 M3 15h4v6H3z M10 15h4v6h-4z M17 15h4v6h-4z M9 3h6v6H9z"/></svg>Data &amp; nät</span></label><label class="chip"><input type="radio" name="tjanst" value="Styr- &amp; reglerteknik" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M10 4a2 2 0 1 1 4 0v10a4 4 0 1 1-4 0z M12 9v8"/></svg>Styr- &amp; reglerteknik</span></label><label class="chip"><input type="radio" name="tjanst" value="Serviceavtal" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3l8 3.5v5.5c0 4.6-3.4 8.3-8 9-4.6-.7-8-4.4-8-9V6.5z M8.5 12l2.5 2.5 4.5-5"/></svg>Serviceavtal</span></label><label class="chip"><input type="radio" name="tjanst" value="Annat" /><span>Annat</span></label></div>
+              </fieldset>
               <div class="form-grid">
-                <label class="field">Namn *<input name="namn" required autocomplete="name" /></label>
-                <label class="field">Telefon<input name="telefon" type="tel" autocomplete="tel" /></label>
-                <label class="field">E-post *<input name="epost" type="email" required autocomplete="email" /></label>
-                <label class="field">Ort<input name="ort" autocomplete="address-level2" /></label>
-                <label class="field field--full">Tjänst<select name="tjanst"><option value="">Välj tjänst (valfritt)</option><option value="Elinstallationer">Elinstallationer</option><option value="Elservice">Elservice</option><option value="Smarta hem">Smarta hem</option><option value="Laddbox">Laddbox</option><option value="Data &amp; nät">Data &amp; nät</option><option value="Styr- &amp; reglerteknik">Styr- &amp; reglerteknik</option><option value="Serviceavtal">Serviceavtal</option><option value="Annat">Annat</option></select></label>
-                <label class="field field--full">Beskriv ditt ärende *<textarea name="meddelande" rows="5" required placeholder="T.ex. vad som ska göras, var och ungefär när."></textarea></label>
+                <label class="ff"><input name="namn" required autocomplete="name" placeholder=" " /><span>Namn *</span></label>
+                <label class="ff"><input name="telefon" type="tel" autocomplete="tel" placeholder=" " /><span>Telefon</span></label>
+                <label class="ff"><input name="epost" type="email" required autocomplete="email" placeholder=" " /><span>E-post *</span></label>
+                <label class="ff"><input name="ort" autocomplete="address-level2" placeholder=" " /><span>Ort</span></label>
+                <label class="ff ff--full"><textarea name="meddelande" rows="4" required placeholder=" "></textarea><span>Beskriv ditt ärende *</span></label>
               </div>
               <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
-              <label class="consent"><input type="checkbox" name="samtycke" required /> <span>Jag godkänner att JJ El &amp; Entreprenad behandlar mina uppgifter för att besvara förfrågan, enligt <a href="integritetspolicy.html">integritetspolicyn</a>. *</span></label>
-              <button class="btn btn--solid btn--lg" type="submit">Skicka förfrågan</button>
+              <label class="consent"><input type="checkbox" name="samtycke" required /> <span>Jag godkänner att JJ El &amp; Entreprenad behandlar mina uppgifter för att besvara förfrågan, enligt <a href="integritetspolicy.html">integritetspolicyn</a>.</span></label>
+              <button class="btn-cta btn-cta--navy btn-cta--block" type="submit"><span>Skicka förfrågan</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
               <p class="form-status" role="status" aria-live="polite"></p>
+              <p class="form-note"><span class="stars" aria-hidden="true">★★★★★</span> 4,7/5 på Reco från 15 verifierade kunder</p>
             </form>
           </div></div>
         </div>

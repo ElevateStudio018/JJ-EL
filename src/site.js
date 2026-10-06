@@ -118,8 +118,9 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
     };
 
     submit.disabled = true;
-    const label = submit.textContent;
-    submit.textContent = 'Skickar…';
+    const labelEl = submit.querySelector('span') || submit;
+    const label = labelEl.textContent;
+    labelEl.textContent = 'Skickar…';
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
@@ -135,7 +136,7 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
         </div>`;
     } catch {
       submit.disabled = false;
-      submit.textContent = label;
+      labelEl.textContent = label;
       status.innerHTML =
         'Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla <a href="mailto:jesper@jjel.se">jesper@jjel.se</a> / ring <a href="tel:+46709107507">070-910 75 07</a>.';
       status.classList.add('is-error');
