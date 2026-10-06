@@ -474,11 +474,8 @@ button {
 .logo__mark {
   width: 30px;
   height: 30px;
-  fill: currentColor;
-  border-radius: 8px;
-}
-.logo__accent {
-  fill: var(--accent);
+  object-fit: contain;
+  flex: none;
 }
 .logo__word {
   font-size: 19px;
