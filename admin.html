@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin — JJ El &amp; Entreprenad AB</title>
+    <link rel="icon" href="favicon.png" type="image/png" />
+  </head>
+  <body>
+    <div id="app">
+      <section class="login" data-view="login" hidden>
+        <form class="card login__card" data-login>
+          <img src="jj-el-logo.png" alt="" width="56" height="56" />
+          <h1>Admin</h1>
+          <p>Logga in med en GitHub-token för att redigera webbplatsens innehåll.</p>
+          <label class="field"><span>GitHub-token</span><input name="token" type="password" autocomplete="current-password" required placeholder="github_pat_…" /></label>
+          <button class="btn btn--primary" type="submit">Logga in</button>
+          <p class="msg" data-login-msg role="alert"></p>
+          <details class="help">
+            <summary>Hur skapar jag en token?</summary>
+            <ol>
+              <li>Gå till <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens</a>.</li>
+              <li>Under <b>Repository access</b>, välj bara repot <code data-repo-name></code>.</li>
+              <li>Under <b>Permissions</b>: <b>Contents</b> = Read and write, <b>Actions</b> = Read-only.</li>
+              <li>Skapa token, kopiera den och klistra in ovan. Den sparas bara i den här webbläsaren.</li>
+            </ol>
+          </details>
+        </form>
+      </section>
+
+      <div class="shell" data-view="editor" hidden>
+        <header class="topbar">
+          <div class="topbar__brand"><img src="jj-el-logo.png" alt="" width="32" height="32" /><b>JJ El</b><span>Admin</span></div>
+          <nav class="tabs" role="tablist">
+            <button role="tab" data-tab="kontakt" aria-selected="true">Kontakt &amp; betyg</button>
+            <button role="tab" data-tab="startsida">Startsida</button>
+            <button role="tab" data-tab="omdomen">Omdömen</button>
+            <button role="tab" data-tab="jobb">Jobbgalleri</button>
+          </nav>
+          <div class="topbar__actions">
+            <span class="deploy" data-deploy title="Status för senaste publicering"></span>
+            <a class="btn btn--ghost" href="./" target="_blank" rel="noopener">Visa sidan</a>
+            <button class="btn btn--ghost" data-logout>Logga ut</button>
+          </div>
+        </header>
+
+        <main class="panels">
+          <section class="panel" data-panel="kontakt">
+            <h2>Kontaktuppgifter</h2>
+            <p class="hint">Visas i sidhuvud, sidfot, kontaktsida och offertformulär på alla sidor.</p>
+            <div class="grid2">
+              <label class="field"><span>Telefon</span><input data-bind="company.phone" placeholder="070-910 75 07" /></label>
+              <label class="field"><span>E-post</span><input data-bind="company.email" type="email" /></label>
+            </div>
+            <p class="hint">Obs: offertformuläret skickar till e-postadressen via FormSubmit. Byter du adress skickas ett aktiveringsmejl vid första förfrågan.</p>
+            <h2>Betyg</h2>
+            <div class="grid3">
+              <label class="field"><span>Reco-betyg</span><input data-bind="rating.reco" placeholder="4,7" /></label>
+              <label class="field"><span>Antal omdömen på Reco</span><input data-bind="rating.recoCount" inputmode="numeric" /></label>
+              <label class="field"><span>Google-betyg</span><input data-bind="rating.google" placeholder="5,0" /></label>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="startsida" hidden>
+            <h2>Hero på startsidan</h2>
+            <label class="field"><span>Rubrik</span><input data-bind="hero.title" /></label>
+            <label class="field"><span>Ingress</span><textarea data-bind="hero.lead" rows="3"></textarea></label>
+          </section>
+
+          <section class="panel" data-panel="omdomen" hidden>
+            <div class="panel__head">
+              <div><h2>Omdömen</h2><p class="hint">Alla visas på sidan Omdömen. Markera <b>Visa på startsidan</b> för att ta med i karusellen.</p></div>
+              <button class="btn" data-add="reviews">+ Nytt omdöme</button>
+            </div>
+            <ol class="list" data-list="reviews"></ol>
+          </section>
+
+          <section class="panel" data-panel="jobb" hidden>
+            <div class="panel__head">
+              <div><h2>Jobb på startsidan</h2><p class="hint">Urvalet under ”Utförda jobb” på startsidan.</p></div>
+              <button class="btn" data-add="jobsHome">+ Lägg till jobb</button>
+            </div>
+            <ol class="list list--jobs" data-list="jobsHome"></ol>
+            <div class="panel__head">
+              <div><h2>Alla jobb (Om oss)</h2><p class="hint">Galleriet på sidan Om oss.</p></div>
+              <button class="btn" data-add="jobsAll">+ Lägg till jobb</button>
+            </div>
+            <ol class="list list--jobs" data-list="jobsAll"></ol>
+          </section>
+        </main>
+
+        <footer class="savebar" data-savebar hidden>
+          <span data-dirty-msg>Du har osparade ändringar.</span>
+          <div>
+            <button class="btn btn--ghost" data-discard>Ångra</button>
+            <button class="btn btn--primary" data-save>Spara &amp; publicera</button>
+          </div>
+        </footer>
+      </div>
+
+      <div class="toast" data-toast role="status" aria-live="polite"></div>
+    </div>
+
+    <template id="tpl-review">
+      <li class="item">
+        <div class="item__main">
+          <div class="grid3">
+            <label class="field"><span>Namn</span><input data-f="name" /></label>
+            <label class="field"><span>Datum</span><input data-f="date" placeholder="7 maj 2026" /></label>
+            <label class="field"><span>Källa</span><input data-f="source" placeholder="Verifierad kund på Reco" /></label>
+          </div>
+          <label class="field"><span>Omdöme</span><textarea data-f="text" rows="3"></textarea></label>
+          <label class="check"><input type="checkbox" data-f="featured" /> Visa på startsidan</label>
+          <label class="field" data-if="featured"><span>Kortare citat för startsidan (valfritt)</span><textarea data-f="quote" rows="2"></textarea></label>
+        </div>
+        <div class="item__tools">
+          <button class="icon" data-move="-1" aria-label="Flytta upp">↑</button>
+          <button class="icon" data-move="1" aria-label="Flytta ner">↓</button>
+          <button class="icon icon--danger" data-remove aria-label="Ta bort">✕</button>
+        </div>
+      </li>
+    </template>
+
+    <template id="tpl-job">
+      <li class="item item--job">
+        <label class="thumb" title="Byt bild">
+          <img alt="" data-thumb />
+          <input type="file" accept="image/*" data-upload hidden />
+          <span>Byt bild</span>
+        </label>
+        <div class="item__main">
+          <label class="field"><span>Bildtext</span><input data-f="caption" /></label>
+          <label class="field"><span>Bild</span><select data-f="image"></select></label>
+        </div>
+        <div class="item__tools">
+          <button class="icon" data-move="-1" aria-label="Flytta upp">↑</button>
+          <button class="icon" data-move="1" aria-label="Flytta ner">↓</button>
+          <button class="icon icon--danger" data-remove aria-label="Ta bort">✕</button>
+        </div>
+      </li>
+    </template>
+
+    <script type="module" src="/src/admin/admin.js"></script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import { cms } from './src/cms/render.js';
 
 // Pexels CDN — all imagery is royalty-free for commercial use (pexels.com/license).
 const PX = (id, w, h) =>
@@ -34,7 +35,7 @@ function pexelsImages() {
 
 export default defineConfig({
   base: './',
-  plugins: [pexelsImages()],
+  plugins: [cms(), pexelsImages()],
   build: {
     target: 'es2020',
     chunkSizeWarningLimit: 700,

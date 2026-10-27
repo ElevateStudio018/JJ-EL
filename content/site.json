@@ -1,0 +1,266 @@
+{
+  "company": {
+    "phone": "070-910 75 07",
+    "email": "jesper@jjel.se"
+  },
+  "rating": {
+    "reco": "4,7",
+    "recoCount": "15",
+    "google": "5,0"
+  },
+  "hero": {
+    "title": "Säkra elinstallationer för hem, företag & fastigheter",
+    "lead": "Från nyinstallationer och renoveringar till felsökning, laddbox och smarta hem — utfört korrekt och effektivt, från planering till färdig installation."
+  },
+  "reviews": [
+    {
+      "name": "Ulrik E",
+      "text": "Snabb, bra och trevlig service!",
+      "date": "5 juli 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Rasmus B",
+      "text": "Behövde hjälp med ett par el-saker och en av grejerna blev inte åtgärdad. Resten av tjänsterna är vi nöjda med.",
+      "date": "16 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Tobias",
+      "text": "Använde mig av JJ när jag totalrustade en lägenhet i Göteborg åt min son. Jag själv bor i Gävle och har egen byggfirma. Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig.",
+      "date": "8 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true,
+      "quote": "Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig."
+    },
+    {
+      "name": "Bengt S",
+      "text": "Trevligt bemötande av kunnig elektriker!",
+      "date": "8 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Hannele K",
+      "text": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med. Kan varmt rekommendera honom och vi kommer absolut att anlita honom igen.",
+      "date": "7 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true,
+      "quote": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med."
+    },
+    {
+      "name": "Hårkonst A",
+      "text": "Hjälpsam. Trevlig. Lyssnar. Bra. Kommer i tid.",
+      "date": "7 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Michael A",
+      "text": "Mycket duktig och lyhörd. Kommer att använda honom igen.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Daniel S",
+      "text": "Jesper utför arbetet med el & montage på det allra bästa sättet. En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade. — Familjen Sallander",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true,
+      "quote": "En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade."
+    },
+    {
+      "name": "Rickard A",
+      "text": "Vårat absoluta förstaval när det kommer elektriker. Noggranna, professionella och väldigt lätta att arbeta med. Toppbetyg.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "name": "Joakim T",
+      "text": "Bra service och alltid nån om kunden. Vi är supernöjda.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Robert M",
+      "text": "Mycket bra service, kom på kort inställesetid. Trevligt bemötande.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "name": "Pontus H",
+      "text": "Vi har använt Jesper Janson ett flertal tillfällen för såväl olika bolag och anläggningar samt privat. Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service. Kan varmt rekommendera honom.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true,
+      "quote": "Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service."
+    },
+    {
+      "name": "Hampus",
+      "text": "Trevlig, enkel att ha o göra med, utmärkt jobb och snabb återkoppling på frågor. Rekommenderas!",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "name": "Sara A",
+      "text": "Allt skött väldigt bra. Inget att anmärka på. Skulle använda mig av dem igen.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "name": "Patrick K",
+      "text": "Väl utfört och fungerar perfekt.",
+      "date": "6 maj 2026",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    }
+  ],
+  "jobsHome": [
+    {
+      "image": "images/jobb-trad-uplight.jpg",
+      "caption": "Trädbelysning i trädgård"
+    },
+    {
+      "image": "images/jobb-bokhylla-2.jpg",
+      "caption": "Bokhylla med integrerad LED"
+    },
+    {
+      "image": "images/jobb-laddbox.jpg",
+      "caption": "Laddbox vid garage"
+    },
+    {
+      "image": "images/jobb-badrum-spotlights.jpg",
+      "caption": "Spotlights i badrum"
+    },
+    {
+      "image": "images/jobb-altan-terrass.jpg",
+      "caption": "LED-belysning på terrass"
+    },
+    {
+      "image": "images/jobb-teknikrum.jpg",
+      "caption": "Elcentral i teknikrum"
+    },
+    {
+      "image": "images/jobb-hylla-spotlights.jpg",
+      "caption": "Spotlights i platsbyggd hylla"
+    },
+    {
+      "image": "images/jobb-fasad-spotlights.jpg",
+      "caption": "Infällda spotlights i takfot"
+    }
+  ],
+  "jobsAll": [
+    {
+      "image": "images/jobb-trad-uplight.jpg",
+      "caption": "Trädbelysning i trädgård"
+    },
+    {
+      "image": "images/jobb-bokhylla-2.jpg",
+      "caption": "Bokhylla med integrerad LED"
+    },
+    {
+      "image": "images/jobb-laddbox.jpg",
+      "caption": "Laddbox vid garage"
+    },
+    {
+      "image": "images/jobb-badrum-spotlights.jpg",
+      "caption": "Spotlights i badrum"
+    },
+    {
+      "image": "images/jobb-altan-terrass.jpg",
+      "caption": "LED-belysning på terrass"
+    },
+    {
+      "image": "images/jobb-teknikrum.jpg",
+      "caption": "Elcentral i teknikrum"
+    },
+    {
+      "image": "images/jobb-hylla-spotlights.jpg",
+      "caption": "Spotlights i platsbyggd hylla"
+    },
+    {
+      "image": "images/jobb-fasad-spotlights.jpg",
+      "caption": "Infällda spotlights i takfot"
+    },
+    {
+      "image": "images/jobb-tradgard-belysning.jpg",
+      "caption": "Trädgårdsbelysning"
+    },
+    {
+      "image": "images/jobb-pollare.jpg",
+      "caption": "Pollarbelysning på altan"
+    },
+    {
+      "image": "images/jobb-dusch-spotlights.jpg",
+      "caption": "Spotlights i dusch"
+    },
+    {
+      "image": "images/jobb-pool.jpg",
+      "caption": "El till pool och poolöverbyggnad"
+    },
+    {
+      "image": "images/jobb-altan-led.jpg",
+      "caption": "LED-list i altantrappa"
+    },
+    {
+      "image": "images/jobb-bokhylla-1.jpg",
+      "caption": "LED-belysning i bokhylla"
+    },
+    {
+      "image": "images/jobb-trappforvaring-2.jpg",
+      "caption": "LED-belysning i förvaring under trappa"
+    },
+    {
+      "image": "images/jobb-garderob-1.jpg",
+      "caption": "Garderob med integrerad belysning"
+    },
+    {
+      "image": "images/jobb-veranda.jpg",
+      "caption": "Infällda spotlights på veranda"
+    },
+    {
+      "image": "images/jobb-kok-belysning.jpg",
+      "caption": "LED-list och uttag i köksnisch"
+    },
+    {
+      "image": "images/jobb-elcentral.jpg",
+      "caption": "Elcentral med prydligt dragna kablar"
+    },
+    {
+      "image": "images/jobb-hall-strombrytare.jpg",
+      "caption": "Belysning och strömbrytare i hall"
+    },
+    {
+      "image": "images/jobb-industrihall.jpg",
+      "caption": "Belysning i industrilokal"
+    },
+    {
+      "image": "images/jobb-korridor-spotlights.jpg",
+      "caption": "Spotlights i korridor"
+    },
+    {
+      "image": "images/jobb-uttag-kok.jpg",
+      "caption": "Uttag och bänkbelysning i kök"
+    },
+    {
+      "image": "images/jobb-garderob-2.jpg",
+      "caption": "Garderobsrad med LED-list"
+    },
+    {
+      "image": "images/jobb-trappforvaring-3.jpg",
+      "caption": "Förvaring med LED under trappa"
+    },
+    {
+      "image": "images/jobb-forvaring.jpg",
+      "caption": "Inbyggd förvaring med LED-belysning"
+    }
+  ]
+}

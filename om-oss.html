@@ -20,9 +20,9 @@
         <div class="wrap topbar__inner">
           <span>Elektriker i hela Västra Götaland</span>
           <div class="topbar__links">
-            <a href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>070-910 75 07</a>
-            <a href="mailto:jesper@jjel.se"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>jesper@jjel.se</a>
-            <a href="omdomen.html">★ 4,7/5 på Reco</a>
+            <a href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>{{phone}}</a>
+            <a href="mailto:{{email}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>{{email}}</a>
+            <a href="omdomen.html">★ {{reco}}/5 på Reco</a>
           </div>
         </div>
       </div>
@@ -45,10 +45,10 @@
           </ul>
         </nav>
         <div class="header-actions">
-          <a class="header-phone" href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>070-910 75 07</span></a>
+          <a class="header-phone" href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>{{phone}}</span></a>
           <a class="btn-cta btn-cta--sm" href="kontakt.html#offert"><span>Begär offert</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
-        <a class="menu-call" href="tel:+46709107507" aria-label="Ring 070-910 75 07"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
+        <a class="menu-call" href="tel:{{tel}}" aria-label="Ring {{phone}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path class="i-open" d="M3 6h18M3 12h18M3 18h18"/><path class="i-close" d="M5 5l14 14M19 5L5 19"/></svg></button>
       </div>
       <nav class="mobile-panel" id="mobilmeny" aria-label="Mobilmeny">
@@ -60,7 +60,7 @@
         </ul>
         <div class="mobile-panel__cta">
           <a class="btn btn--white btn--lg" href="kontakt.html#offert">Begär offert</a>
-          <a class="btn btn--ghost btn--lg" href="tel:+46709107507">Ring 070-910 75 07</a>
+          <a class="btn btn--ghost btn--lg" href="tel:{{tel}}">Ring {{phone}}</a>
         </div>
       </nav>
     </header>
@@ -100,7 +100,7 @@
       <section class="section" id="jobb">
         <div class="wrap">
           <div class="section-head" data-reveal><div><span class="eyebrow">Utförda jobb</span><h2>Bilder från våra uppdrag</h2></div></div>
-          <div class="jobs"><figure class="job" data-reveal><img src="images/jobb-trad-uplight.jpg" alt="Trädbelysning i trädgård" loading="lazy" decoding="async" /><figcaption>Trädbelysning i trädgård</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-bokhylla-2.jpg" alt="Bokhylla med integrerad LED" loading="lazy" decoding="async" /><figcaption>Bokhylla med integrerad LED</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-laddbox.jpg" alt="Laddbox vid garage" loading="lazy" decoding="async" /><figcaption>Laddbox vid garage</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-badrum-spotlights.jpg" alt="Spotlights i badrum" loading="lazy" decoding="async" /><figcaption>Spotlights i badrum</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-altan-terrass.jpg" alt="LED-belysning på terrass" loading="lazy" decoding="async" /><figcaption>LED-belysning på terrass</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-teknikrum.jpg" alt="Elcentral i teknikrum" loading="lazy" decoding="async" /><figcaption>Elcentral i teknikrum</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-hylla-spotlights.jpg" alt="Spotlights i platsbyggd hylla" loading="lazy" decoding="async" /><figcaption>Spotlights i platsbyggd hylla</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-fasad-spotlights.jpg" alt="Infällda spotlights i takfot" loading="lazy" decoding="async" /><figcaption>Infällda spotlights i takfot</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-tradgard-belysning.jpg" alt="Trädgårdsbelysning" loading="lazy" decoding="async" /><figcaption>Trädgårdsbelysning</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-pollare.jpg" alt="Pollarbelysning på altan" loading="lazy" decoding="async" /><figcaption>Pollarbelysning på altan</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-dusch-spotlights.jpg" alt="Spotlights i dusch" loading="lazy" decoding="async" /><figcaption>Spotlights i dusch</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-pool.jpg" alt="El till pool och poolöverbyggnad" loading="lazy" decoding="async" /><figcaption>El till pool och poolöverbyggnad</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-altan-led.jpg" alt="LED-list i altantrappa" loading="lazy" decoding="async" /><figcaption>LED-list i altantrappa</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-bokhylla-1.jpg" alt="LED-belysning i bokhylla" loading="lazy" decoding="async" /><figcaption>LED-belysning i bokhylla</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-trappforvaring-2.jpg" alt="LED-belysning i förvaring under trappa" loading="lazy" decoding="async" /><figcaption>LED-belysning i förvaring under trappa</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-garderob-1.jpg" alt="Garderob med integrerad belysning" loading="lazy" decoding="async" /><figcaption>Garderob med integrerad belysning</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-veranda.jpg" alt="Infällda spotlights på veranda" loading="lazy" decoding="async" /><figcaption>Infällda spotlights på veranda</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-kok-belysning.jpg" alt="LED-list och uttag i köksnisch" loading="lazy" decoding="async" /><figcaption>LED-list och uttag i köksnisch</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-elcentral.jpg" alt="Elcentral med prydligt dragna kablar" loading="lazy" decoding="async" /><figcaption>Elcentral med prydligt dragna kablar</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-hall-strombrytare.jpg" alt="Belysning och strömbrytare i hall" loading="lazy" decoding="async" /><figcaption>Belysning och strömbrytare i hall</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-industrihall.jpg" alt="Belysning i industrilokal" loading="lazy" decoding="async" /><figcaption>Belysning i industrilokal</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-korridor-spotlights.jpg" alt="Spotlights i korridor" loading="lazy" decoding="async" /><figcaption>Spotlights i korridor</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-uttag-kok.jpg" alt="Uttag och bänkbelysning i kök" loading="lazy" decoding="async" /><figcaption>Uttag och bänkbelysning i kök</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-garderob-2.jpg" alt="Garderobsrad med LED-list" loading="lazy" decoding="async" /><figcaption>Garderobsrad med LED-list</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-trappforvaring-3.jpg" alt="Förvaring med LED under trappa" loading="lazy" decoding="async" /><figcaption>Förvaring med LED under trappa</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-forvaring.jpg" alt="Inbyggd förvaring med LED-belysning" loading="lazy" decoding="async" /><figcaption>Inbyggd förvaring med LED-belysning</figcaption></figure></div>
+          <div class="jobs"><!--cms:jobsAll--></div>
         </div>
       </section>
 
@@ -124,8 +124,8 @@
               <div class="person__body">
                 <h3>Jesper Janson</h3>
                 <p class="role">JJ El &amp; Entreprenad AB</p>
-                <a href="mailto:jesper@jjel.se">jesper@jjel.se</a>
-                <a href="tel:+46709107507">070-910 75 07</a>
+                <a href="mailto:{{email}}">{{email}}</a>
+                <a href="tel:{{tel}}">{{phone}}</a>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@
         <div class="footer-cols">
           <div>
             <h4>Kontakta oss</h4>
-            <ul><li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li><li><a href="tel:+46709107507">070-910 75 07</a></li></ul>
+            <ul><li><a href="mailto:{{email}}">{{email}}</a></li><li><a href="tel:{{tel}}">{{phone}}</a></li></ul>
             <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
           <div><h4>Tjänster</h4><ul><li><a href="elinstallationer.html">Elinstallationer</a></li><li><a href="elservice.html">Elservice</a></li><li><a href="smarta-hem.html">Smarta hem</a></li><li><a href="laddbox.html">Laddbox</a></li><li><a href="data-och-nat.html">Data &amp; nät</a></li><li><a href="styr-och-reglerteknik.html">Styr- &amp; reglerteknik</a></li></ul></div>
