@@ -6,7 +6,7 @@ Vad hostingleverantören behöver erbjuda för att köra webbplatsen.
 
 - **Helt statisk webbplats.** HTML, CSS, JavaScript och bilder, byggda i förväg med Vite.
 - **Ingen serverkod.** Ingen PHP, Node, Python eller databas behövs i drift.
-- **Inget CMS.** WordPress eller liknande krävs inte.
+- **Inget server-CMS.** WordPress eller liknande krävs inte. Admin-panelen (`/admin.html`) körs helt i webbläsaren och sparar till GitHub (se punkt 4).
 - **Det som publiceras** är innehållet i mappen `dist/` efter `npm run build`:
   - 15 HTML-sidor
   - `assets/` med en CSS- och en JS-fil samt typsnitt (woff2)
@@ -55,6 +55,9 @@ Vad hostingleverantören behöver erbjuda för att köra webbplatsen.
     - Node-version: 22
   - **b) Traditionellt webbhotell** (t.ex. Loopia, One.com eller Binero).
     - Ladda upp innehållet i `dist/` till webbroten (`public_html`/`htdocs`) via SFTP.
+- **Admin-panelen kräver automatisk deploy.** Ändringar i `/admin.html` sparas som commits i GitHub-repot och publiceras genom att sajten byggs om.
+  - Med **a)** sker det automatiskt. I dag gör GitHub Actions det mot GitHub Pages; Netlify, Cloudflare Pages och Vercel gör samma sak med sin Git-koppling.
+  - Med **b)** måste webbhotellet ha **SFTP eller FTPS**, så att GitHub Actions kan ladda upp `dist/` efter varje bygge. Manuell uppladdning gör att admin-ändringar aldrig syns.
 - **Länkar:** sajten använder relativa länkar (`base: './'`), så den fungerar både i domänroten och i en undermapp.
 
 ## 5. Externa tjänster som sajten använder
@@ -89,4 +92,4 @@ Följande pekar i dag på GitHub Pages-adressen och ska bytas till `https://jjel
 
 ## 8. Sammanfattning för leverantören
 
-> Statisk webbplats, cirka 10 MB, inga serverkrav utöver att servera filer över HTTPS på egen domän (jjel.se) med 301 http→https/www-omdirigering. Gzip/Brotli och långa cache-headers för `/assets/` önskas. Ingen PHP, databas eller e-post krävs. Befintliga MX-poster för jjel.se ska lämnas orörda.
+> Statisk webbplats, cirka 10 MB, byggs och driftsätts automatiskt från GitHub (SFTP-åtkomst eller Git-koppling krävs). Inga serverkrav utöver att servera filer över HTTPS på egen domän (jjel.se) med 301 http→https/www-omdirigering. Gzip/Brotli och långa cache-headers för `/assets/` önskas. Ingen PHP, databas eller e-post krävs. Befintliga MX-poster för jjel.se ska lämnas orörda.
