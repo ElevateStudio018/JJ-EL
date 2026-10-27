@@ -20,9 +20,9 @@
         <div class="wrap topbar__inner">
           <span>Elektriker i hela Västra Götaland</span>
           <div class="topbar__links">
-            <a href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>070-910 75 07</a>
-            <a href="mailto:jesper@jjel.se"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>jesper@jjel.se</a>
-            <a href="omdomen.html">★ 4,7/5 på Reco</a>
+            <a href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>{{phone}}</a>
+            <a href="mailto:{{email}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>{{email}}</a>
+            <a href="omdomen.html">★ {{reco}}/5 på Reco</a>
           </div>
         </div>
       </div>
@@ -45,10 +45,10 @@
           </ul>
         </nav>
         <div class="header-actions">
-          <a class="header-phone" href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>070-910 75 07</span></a>
+          <a class="header-phone" href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>{{phone}}</span></a>
           <a class="btn-cta btn-cta--sm" href="kontakt.html#offert"><span>Begär offert</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
-        <a class="menu-call" href="tel:+46709107507" aria-label="Ring 070-910 75 07"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
+        <a class="menu-call" href="tel:{{tel}}" aria-label="Ring {{phone}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path class="i-open" d="M3 6h18M3 12h18M3 18h18"/><path class="i-close" d="M5 5l14 14M19 5L5 19"/></svg></button>
       </div>
       <nav class="mobile-panel" id="mobilmeny" aria-label="Mobilmeny">
@@ -60,7 +60,7 @@
         </ul>
         <div class="mobile-panel__cta">
           <a class="btn btn--white btn--lg" href="kontakt.html#offert">Begär offert</a>
-          <a class="btn btn--ghost btn--lg" href="tel:+46709107507">Ring 070-910 75 07</a>
+          <a class="btn btn--ghost btn--lg" href="tel:{{tel}}">Ring {{phone}}</a>
         </div>
       </nav>
     </header>
@@ -79,7 +79,7 @@
           <h2>Personuppgiftsansvarig</h2>
           <p>JJ El &amp; Entreprenad AB, Gustavsbergsvägen 8, 442 53 Ytterby, är personuppgiftsansvarig för de uppgifter som behandlas via denna webbplats.</p>
           <h2>Vilka uppgifter vi samlar in</h2>
-          <p>När du skickar en offertförfrågan via formuläret lämnar du namn, e-postadress och en beskrivning av ditt ärende, samt valfritt telefonnummer, ort och tjänst. Uppgifterna skickas som ett e-postmeddelande till <a href="mailto:jesper@jjel.se">jesper@jjel.se</a>. Webbplatsen har ingen egen databas och ingen analys- eller spårningstjänst är installerad.</p>
+          <p>När du skickar en offertförfrågan via formuläret lämnar du namn, e-postadress och en beskrivning av ditt ärende, samt valfritt telefonnummer, ort och tjänst. Uppgifterna skickas som ett e-postmeddelande till <a href="mailto:{{email}}">{{email}}</a>. Webbplatsen har ingen egen databas och ingen analys- eller spårningstjänst är installerad.</p>
           <h2>Personuppgiftsbiträde</h2>
           <p>För att formuläret ska kunna skicka e-post utan att du behöver öppna ditt eget e-postprogram används tjänsten FormSubmit (formsubmit.co), som förmedlar meddelandet till oss. Uppgifterna passerar då FormSubmits servrar.</p>
           <h2>Karta</h2>
@@ -89,7 +89,7 @@
           <h2>Lagringstid</h2>
           <p>E-post sparas så länge det behövs för att hantera ärendet och eventuell efterföljande affärsrelation.</p>
           <h2>Dina rättigheter</h2>
-          <p>Du har rätt att begära tillgång till, rättelse av eller radering av dina personuppgifter, och att återkalla ditt samtycke. Kontakta oss på <a href="mailto:jesper@jjel.se">jesper@jjel.se</a> eller <a href="tel:+46709107507">070-910 75 07</a>. Du kan även lämna klagomål till Integritetsskyddsmyndigheten (IMY). Läs även om <a href="cookies.html">cookies</a>.</p>
+          <p>Du har rätt att begära tillgång till, rättelse av eller radering av dina personuppgifter, och att återkalla ditt samtycke. Kontakta oss på <a href="mailto:{{email}}">{{email}}</a> eller <a href="tel:{{tel}}">{{phone}}</a>. Du kan även lämna klagomål till Integritetsskyddsmyndigheten (IMY). Läs även om <a href="cookies.html">cookies</a>.</p>
         </div>
       </section>
     </main>
@@ -98,7 +98,7 @@
         <div class="footer-cols">
           <div>
             <h4>Kontakta oss</h4>
-            <ul><li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li><li><a href="tel:+46709107507">070-910 75 07</a></li></ul>
+            <ul><li><a href="mailto:{{email}}">{{email}}</a></li><li><a href="tel:{{tel}}">{{phone}}</a></li></ul>
             <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
           <div><h4>Tjänster</h4><ul><li><a href="elinstallationer.html">Elinstallationer</a></li><li><a href="elservice.html">Elservice</a></li><li><a href="smarta-hem.html">Smarta hem</a></li><li><a href="laddbox.html">Laddbox</a></li><li><a href="data-och-nat.html">Data &amp; nät</a></li><li><a href="styr-och-reglerteknik.html">Styr- &amp; reglerteknik</a></li></ul></div>

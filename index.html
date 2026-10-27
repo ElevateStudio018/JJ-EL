@@ -20,9 +20,9 @@
         <div class="wrap topbar__inner">
           <span>Elektriker i hela Västra Götaland</span>
           <div class="topbar__links">
-            <a href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>070-910 75 07</a>
-            <a href="mailto:jesper@jjel.se"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>jesper@jjel.se</a>
-            <a href="omdomen.html">★ 4,7/5 på Reco</a>
+            <a href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>{{phone}}</a>
+            <a href="mailto:{{email}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>{{email}}</a>
+            <a href="omdomen.html">★ {{reco}}/5 på Reco</a>
           </div>
         </div>
       </div>
@@ -45,10 +45,10 @@
           </ul>
         </nav>
         <div class="header-actions">
-          <a class="header-phone" href="tel:+46709107507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>070-910 75 07</span></a>
+          <a class="header-phone" href="tel:{{tel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span>{{phone}}</span></a>
           <a class="btn-cta btn-cta--sm" href="kontakt.html#offert"><span>Begär offert</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
-        <a class="menu-call" href="tel:+46709107507" aria-label="Ring 070-910 75 07"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
+        <a class="menu-call" href="tel:{{tel}}" aria-label="Ring {{phone}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="mobilmeny" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path class="i-open" d="M3 6h18M3 12h18M3 18h18"/><path class="i-close" d="M5 5l14 14M19 5L5 19"/></svg></button>
       </div>
       <nav class="mobile-panel" id="mobilmeny" aria-label="Mobilmeny">
@@ -60,7 +60,7 @@
         </ul>
         <div class="mobile-panel__cta">
           <a class="btn btn--white btn--lg" href="kontakt.html#offert">Begär offert</a>
-          <a class="btn btn--ghost btn--lg" href="tel:+46709107507">Ring 070-910 75 07</a>
+          <a class="btn btn--ghost btn--lg" href="tel:{{tel}}">Ring {{phone}}</a>
         </div>
       </nav>
     </header>
@@ -73,8 +73,8 @@
           <img src="images/jobb-elcentral.jpg" alt="Elcentral installerad av JJ El" loading="lazy" decoding="async" />
         </div>
         <div class="wrap hero__inner">
-          <h1>Säkra elinstallationer för hem, företag &amp; fastigheter</h1>
-          <p class="hero__lead">Från nyinstallationer och renoveringar till felsökning, laddbox och smarta hem — utfört korrekt och effektivt, från planering till färdig installation.</p>
+          <h1>{{hero.title}}</h1>
+          <p class="hero__lead">{{hero.lead}}</p>
           <div class="hero__ctas"><a class="btn-cta  btn-cta--plain" href="#offert"><span>Begär offert</span></a><a class="btn-ghost" href="tjanster.html">Se våra tjänster</a></div>
         </div>
       </section>
@@ -126,7 +126,7 @@
       <section class="section--tight">
         <div class="wrap">
           <div class="feature" data-reveal>
-            <div class="feature__img"><img src="images/jobb-elcentral.jpg" alt="Elcentral med prydligt dragna kablar, utfört av JJ El" loading="lazy" decoding="async" /><span class="sticker">4,7/5<br />på Reco</span></div>
+            <div class="feature__img"><img src="images/jobb-elcentral.jpg" alt="Elcentral med prydligt dragna kablar, utfört av JJ El" loading="lazy" decoding="async" /><span class="sticker">{{reco}}/5<br />på Reco</span></div>
             <div class="feature__body prose">
               <span class="eyebrow">Om JJ El</span>
               <h2 class="title">Lång erfarenhet, genuint engagemang</h2>
@@ -145,7 +145,7 @@
             <div><span class="eyebrow">Utförda jobb</span><h2>Ett urval av våra installationer</h2></div>
             <a class="link-more" href="om-oss.html#jobb">Se fler jobb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-          <div class="jobs"><figure class="job" data-reveal><img src="images/jobb-trad-uplight.jpg" alt="Trädbelysning i trädgård" loading="lazy" decoding="async" /><figcaption>Trädbelysning i trädgård</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-bokhylla-2.jpg" alt="Bokhylla med integrerad LED" loading="lazy" decoding="async" /><figcaption>Bokhylla med integrerad LED</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-laddbox.jpg" alt="Laddbox vid garage" loading="lazy" decoding="async" /><figcaption>Laddbox vid garage</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-badrum-spotlights.jpg" alt="Spotlights i badrum" loading="lazy" decoding="async" /><figcaption>Spotlights i badrum</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-altan-terrass.jpg" alt="LED-belysning på terrass" loading="lazy" decoding="async" /><figcaption>LED-belysning på terrass</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-teknikrum.jpg" alt="Elcentral i teknikrum" loading="lazy" decoding="async" /><figcaption>Elcentral i teknikrum</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-hylla-spotlights.jpg" alt="Spotlights i platsbyggd hylla" loading="lazy" decoding="async" /><figcaption>Spotlights i platsbyggd hylla</figcaption></figure><figure class="job" data-reveal><img src="images/jobb-fasad-spotlights.jpg" alt="Infällda spotlights i takfot" loading="lazy" decoding="async" /><figcaption>Infällda spotlights i takfot</figcaption></figure></div>
+          <div class="jobs"><!--cms:jobsHome--></div>
         </div>
       </section>
 
@@ -153,12 +153,12 @@
         <div class="wrap rspot__grid">
           <div data-reveal>
             <span class="eyebrow">Omdömen</span>
-            <div class="rspot__score">4,7 av 5</div>
-            <p class="rspot__sub">Snittbetyg från 15 verifierade kunder på Reco. Google: 5,0 av 5.</p>
+            <div class="rspot__score">{{reco}} av 5</div>
+            <p class="rspot__sub">Snittbetyg från {{recoCount}} verifierade kunder på Reco. Google: {{google}} av 5.</p>
             <a class="btn-cta " href="omdomen.html"><span>Läs alla omdömen</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           </div>
           <div class="carousel rspot__slider" data-reveal>
-            <div class="carousel__track"><figure class="quote"><blockquote>Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med.</blockquote><figcaption><span><b>Hannele K</b><span>Verifierad kund på Reco · 7 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service.</blockquote><figcaption><span><b>Pontus H</b><span>Verifierad kund på Reco · 6 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>Vårat absoluta förstaval när det kommer elektriker. Noggranna, professionella och väldigt lätta att arbeta med. Toppbetyg.</blockquote><figcaption><span><b>Rickard A</b><span>Verifierad kund på Reco · 6 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>En mycket kompetent &amp; kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade.</blockquote><figcaption><span><b>Daniel S</b><span>Verifierad kund på Reco · 6 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig.</blockquote><figcaption><span><b>Tobias</b><span>Verifierad kund på Reco · 8 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>Trevlig, enkel att ha o göra med, utmärkt jobb och snabb återkoppling på frågor. Rekommenderas!</blockquote><figcaption><span><b>Hampus</b><span>Verifierad kund på Reco · 6 maj 2026</span></span></figcaption></figure><figure class="quote"><blockquote>Mycket bra service, kom på kort inställesetid. Trevligt bemötande.</blockquote><figcaption><span><b>Robert M</b><span>Verifierad kund på Reco · 6 maj 2026</span></span></figcaption></figure></div>
+            <div class="carousel__track"><!--cms:quotes--></div>
             <div class="rspot__nav">
               <button class="carousel__btn carousel__btn--prev" aria-label="Föregående omdöme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
               <button class="carousel__btn carousel__btn--next" aria-label="Nästa omdöme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -184,8 +184,8 @@
             <h2>Berätta om ditt elarbete</h2>
             <p>Oavsett om det gäller en nyinstallation, felsökning eller en laddbox — skicka en förfrågan så återkommer vi så snart vi kan.</p>
             <div class="offert__contact">
-              <a href="tel:+46709107507"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span><span><small>Ring oss</small>070-910 75 07</span></a>
-              <a href="mailto:jesper@jjel.se"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg></span><span><small>Mejla oss</small>jesper@jjel.se</span></a>
+              <a href="tel:{{tel}}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span><span><small>Ring oss</small>{{phone}}</span></a>
+              <a href="mailto:{{email}}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg></span><span><small>Mejla oss</small>{{email}}</span></a>
               <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg></span><span><small>Verksamhetsområde</small>Hela Västra Götaland</span></div>
             </div>
           </div>
@@ -208,7 +208,7 @@
               <label class="consent"><input type="checkbox" name="samtycke" required /> <span>Jag godkänner att JJ El &amp; Entreprenad behandlar mina uppgifter för att besvara förfrågan, enligt <a href="integritetspolicy.html">integritetspolicyn</a>.</span></label>
               <button class="btn-cta btn-cta--navy btn-cta--block" type="submit"><span>Skicka förfrågan</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
               <p class="form-status" role="status" aria-live="polite"></p>
-              <p class="form-note"><span class="stars" aria-hidden="true">★★★★★</span> 4,7/5 på Reco från 15 verifierade kunder</p>
+              <p class="form-note"><span class="stars" aria-hidden="true">★★★★★</span> {{reco}}/5 på Reco från {{recoCount}} verifierade kunder</p>
             </form>
           </div></div>
         </div>
@@ -220,8 +220,8 @@
           <h3>Hitta hit</h3>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><span>Gustavsbergsvägen 8<br />442 53 Ytterby</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><a href="tel:+46709107507">070-910 75 07</a></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><a href="tel:{{tel}}">{{phone}}</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg><a href="mailto:{{email}}">{{email}}</a></li>
           </ul>
           <a class="btn-cta btn-cta--navy btn-cta--sm" href="https://maps.app.goo.gl/MB4G1n2Hd1wPZ4757"><span>Vägbeskrivning</span><span class="btn-cta__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
@@ -232,7 +232,7 @@
         <div class="footer-cols">
           <div>
             <h4>Kontakta oss</h4>
-            <ul><li><a href="mailto:jesper@jjel.se">jesper@jjel.se</a></li><li><a href="tel:+46709107507">070-910 75 07</a></li></ul>
+            <ul><li><a href="mailto:{{email}}">{{email}}</a></li><li><a href="tel:{{tel}}">{{phone}}</a></li></ul>
             <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
           <div><h4>Tjänster</h4><ul><li><a href="elinstallationer.html">Elinstallationer</a></li><li><a href="elservice.html">Elservice</a></li><li><a href="smarta-hem.html">Smarta hem</a></li><li><a href="laddbox.html">Laddbox</a></li><li><a href="data-och-nat.html">Data &amp; nät</a></li><li><a href="styr-och-reglerteknik.html">Styr- &amp; reglerteknik</a></li></ul></div>

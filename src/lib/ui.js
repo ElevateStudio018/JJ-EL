@@ -1,6 +1,7 @@
 import { gsap } from './scroll.js';
 import { stopScroll, startScroll } from './scroll.js';
 import { finePointer, reducedMotion } from './env.js';
+import { company } from '../../content/site.json';
 
 let lastFocus = null;
 
@@ -103,7 +104,7 @@ export function initDrawer() {
       '',
       d.get('meddelande') || '',
     ].join('\n');
-    window.location.href = `mailto:jesper@jjel.se?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${company.email}?subject=${encodeURIComponent(`Offertförfrågan — ${d.get('typ')}`)}&body=${encodeURIComponent(body)}`;
     status.textContent = 'Ditt e-postprogram öppnas med förfrågan ifylld. Vi återkommer så snart vi kan.';
   });
 }

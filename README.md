@@ -19,9 +19,27 @@ npm run preview  # förhandsgranska bygget
 | `process.html` | "Så går det till" — arbetsprocessen i sex steg |
 | `om-oss.html` | Företagsbeskrivning, fokusområden, verksamhetsområde |
 | `kontakt.html` | Kontaktvägar och adress |
+| `admin.html`, `src/admin/*` | Admin-panelen |
+| `content/site.json` | Redigerbart innehåll (via admin) |
+| `src/cms/render.js` | Fyller i innehållet i sidorna vid bygget |
 | `src/data/images.js` | Pexels foto-ID:n |
 | `src/lib/*` | Smooth scroll (Lenis + GSAP), reveals, header, meny, offertformulär |
 | `src/styles/*` | Designsystem (tokens, typografi, knappar) och sektionsstilar |
+
+## Admin-panel (redigera innehåll)
+
+Kontaktuppgifter, betyg, hero-texten, omdömen och jobbgallerierna ligger i `content/site.json`
+och fylls i på sidorna vid bygget (`src/cms/render.js`). De redigeras på **`/admin.html`**:
+
+1. Skapa en [fine-grained GitHub-token](https://github.com/settings/personal-access-tokens/new)
+   för bara det här repot med **Contents: Read and write** och **Actions: Read-only**.
+2. Öppna `https://elevatestudio018.github.io/JJ-EL/admin.html` och logga in med token
+   (den sparas bara i webbläsaren).
+3. Ändra och klicka **Spara & publicera**. Ändringen committas till `main` och GitHub Actions
+   bygger om sidan inom någon minut. Uppladdade bilder skalas ner och hamnar i `public/images/`.
+
+I HTML-filerna står `{{phone}}`, `{{email}}`, `{{reco}}` m.fl. och `<!--cms:reviews-->`-markörer
+där innehållet ska in. Övrig text redigeras fortfarande direkt i HTML.
 
 ## Designsystem
 

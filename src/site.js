@@ -3,10 +3,12 @@ import '@fontsource/plus-jakarta-sans/500.css';
 import '@fontsource/plus-jakarta-sans/700.css';
 import '@fontsource/plus-jakarta-sans/800.css';
 import './styles/site.css';
+import { company } from '../content/site.json';
 
 // FormSubmit relays the form as an e-mail to this address (no account needed).
 // The very first submission triggers a one-time activation e-mail to this inbox.
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/jesper@jjel.se';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${company.email}`;
+const TEL = company.phone.replace(/[^\d+]/g, '').replace(/^0/, '+46');
 
 document.documentElement.classList.add('js');
 
@@ -145,7 +147,7 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
       submit.disabled = false;
       labelEl.textContent = label;
       status.innerHTML =
-        'Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla <a href="mailto:jesper@jjel.se">jesper@jjel.se</a> / ring <a href="tel:+46709107507">070-910 75 07</a>.';
+        `Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla <a href="mailto:${company.email}">${company.email}</a> / ring <a href="tel:${TEL}">${company.phone}</a>.`;
       status.classList.add('is-error');
     }
   });
