@@ -35,9 +35,12 @@ Kontaktuppgifter, betyg, hero-texten, omdömen och jobbgallerierna redigeras på
 - **Lagring:** Supabase-projektet *vastkust-bygg* (delas med den sajten; JJ El:s delar heter `jjel_*`):
   tabellen `public.jjel_content` (en rad med allt innehåll) och bucketen `jjel-images` för uppladdade bilder.
   Skrivning skyddas av RLS – bara inloggade konton som finns i `private.jjel_admins`.
-- **Publicering:** GitHub Actions (`.github/workflows/deploy.yml`) kör var 5:e minut,
-  hämtar innehållet med `scripts/pull-content.mjs` till `content/site.json`, committar ändringen
-  och bygger om sajten. Supabase är alltså källan – ändringar direkt i `content/site.json` skrivs över.
+- **Publicering:** ändringar syns direkt. Varje sida bär innehållsversionen den byggdes med
+  (`<meta name="cms-version">`); `src/cms/live.js` hämtar innehållet från Supabase och uppdaterar
+  sidan om admin har sparat något nyare. HTML-filerna byggs om med det nya innehållet vid nästa
+  deploy: workflowen (`.github/workflows/deploy.yml`) hämtar innehållet med `scripts/pull-content.mjs`
+  till `content/site.json` och committar det. Supabase är källan – ändringar direkt i
+  `content/site.json` skrivs över.
 - **Bygget:** `src/cms/render.js` fyller i `{{phone}}`, `{{email}}`, `{{reco}}` m.fl. och
   `<!--cms:reviews-->`-markörer i HTML-filerna. Övrig text redigeras fortfarande direkt i HTML.
 - **Ny admin:** skapa användaren i Supabase (Authentication → Add user) och lägg till adressen:
