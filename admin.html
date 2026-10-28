@@ -13,19 +13,11 @@
         <form class="card login__card" data-login>
           <img src="jj-el-logo.png" alt="" width="56" height="56" />
           <h1>Admin</h1>
-          <p>Logga in med en GitHub-token för att redigera webbplatsens innehåll.</p>
-          <label class="field"><span>GitHub-token</span><input name="token" type="password" autocomplete="current-password" required placeholder="github_pat_…" /></label>
+          <p>Logga in för att redigera webbplatsens innehåll.</p>
+          <label class="field"><span>E-post</span><input name="email" type="email" autocomplete="username" required /></label>
+          <label class="field"><span>Lösenord</span><input name="password" type="password" autocomplete="current-password" required /></label>
           <button class="btn btn--primary" type="submit">Logga in</button>
           <p class="msg" data-login-msg role="alert"></p>
-          <details class="help">
-            <summary>Hur skapar jag en token?</summary>
-            <ol>
-              <li>Gå till <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens</a>.</li>
-              <li>Under <b>Repository access</b>, välj bara repot <code data-repo-name></code>.</li>
-              <li>Under <b>Permissions</b>: <b>Contents</b> = Read and write, <b>Actions</b> = Read-only.</li>
-              <li>Skapa token, kopiera den och klistra in ovan. Den sparas bara i den här webbläsaren.</li>
-            </ol>
-          </details>
         </form>
       </section>
 
@@ -41,6 +33,7 @@
           <div class="topbar__actions">
             <span class="deploy" data-deploy title="Status för senaste publicering"></span>
             <a class="btn btn--ghost" href="./" target="_blank" rel="noopener">Visa sidan</a>
+            <button class="btn btn--ghost" data-password>Byt lösenord</button>
             <button class="btn btn--ghost" data-logout>Logga ut</button>
           </div>
         </header>
@@ -98,6 +91,19 @@
           </div>
         </footer>
       </div>
+
+      <dialog class="card dialog" data-pw-dialog>
+        <form data-pw-form>
+          <h2>Byt lösenord</h2>
+          <label class="field"><span>Nytt lösenord</span><input name="pw" type="password" autocomplete="new-password" required minlength="8" /></label>
+          <label class="field"><span>Upprepa lösenord</span><input name="pw2" type="password" autocomplete="new-password" required /></label>
+          <p class="msg" data-pw-msg role="alert"></p>
+          <div class="dialog__actions">
+            <button class="btn btn--ghost" type="button" data-pw-cancel>Avbryt</button>
+            <button class="btn btn--primary" type="submit">Spara</button>
+          </div>
+        </form>
+      </dialog>
 
       <div class="toast" data-toast role="status" aria-live="polite"></div>
     </div>

@@ -19,8 +19,9 @@ npm run preview  # förhandsgranska bygget
 | `process.html` | "Så går det till" — arbetsprocessen i sex steg |
 | `om-oss.html` | Företagsbeskrivning, fokusområden, verksamhetsområde |
 | `kontakt.html` | Kontaktvägar och adress |
-| `admin.html`, `src/admin/*` | Admin-panelen |
-| `content/site.json` | Redigerbart innehåll (via admin) |
+| `admin.html`, `src/admin/*` | Admin-panelen (Supabase-inloggning) |
+| `content/site.json` | Innehållet från admin (synkas från Supabase, redigera inte för hand) |
+| `scripts/pull-content.mjs` | Hämtar innehållet från Supabase vid bygget |
 | `src/cms/render.js` | Fyller i innehållet i sidorna vid bygget |
 | `src/data/images.js` | Pexels foto-ID:n |
 | `src/lib/*` | Smooth scroll (Lenis + GSAP), reveals, header, meny, offertformulär |
@@ -28,18 +29,19 @@ npm run preview  # förhandsgranska bygget
 
 ## Admin-panel (redigera innehåll)
 
-Kontaktuppgifter, betyg, hero-texten, omdömen och jobbgallerierna ligger i `content/site.json`
-och fylls i på sidorna vid bygget (`src/cms/render.js`). De redigeras på **`/admin.html`**:
+Kontaktuppgifter, betyg, hero-texten, omdömen och jobbgallerierna redigeras på **`/admin.html`**
+(inloggning med e-post och lösenord). Behöriga adresser står i Supabase-tabellen `private.jjel_admins`.
 
-1. Skapa en [fine-grained GitHub-token](https://github.com/settings/personal-access-tokens/new)
-   för bara det här repot med **Contents: Read and write** och **Actions: Read-only**.
-2. Öppna `https://elevatestudio018.github.io/JJ-EL/admin.html` och logga in med token
-   (den sparas bara i webbläsaren).
-3. Ändra och klicka **Spara & publicera**. Ändringen committas till `main` och GitHub Actions
-   bygger om sidan inom någon minut. Uppladdade bilder skalas ner och hamnar i `public/images/`.
-
-I HTML-filerna står `{{phone}}`, `{{email}}`, `{{reco}}` m.fl. och `<!--cms:reviews-->`-markörer
-där innehållet ska in. Övrig text redigeras fortfarande direkt i HTML.
+- **Lagring:** Supabase-projektet *vastkust-bygg* (delas med den sajten; JJ El:s delar heter `jjel_*`):
+  tabellen `public.jjel_content` (en rad med allt innehåll) och bucketen `jjel-images` för uppladdade bilder.
+  Skrivning skyddas av RLS – bara inloggade konton som finns i `private.jjel_admins`.
+- **Publicering:** GitHub Actions (`.github/workflows/deploy.yml`) kör var 5:e minut,
+  hämtar innehållet med `scripts/pull-content.mjs` till `content/site.json`, committar ändringen
+  och bygger om sajten. Supabase är alltså källan – ändringar direkt i `content/site.json` skrivs över.
+- **Bygget:** `src/cms/render.js` fyller i `{{phone}}`, `{{email}}`, `{{reco}}` m.fl. och
+  `<!--cms:reviews-->`-markörer i HTML-filerna. Övrig text redigeras fortfarande direkt i HTML.
+- **Ny admin:** skapa användaren i Supabase (Authentication → Add user) och lägg till adressen:
+  `insert into private.jjel_admins (email) values ('namn@exempel.se');`
 
 ## Designsystem
 
