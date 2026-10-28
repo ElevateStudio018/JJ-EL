@@ -2,150 +2,277 @@
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)" />
     <title>Admin — JJ El &amp; Entreprenad AB</title>
     <link rel="icon" href="favicon.png" type="image/png" />
   </head>
   <body>
-    <div id="app">
-      <section class="login" data-view="login" hidden>
-        <form class="card login__card" data-login>
-          <img src="jj-el-logo.png" alt="" width="56" height="56" />
-          <h1>Admin</h1>
-          <p>Logga in för att redigera webbplatsens innehåll.</p>
-          <label class="field"><span>E-post</span><input name="email" type="email" autocomplete="username" required /></label>
-          <label class="field"><span>Lösenord</span><input name="password" type="password" autocomplete="current-password" required /></label>
-          <button class="btn btn--primary" type="submit">Logga in</button>
-          <p class="msg" data-login-msg role="alert"></p>
-        </form>
-      </section>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+        <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M3 21h18M8 7h4M8 11h4M8 15h4"/></symbol>
+        <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
+        <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+        <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+        <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+        <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol>
+        <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></symbol>
+        <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+        <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h2"/></symbol>
+        <symbol id="i-wand" viewBox="0 0 24 24"><path d="m15 4 5 5L9 20l-5-5zM14 2v2M20 8h2M18 4l1.5-1.5"/></symbol>
+        <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3"/></symbol>
+        <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 17l5-5-5-5M15 12H3"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></symbol>
+      </defs>
+    </svg>
 
-      <div class="shell" data-view="editor" hidden>
-        <header class="topbar">
-          <div class="topbar__brand"><img src="jj-el-logo.png" alt="" width="32" height="32" /><b>JJ El</b><span>Admin</span></div>
-          <nav class="tabs" role="tablist">
-            <button role="tab" data-tab="kontakt" aria-selected="true">Kontakt &amp; betyg</button>
-            <button role="tab" data-tab="startsida">Startsida</button>
-            <button role="tab" data-tab="omdomen">Omdömen</button>
-            <button role="tab" data-tab="jobb">Jobbgalleri</button>
-          </nav>
-          <div class="topbar__actions">
-            <span class="deploy" data-deploy title="Status för senaste publicering"></span>
-            <a class="btn btn--ghost" href="./" target="_blank" rel="noopener">Visa sidan</a>
-            <button class="btn btn--ghost" data-password>Byt lösenord</button>
-            <button class="btn btn--ghost" data-logout>Logga ut</button>
+    <!-- Login -->
+    <section class="login" data-view="login" hidden>
+      <div class="login__art" aria-hidden="true"><img src="images/jobb-elcentral.jpg" alt="" /></div>
+      <form class="login__card" data-login>
+        <img class="login__logo" src="jj-el-logo.png" alt="" width="52" height="52" />
+        <h1>Välkommen tillbaka</h1>
+        <p class="muted">Logga in för att uppdatera JJ El:s webbplats.</p>
+        <label class="field"><span>E-post</span><input name="email" type="email" autocomplete="username" required /></label>
+        <label class="field"><span>Lösenord</span><input name="password" type="password" autocomplete="current-password" required /></label>
+        <button class="btn btn--primary btn--block" type="submit">Logga in</button>
+        <p class="form-msg" data-login-msg role="alert"></p>
+        <p class="login__foot muted">Glömt lösenordet? Kontakta Elevate Studio.</p>
+      </form>
+    </section>
+
+    <!-- Editor -->
+    <div class="app" data-view="editor" hidden>
+      <aside class="side">
+        <div class="side__brand"><img src="jj-el-logo.png" alt="" width="34" height="34" /><div><b>JJ El</b><small>Webbplats</small></div></div>
+        <nav class="nav" aria-label="Sektioner">
+          <button class="nav__item" data-nav="oversikt"><svg><use href="#i-home"/></svg><span>Översikt</span><i class="nav__dot"></i></button>
+          <button class="nav__item" data-nav="foretag"><svg><use href="#i-building"/></svg><span>Företag</span><i class="nav__dot"></i></button>
+          <button class="nav__item" data-nav="startsida"><svg><use href="#i-layout"/></svg><span>Startsida</span><i class="nav__dot"></i></button>
+          <button class="nav__item" data-nav="omdomen"><svg><use href="#i-star"/></svg><span>Omdömen</span><em data-count="reviews"></em><i class="nav__dot"></i></button>
+          <button class="nav__item" data-nav="jobb"><svg><use href="#i-image"/></svg><span>Jobb &amp; bilder</span><em data-count="jobs"></em><i class="nav__dot"></i></button>
+        </nav>
+        <div class="side__foot">
+          <a class="nav__item" href="./" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg><span>Visa webbplatsen</span></a>
+          <div class="user">
+            <button class="user__btn" data-user-menu aria-haspopup="menu" aria-expanded="false"><span class="avatar" data-avatar></span><span class="user__mail" data-user-email></span></button>
+            <div class="menu" data-menu role="menu" hidden>
+              <button role="menuitem" data-password><svg><use href="#i-key"/></svg>Byt lösenord</button>
+              <button role="menuitem" data-logout><svg><use href="#i-logout"/></svg>Logga ut</button>
+            </div>
           </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="banner" data-draft-banner hidden>
+          <svg><use href="#i-undo"/></svg>
+          <span data-draft-text></span>
+          <button class="btn btn--sm" data-draft-restore>Återställ</button>
+          <button class="btn btn--sm btn--ghost" data-draft-drop>Släng</button>
+        </div>
+
+        <!-- Översikt -->
+        <section class="view" data-view-id="oversikt">
+          <header class="head">
+            <div><h1 data-greeting>Översikt</h1><p class="muted">Det här visas just nu på jjel.se – och vad som kan bli bättre.</p></div>
+            <span class="status" data-status></span>
+          </header>
+          <div class="stats" data-stats></div>
+          <div class="grid-2">
+            <div class="card">
+              <div class="card__head"><h2>Publicering</h2></div>
+              <ol class="steps" data-steps></ol>
+              <p class="muted small" data-last-edit></p>
+            </div>
+            <div class="card">
+              <div class="card__head"><h2>Förslag</h2><span class="muted small" data-tips-count></span></div>
+              <ul class="tips" data-tips></ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__head"><h2>Snabbval</h2></div>
+            <div class="quick">
+              <button class="quick__btn" data-quick="review"><svg><use href="#i-star"/></svg><b>Nytt omdöme</b><span>Lägg till eller klistra in från Reco</span></button>
+              <button class="quick__btn" data-quick="job"><svg><use href="#i-upload"/></svg><b>Ladda upp jobbild</b><span>Bilden skalas ner automatiskt</span></button>
+              <button class="quick__btn" data-nav="foretag"><svg><use href="#i-phone"/></svg><b>Kontaktuppgifter</b><span>Telefon, e-post och betyg</span></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Företag -->
+        <section class="view" data-view-id="foretag" hidden>
+          <header class="head"><div><h1>Företag</h1><p class="muted">Kontaktuppgifter och betyg. Visas i sidhuvud, sidfot och offertformulär på alla sidor.</p></div></header>
+          <div class="split">
+            <div class="card">
+              <h2>Kontakt</h2>
+              <label class="field"><span>Telefon</span><input data-bind="company.phone" inputmode="tel" placeholder="070-910 75 07" /><small class="field__hint" data-hint="phone"></small></label>
+              <label class="field"><span>E-post</span><input data-bind="company.email" type="email" /><small class="field__hint" data-hint="email"></small></label>
+              <h2 class="mt">Betyg</h2>
+              <div class="grid-3">
+                <label class="field"><span>Reco</span><input data-bind="rating.reco" inputmode="decimal" placeholder="4,7" /></label>
+                <label class="field"><span>Antal på Reco</span><input data-bind="rating.recoCount" inputmode="numeric" /></label>
+                <label class="field"><span>Google</span><input data-bind="rating.google" inputmode="decimal" placeholder="5,0" /></label>
+              </div>
+              <small class="field__hint" data-hint="rating"></small>
+            </div>
+            <div class="preview">
+              <span class="preview__label">Förhandsvisning</span>
+              <div class="pv-topbar" data-pv-company></div>
+              <div class="pv-score" data-pv-score></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Startsida -->
+        <section class="view" data-view-id="startsida" hidden>
+          <header class="head"><div><h1>Startsida</h1><p class="muted">Det första besökarna ser.</p></div></header>
+          <div class="split">
+            <div class="card">
+              <label class="field"><span>Rubrik <small class="counter" data-counter="hero.title" data-max="70"></small></span><textarea data-bind="hero.title" rows="2"></textarea></label>
+              <label class="field"><span>Ingress <small class="counter" data-counter="hero.lead" data-max="200"></small></span><textarea data-bind="hero.lead" rows="4"></textarea></label>
+              <p class="muted small">Tips: en kort rubrik (under 60 tecken) får plats på tre rader i mobilen.</p>
+            </div>
+            <div class="preview">
+              <span class="preview__label">Förhandsvisning</span>
+              <div class="pv-hero" data-pv-hero></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Omdömen -->
+        <section class="view" data-view-id="omdomen" hidden>
+          <header class="head">
+            <div><h1>Omdömen</h1><p class="muted">Alla visas på sidan Omdömen. Slå på <b>Startsida</b> för att ta med ett omdöme i karusellen. Dra för att ändra ordning.</p></div>
+            <div class="head__actions">
+              <button class="btn" data-paste-open><svg><use href="#i-clipboard"/></svg>Klistra in</button>
+              <button class="btn btn--primary" data-add-review><svg><use href="#i-plus"/></svg>Nytt omdöme</button>
+            </div>
+          </header>
+          <div class="toolbar">
+            <label class="search"><svg><use href="#i-search"/></svg><input type="search" placeholder="Sök namn eller text…" data-search /></label>
+            <div class="chips" data-filters>
+              <button class="chip" data-filter="all" aria-pressed="true">Alla</button>
+              <button class="chip" data-filter="featured" aria-pressed="false">På startsidan</button>
+              <button class="chip" data-filter="hidden" aria-pressed="false">Bara omdömessidan</button>
+            </div>
+          </div>
+          <ol class="rlist" data-reviews></ol>
+        </section>
+
+        <!-- Jobb -->
+        <section class="view" data-view-id="jobb" hidden>
+          <header class="head">
+            <div><h1>Jobb &amp; bilder</h1><p class="muted">Bilder på utförda jobb. Dra för att ändra ordning, eller släpp nya bilder direkt i rutnätet.</p></div>
+            <div class="head__actions">
+              <button class="btn" data-media-open><svg><use href="#i-image"/></svg>Bildbibliotek</button>
+              <button class="btn btn--primary" data-add-job><svg><use href="#i-upload"/></svg>Ladda upp</button>
+            </div>
+          </header>
+          <div class="toolbar">
+            <div class="seg" role="tablist" data-joblists>
+              <button role="tab" data-joblist="jobsHome" aria-selected="true">Startsidan <em data-count="jobsHome"></em></button>
+              <button role="tab" data-joblist="jobsAll" aria-selected="false">Om oss <em data-count="jobsAll"></em></button>
+            </div>
+            <span class="muted small" data-joblist-hint></span>
+          </div>
+          <ol class="jgrid" data-jobs></ol>
+          <input type="file" accept="image/*" multiple hidden data-file-new />
+        </section>
+      </main>
+
+      <!-- Drawer -->
+      <aside class="drawer" data-drawer aria-hidden="true">
+        <header class="drawer__head">
+          <h2 data-drawer-title></h2>
+          <button class="icon-btn" data-drawer-close aria-label="Stäng"><svg><use href="#i-x"/></svg></button>
         </header>
-
-        <main class="panels">
-          <section class="panel" data-panel="kontakt">
-            <h2>Kontaktuppgifter</h2>
-            <p class="hint">Visas i sidhuvud, sidfot, kontaktsida och offertformulär på alla sidor.</p>
-            <div class="grid2">
-              <label class="field"><span>Telefon</span><input data-bind="company.phone" placeholder="070-910 75 07" /></label>
-              <label class="field"><span>E-post</span><input data-bind="company.email" type="email" /></label>
-            </div>
-            <p class="hint">Obs: offertformuläret skickar till e-postadressen via FormSubmit. Byter du adress skickas ett aktiveringsmejl vid första förfrågan.</p>
-            <h2>Betyg</h2>
-            <div class="grid3">
-              <label class="field"><span>Reco-betyg</span><input data-bind="rating.reco" placeholder="4,7" /></label>
-              <label class="field"><span>Antal omdömen på Reco</span><input data-bind="rating.recoCount" inputmode="numeric" /></label>
-              <label class="field"><span>Google-betyg</span><input data-bind="rating.google" placeholder="5,0" /></label>
-            </div>
-          </section>
-
-          <section class="panel" data-panel="startsida" hidden>
-            <h2>Hero på startsidan</h2>
-            <label class="field"><span>Rubrik</span><input data-bind="hero.title" /></label>
-            <label class="field"><span>Ingress</span><textarea data-bind="hero.lead" rows="3"></textarea></label>
-          </section>
-
-          <section class="panel" data-panel="omdomen" hidden>
-            <div class="panel__head">
-              <div><h2>Omdömen</h2><p class="hint">Alla visas på sidan Omdömen. Markera <b>Visa på startsidan</b> för att ta med i karusellen.</p></div>
-              <button class="btn" data-add="reviews">+ Nytt omdöme</button>
-            </div>
-            <ol class="list" data-list="reviews"></ol>
-          </section>
-
-          <section class="panel" data-panel="jobb" hidden>
-            <div class="panel__head">
-              <div><h2>Jobb på startsidan</h2><p class="hint">Urvalet under ”Utförda jobb” på startsidan.</p></div>
-              <button class="btn" data-add="jobsHome">+ Lägg till jobb</button>
-            </div>
-            <ol class="list list--jobs" data-list="jobsHome"></ol>
-            <div class="panel__head">
-              <div><h2>Alla jobb (Om oss)</h2><p class="hint">Galleriet på sidan Om oss.</p></div>
-              <button class="btn" data-add="jobsAll">+ Lägg till jobb</button>
-            </div>
-            <ol class="list list--jobs" data-list="jobsAll"></ol>
-          </section>
-        </main>
-
-        <footer class="savebar" data-savebar hidden>
-          <span data-dirty-msg>Du har osparade ändringar.</span>
-          <div>
-            <button class="btn btn--ghost" data-discard>Ångra</button>
-            <button class="btn btn--primary" data-save>Spara &amp; publicera</button>
-          </div>
+        <div class="drawer__body" data-drawer-body></div>
+        <footer class="drawer__foot">
+          <button class="icon-btn" data-move="-1" aria-label="Flytta upp"><svg><use href="#i-up"/></svg></button>
+          <button class="icon-btn" data-move="1" aria-label="Flytta ner"><svg><use href="#i-down"/></svg></button>
+          <span class="muted small" data-drawer-pos></span>
+          <button class="btn btn--danger-ghost" data-remove><svg><use href="#i-trash"/></svg>Ta bort</button>
         </footer>
+      </aside>
+      <div class="scrim" data-scrim hidden></div>
+
+      <!-- Save bar -->
+      <div class="savebar" data-savebar hidden>
+        <span class="savebar__info"><i class="pulse"></i><span data-dirty-count></span></span>
+        <button class="btn btn--sm btn--ghost" data-undo title="Ångra (Ctrl+Z)"><svg><use href="#i-undo"/></svg>Ångra</button>
+        <button class="btn btn--sm btn--ghost" data-discard>Kasta</button>
+        <button class="btn btn--sm btn--accent" data-save>Spara &amp; publicera <kbd data-kbd>Ctrl S</kbd></button>
       </div>
 
-      <dialog class="card dialog" data-pw-dialog>
-        <form data-pw-form>
-          <h2>Byt lösenord</h2>
-          <label class="field"><span>Nytt lösenord</span><input name="pw" type="password" autocomplete="new-password" required minlength="8" /></label>
-          <label class="field"><span>Upprepa lösenord</span><input name="pw2" type="password" autocomplete="new-password" required /></label>
-          <p class="msg" data-pw-msg role="alert"></p>
-          <div class="dialog__actions">
-            <button class="btn btn--ghost" type="button" data-pw-cancel>Avbryt</button>
-            <button class="btn btn--primary" type="submit">Spara</button>
-          </div>
-        </form>
-      </dialog>
-
-      <div class="toast" data-toast role="status" aria-live="polite"></div>
+      <!-- Bottom nav (mobile) -->
+      <nav class="tabbar" aria-label="Sektioner">
+        <button data-nav="oversikt"><svg><use href="#i-home"/></svg><span>Översikt</span></button>
+        <button data-nav="foretag"><svg><use href="#i-building"/></svg><span>Företag</span></button>
+        <button data-nav="startsida"><svg><use href="#i-layout"/></svg><span>Start</span></button>
+        <button data-nav="omdomen"><svg><use href="#i-star"/></svg><span>Omdömen</span></button>
+        <button data-nav="jobb"><svg><use href="#i-image"/></svg><span>Jobb</span></button>
+      </nav>
     </div>
 
-    <template id="tpl-review">
-      <li class="item">
-        <div class="item__main">
-          <div class="grid3">
-            <label class="field"><span>Namn</span><input data-f="name" /></label>
-            <label class="field"><span>Datum</span><input data-f="date" placeholder="7 maj 2026" /></label>
-            <label class="field"><span>Källa</span><input data-f="source" placeholder="Verifierad kund på Reco" /></label>
-          </div>
-          <label class="field"><span>Omdöme</span><textarea data-f="text" rows="3"></textarea></label>
-          <label class="check"><input type="checkbox" data-f="featured" /> Visa på startsidan</label>
-          <label class="field" data-if="featured"><span>Kortare citat för startsidan (valfritt)</span><textarea data-f="quote" rows="2"></textarea></label>
-        </div>
-        <div class="item__tools">
-          <button class="icon" data-move="-1" aria-label="Flytta upp">↑</button>
-          <button class="icon" data-move="1" aria-label="Flytta ner">↓</button>
-          <button class="icon icon--danger" data-remove aria-label="Ta bort">✕</button>
-        </div>
-      </li>
-    </template>
+    <!-- Media library -->
+    <dialog class="modal modal--wide" data-media>
+      <header class="modal__head">
+        <h2>Bildbibliotek</h2>
+        <label class="search"><svg><use href="#i-search"/></svg><input type="search" placeholder="Sök bild…" data-media-search /></label>
+        <button class="icon-btn" data-media-close aria-label="Stäng"><svg><use href="#i-x"/></svg></button>
+      </header>
+      <label class="dropzone" data-dropzone>
+        <svg><use href="#i-upload"/></svg>
+        <span><b>Släpp bilder här</b> eller klicka för att välja. JPG, PNG eller WebP – skalas ner automatiskt.</span>
+        <input type="file" accept="image/*" multiple hidden data-media-file />
+      </label>
+      <ul class="mgrid" data-media-grid></ul>
+    </dialog>
 
-    <template id="tpl-job">
-      <li class="item item--job">
-        <label class="thumb" title="Byt bild">
-          <img alt="" data-thumb />
-          <input type="file" accept="image/*" data-upload hidden />
-          <span>Byt bild</span>
-        </label>
-        <div class="item__main">
-          <label class="field"><span>Bildtext</span><input data-f="caption" /></label>
-          <label class="field"><span>Bild</span><select data-f="image"></select></label>
-        </div>
-        <div class="item__tools">
-          <button class="icon" data-move="-1" aria-label="Flytta upp">↑</button>
-          <button class="icon" data-move="1" aria-label="Flytta ner">↓</button>
-          <button class="icon icon--danger" data-remove aria-label="Ta bort">✕</button>
-        </div>
-      </li>
-    </template>
+    <!-- Paste review -->
+    <dialog class="modal" data-paste>
+      <form method="dialog" data-paste-form>
+        <header class="modal__head"><h2>Klistra in omdöme</h2><button class="icon-btn" value="cancel" formnovalidate aria-label="Stäng"><svg><use href="#i-x"/></svg></button></header>
+        <p class="muted small">Kopiera ett omdöme från Reco eller Google (namn, datum och text) och klistra in nedan. Fälten fylls i automatiskt – du kan justera innan du sparar.</p>
+        <textarea name="raw" rows="7" placeholder="Hannele K&#10;7 maj 2026&#10;Supernöjd! Gör ett riktigt bra jobb…" data-paste-raw></textarea>
+        <div class="pv-parse" data-paste-preview></div>
+        <footer class="modal__foot">
+          <button class="btn btn--ghost" value="cancel" formnovalidate>Avbryt</button>
+          <button class="btn btn--primary" value="ok" data-paste-ok disabled>Lägg till</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <!-- Password -->
+    <dialog class="modal" data-pw>
+      <form data-pw-form>
+        <header class="modal__head"><h2>Byt lösenord</h2></header>
+        <label class="field"><span>Nytt lösenord</span><input name="pw" type="password" autocomplete="new-password" required minlength="8" /></label>
+        <label class="field"><span>Upprepa lösenord</span><input name="pw2" type="password" autocomplete="new-password" required /></label>
+        <p class="form-msg" data-pw-msg role="alert"></p>
+        <footer class="modal__foot">
+          <button class="btn btn--ghost" type="button" data-pw-cancel>Avbryt</button>
+          <button class="btn btn--primary" type="submit">Spara</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <div class="toasts" data-toasts aria-live="polite"></div>
 
     <script type="module" src="/src/admin/admin.js"></script>
   </body>
