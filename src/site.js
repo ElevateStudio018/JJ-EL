@@ -4,11 +4,15 @@ import '@fontsource/plus-jakarta-sans/700.css';
 import '@fontsource/plus-jakarta-sans/800.css';
 import './styles/site.css';
 import { company } from '../content/site.json';
+import { liveContent } from './cms/live.js';
 
-// FormSubmit relays the form as an e-mail to this address (no account needed).
-// The very first submission triggers a one-time activation e-mail to this inbox.
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${company.email}`;
-const TEL = company.phone.replace(/[^\d+]/g, '').replace(/^0/, '+46');
+// FormSubmit relays the form as an e-mail to the company address (no account needed); it follows
+// the admin as soon as the page has the live content. The very first submission to a new address
+// triggers a one-time activation e-mail to that inbox.
+let contact = company;
+liveContent.then((c) => c && (contact = c.company));
+const formEndpoint = () => `https://formsubmit.co/ajax/${contact.email}`;
+const tel = () => contact.phone.replace(/[^\d+]/g, '').replace(/^0/, '+46');
 
 document.documentElement.classList.add('js');
 
@@ -46,9 +50,9 @@ document.querySelectorAll('.carousel').forEach((c) => {
   c.querySelector('.carousel__btn--next')?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
   const count = c.querySelector('[data-count]');
   if (count) {
-    const total = track.children.length;
-    const upd = () => (count.textContent = `${Math.round(track.scrollLeft / step()) + 1} / ${total}`);
+    const upd = () => (count.textContent = `${Math.round(track.scrollLeft / step()) + 1} / ${track.children.length}`);
     track.addEventListener('scroll', upd, { passive: true });
+    document.addEventListener('cms:updated', upd);
     upd();
   }
 });
@@ -67,23 +71,24 @@ filterBtns.forEach((btn) =>
   }),
 );
 
-// Gentle fade-up as sections enter the viewport.
-const revealEls = document.querySelectorAll('[data-reveal]');
-if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-in');
-          io.unobserve(en.target);
-        }
-      }),
-    { rootMargin: '0px 0px -8% 0px' },
-  );
-  revealEls.forEach((el) => io.observe(el));
-} else {
-  revealEls.forEach((el) => el.classList.add('is-in'));
-}
+// Gentle fade-up as sections enter the viewport (also for blocks re-rendered with live content).
+const io =
+  'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? new IntersectionObserver(
+        (entries) =>
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.classList.add('is-in');
+              io.unobserve(en.target);
+            }
+          }),
+        { rootMargin: '0px 0px -8% 0px' },
+      )
+    : null;
+const reveal = () =>
+  document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => (io ? io.observe(el) : el.classList.add('is-in')));
+reveal();
+document.addEventListener('cms:updated', reveal);
 
 // Quote form → FormSubmit (AJAX), so visitors never need their own mail client.
 document.querySelectorAll('[data-offert]').forEach((form) => {
@@ -131,7 +136,7 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
     const label = labelEl.textContent;
     labelEl.textContent = 'Skickar…';
     try {
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch(formEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
@@ -147,7 +152,7 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
       submit.disabled = false;
       labelEl.textContent = label;
       status.innerHTML =
-        `Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla <a href="mailto:${company.email}">${company.email}</a> / ring <a href="tel:${TEL}">${company.phone}</a>.`;
+        `Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla <a href="mailto:${contact.email}">${contact.email}</a> / ring <a href="tel:${tel()}">${contact.phone}</a>.`;
       status.classList.add('is-error');
     }
   });

@@ -22,7 +22,7 @@ let userEmail = '';
 let images = []; // selectable images: "images/x.jpg" (in the repo) or bucket URLs
 const pending = new Map(); // bucket URL → { blob, path, url } awaiting upload
 const undoStack = [];
-const ui = { view: 'oversikt', filter: 'all', search: '', jobList: 'jobsHome', drawer: null, live: null, mediaPick: null };
+const ui = { view: 'oversikt', filter: 'all', search: '', jobList: 'jobsHome', drawer: null, mediaPick: null };
 
 /* ---------- helpers ---------- */
 
@@ -106,13 +106,6 @@ async function addImageFiles(files) {
     }
   }
   return urls;
-}
-
-/** Same text the sync job writes to content/site.json, hashed like the build's content-version.txt. */
-async function contentHash(data) {
-  const bytes = new TextEncoder().encode(`${JSON.stringify(data, null, 2)}\n`);
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 /** Rough number of edits between two JSON values: changed fields, added/removed list items, one per reorder. */
@@ -267,9 +260,9 @@ function renderSavebar() {
 
 function renderStatus() {
   const el = $('[data-status]');
-  const state = isDirty() ? 'dirty' : ui.live === false ? 'busy' : ui.live ? 'ok' : '';
+  const state = isDirty() ? 'dirty' : 'ok';
   el.dataset.state = state;
-  el.textContent = { dirty: 'Osparade ändringar', busy: 'Publiceras…', ok: 'Live på webbplatsen', '': 'Kontrollerar…' }[state];
+  el.textContent = state === 'dirty' ? 'Osparade ändringar' : 'Live på webbplatsen';
 }
 
 /** Smart checks on the content, each with an optional fix. */
@@ -324,8 +317,7 @@ function renderDashboard() {
   const dirty = isDirty();
   const steps = [
     { b: dirty ? 'Osparade ändringar' : 'Sparat', s: dirty ? 'Klicka på ”Spara & publicera” när du är klar.' : 'Allt du ändrat är sparat.', st: dirty ? 'active' : 'done' },
-    { b: 'Webbplatsen byggs om', s: 'Sker automatiskt, brukar ta 5–10 minuter.', st: dirty ? '' : ui.live ? 'done' : 'active' },
-    { b: 'Live på webbplatsen', s: ui.live && !dirty ? 'Besökarna ser det senast sparade.' : 'Väntar…', st: !dirty && ui.live ? 'done' : '' },
+    { b: 'Live på webbplatsen', s: dirty ? 'Syns för besökarna direkt när du sparar.' : 'Besökarna ser det senast sparade.', st: dirty ? '' : 'done' },
   ];
   $('[data-steps]').innerHTML = steps.map((x) => `<li class="${x.st ? `is-${x.st}` : ''}"><div><b>${x.b}</b><span>${x.s}</span></div></li>`).join('');
   $('[data-last-edit]').textContent = updatedAt ? `Senast sparad ${relTime(updatedAt)}${updatedBy ? ` av ${updatedBy}` : ''}.` : '';
@@ -901,33 +893,15 @@ async function save(btn) {
     saved = JSON.stringify(content);
     undoStack.length = 0;
     dropDraft();
-    ui.live = false;
     renderAll();
     if (ui.drawer) renderDrawer();
-    toast('Sparat! Webbplatsen uppdateras automatiskt inom 5–10 minuter.');
-    watchDeploy();
+    toast('Sparat! Ändringen syns direkt på webbplatsen.');
   } catch (err) {
     toast(`Kunde inte spara: ${err.message}`, 'error');
   } finally {
     btn.disabled = false;
     btn.innerHTML = label;
   }
-}
-
-let deployTimer;
-/** Compares the saved content with what the live site was built from (content-version.txt). */
-async function watchDeploy() {
-  clearTimeout(deployTimer);
-  const want = await contentHash(JSON.parse(saved));
-  const live = await fetch(`content-version.txt?t=${Date.now()}`, { cache: 'no-store' })
-    .then((r) => (r.ok ? r.text() : ''))
-    .catch(() => '');
-  const was = ui.live;
-  ui.live = live.trim() === want;
-  if (was === false && ui.live) toast('Ändringarna är nu live på webbplatsen.');
-  renderStatus();
-  renderDashboard();
-  if (!ui.live) deployTimer = setTimeout(watchDeploy, 30000);
 }
 
 async function load() {
@@ -952,7 +926,6 @@ async function load() {
   renderAll();
   $$('[data-view]').forEach((v) => (v.hidden = v.dataset.view !== 'editor'));
   go(location.hash.slice(1) || 'oversikt');
-  watchDeploy();
   try {
     const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
     if (draft && JSON.stringify(draft.content) !== saved) {
