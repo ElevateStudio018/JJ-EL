@@ -1,24 +1,60 @@
 name: Deploy to GitHub Pages
 
+# Content edited in /admin.html is saved to Supabase. Every few minutes the sync job copies it
+# into content/site.json; when it changed, it is committed and the site is rebuilt.
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.pull.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: pull
+        run: node scripts/pull-content.mjs
+      - if: steps.pull.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -am 'Synka innehåll från admin'
+          git pull --rebase origin main
+          git push origin HEAD:main
+      # Scheduled workflows are switched off after 60 days without commits; re-enabling keeps it alive.
+      - if: github.event_name == 'schedule'
+        continue-on-error: true
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/deploy.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
   build:
+    needs: sync
+    if: github.event_name != 'schedule' || needs.sync.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22

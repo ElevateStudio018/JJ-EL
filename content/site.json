@@ -1,162 +1,17 @@
 {
-  "company": {
-    "phone": "070-910 75 07",
-    "email": "jesper@jjel.se"
+  "hero": {
+    "lead": "Från nyinstallationer och renoveringar till felsökning, laddbox och smarta hem — utfört korrekt och effektivt, från planering till färdig installation.",
+    "title": "Säkra elinstallationer för hem, företag & fastigheter"
   },
   "rating": {
     "reco": "4,7",
-    "recoCount": "15",
-    "google": "5,0"
+    "google": "5,0",
+    "recoCount": "15"
   },
-  "hero": {
-    "title": "Säkra elinstallationer för hem, företag & fastigheter",
-    "lead": "Från nyinstallationer och renoveringar till felsökning, laddbox och smarta hem — utfört korrekt och effektivt, från planering till färdig installation."
+  "company": {
+    "email": "jesper@jjel.se",
+    "phone": "070-910 75 07"
   },
-  "reviews": [
-    {
-      "name": "Ulrik E",
-      "text": "Snabb, bra och trevlig service!",
-      "date": "5 juli 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Rasmus B",
-      "text": "Behövde hjälp med ett par el-saker och en av grejerna blev inte åtgärdad. Resten av tjänsterna är vi nöjda med.",
-      "date": "16 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Tobias",
-      "text": "Använde mig av JJ när jag totalrustade en lägenhet i Göteborg åt min son. Jag själv bor i Gävle och har egen byggfirma. Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig.",
-      "date": "8 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true,
-      "quote": "Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig."
-    },
-    {
-      "name": "Bengt S",
-      "text": "Trevligt bemötande av kunnig elektriker!",
-      "date": "8 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Hannele K",
-      "text": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med. Kan varmt rekommendera honom och vi kommer absolut att anlita honom igen.",
-      "date": "7 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true,
-      "quote": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med."
-    },
-    {
-      "name": "Hårkonst A",
-      "text": "Hjälpsam. Trevlig. Lyssnar. Bra. Kommer i tid.",
-      "date": "7 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Michael A",
-      "text": "Mycket duktig och lyhörd. Kommer att använda honom igen.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Daniel S",
-      "text": "Jesper utför arbetet med el & montage på det allra bästa sättet. En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade. — Familjen Sallander",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true,
-      "quote": "En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade."
-    },
-    {
-      "name": "Rickard A",
-      "text": "Vårat absoluta förstaval när det kommer elektriker. Noggranna, professionella och väldigt lätta att arbeta med. Toppbetyg.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true
-    },
-    {
-      "name": "Joakim T",
-      "text": "Bra service och alltid nån om kunden. Vi är supernöjda.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Robert M",
-      "text": "Mycket bra service, kom på kort inställesetid. Trevligt bemötande.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true
-    },
-    {
-      "name": "Pontus H",
-      "text": "Vi har använt Jesper Janson ett flertal tillfällen för såväl olika bolag och anläggningar samt privat. Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service. Kan varmt rekommendera honom.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true,
-      "quote": "Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service."
-    },
-    {
-      "name": "Hampus",
-      "text": "Trevlig, enkel att ha o göra med, utmärkt jobb och snabb återkoppling på frågor. Rekommenderas!",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": true
-    },
-    {
-      "name": "Sara A",
-      "text": "Allt skött väldigt bra. Inget att anmärka på. Skulle använda mig av dem igen.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    },
-    {
-      "name": "Patrick K",
-      "text": "Väl utfört och fungerar perfekt.",
-      "date": "6 maj 2026",
-      "source": "Verifierad kund på Reco",
-      "featured": false
-    }
-  ],
-  "jobsHome": [
-    {
-      "image": "images/jobb-trad-uplight.jpg",
-      "caption": "Trädbelysning i trädgård"
-    },
-    {
-      "image": "images/jobb-bokhylla-2.jpg",
-      "caption": "Bokhylla med integrerad LED"
-    },
-    {
-      "image": "images/jobb-laddbox.jpg",
-      "caption": "Laddbox vid garage"
-    },
-    {
-      "image": "images/jobb-badrum-spotlights.jpg",
-      "caption": "Spotlights i badrum"
-    },
-    {
-      "image": "images/jobb-altan-terrass.jpg",
-      "caption": "LED-belysning på terrass"
-    },
-    {
-      "image": "images/jobb-teknikrum.jpg",
-      "caption": "Elcentral i teknikrum"
-    },
-    {
-      "image": "images/jobb-hylla-spotlights.jpg",
-      "caption": "Spotlights i platsbyggd hylla"
-    },
-    {
-      "image": "images/jobb-fasad-spotlights.jpg",
-      "caption": "Infällda spotlights i takfot"
-    }
-  ],
   "jobsAll": [
     {
       "image": "images/jobb-trad-uplight.jpg",
@@ -261,6 +116,151 @@
     {
       "image": "images/jobb-forvaring.jpg",
       "caption": "Inbyggd förvaring med LED-belysning"
+    }
+  ],
+  "reviews": [
+    {
+      "date": "5 juli 2026",
+      "name": "Ulrik E",
+      "text": "Snabb, bra och trevlig service!",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "16 maj 2026",
+      "name": "Rasmus B",
+      "text": "Behövde hjälp med ett par el-saker och en av grejerna blev inte åtgärdad. Resten av tjänsterna är vi nöjda med.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "8 maj 2026",
+      "name": "Tobias",
+      "text": "Använde mig av JJ när jag totalrustade en lägenhet i Göteborg åt min son. Jag själv bor i Gävle och har egen byggfirma. Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig.",
+      "quote": "Han tog åt sig jobbet på kort varsel och gjorde jobbet med bra resultat. Flexibel och pålitlig.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "8 maj 2026",
+      "name": "Bengt S",
+      "text": "Trevligt bemötande av kunnig elektriker!",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "7 maj 2026",
+      "name": "Hannele K",
+      "text": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med. Kan varmt rekommendera honom och vi kommer absolut att anlita honom igen.",
+      "quote": "Supernöjd! Gör ett riktigt bra jobb och är väldigt noggrann med detaljerna. Trevlig, pålitlig och lätt att ha att göra med.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "7 maj 2026",
+      "name": "Hårkonst A",
+      "text": "Hjälpsam. Trevlig. Lyssnar. Bra. Kommer i tid.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Michael A",
+      "text": "Mycket duktig och lyhörd. Kommer att använda honom igen.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Daniel S",
+      "text": "Jesper utför arbetet med el & montage på det allra bästa sättet. En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade. — Familjen Sallander",
+      "quote": "En mycket kompetent & kunnig elektriker som dessutom besitter en kreativ förmåga. Jag kan varmt rekommendera JJ EL till alla intresserade.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Rickard A",
+      "text": "Vårat absoluta förstaval när det kommer elektriker. Noggranna, professionella och väldigt lätta att arbeta med. Toppbetyg.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Joakim T",
+      "text": "Bra service och alltid nån om kunden. Vi är supernöjda.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Robert M",
+      "text": "Mycket bra service, kom på kort inställesetid. Trevligt bemötande.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Pontus H",
+      "text": "Vi har använt Jesper Janson ett flertal tillfällen för såväl olika bolag och anläggningar samt privat. Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service. Kan varmt rekommendera honom.",
+      "quote": "Han kommer alltid i tid. Antal timmar ligger alltid inom budget. Han är väldigt snabb med återkoppling och håller en hög service.",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Hampus",
+      "text": "Trevlig, enkel att ha o göra med, utmärkt jobb och snabb återkoppling på frågor. Rekommenderas!",
+      "source": "Verifierad kund på Reco",
+      "featured": true
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Sara A",
+      "text": "Allt skött väldigt bra. Inget att anmärka på. Skulle använda mig av dem igen.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    },
+    {
+      "date": "6 maj 2026",
+      "name": "Patrick K",
+      "text": "Väl utfört och fungerar perfekt.",
+      "source": "Verifierad kund på Reco",
+      "featured": false
+    }
+  ],
+  "jobsHome": [
+    {
+      "image": "images/jobb-trad-uplight.jpg",
+      "caption": "Trädbelysning i trädgård"
+    },
+    {
+      "image": "images/jobb-bokhylla-2.jpg",
+      "caption": "Bokhylla med integrerad LED"
+    },
+    {
+      "image": "images/jobb-laddbox.jpg",
+      "caption": "Laddbox vid garage"
+    },
+    {
+      "image": "images/jobb-badrum-spotlights.jpg",
+      "caption": "Spotlights i badrum"
+    },
+    {
+      "image": "images/jobb-altan-terrass.jpg",
+      "caption": "LED-belysning på terrass"
+    },
+    {
+      "image": "images/jobb-teknikrum.jpg",
+      "caption": "Elcentral i teknikrum"
+    },
+    {
+      "image": "images/jobb-hylla-spotlights.jpg",
+      "caption": "Spotlights i platsbyggd hylla"
+    },
+    {
+      "image": "images/jobb-fasad-spotlights.jpg",
+      "caption": "Infällda spotlights i takfot"
     }
   ]
 }

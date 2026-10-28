@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 /**
@@ -58,11 +59,27 @@ export function renderHtml(html, c = loadContent()) {
     .replace(/\{\{([\w.]+)\}\}/g, (m, key) => (key in vars ? esc(vars[key]) : m));
 }
 
-/** Vite plugin: renders content into every page and reloads the dev server when the content file changes. */
+const IMAGE_DIR = resolve(import.meta.dirname, '../../public/images');
+
+/**
+ * Vite plugin: renders content into every page, reloads the dev server when the content file changes,
+ * emits content-version.txt (hash of the content file, so the admin can tell when a save is live) and
+ * provides `virtual:repo-images` (the job photos in public/images, selectable in the admin).
+ */
 export function cms() {
   return {
     name: 'cms',
     transformIndexHtml: { order: 'pre', handler: (html) => renderHtml(html) },
+    resolveId: (id) => (id === 'virtual:repo-images' ? '\0virtual:repo-images' : null),
+    load(id) {
+      if (id !== '\0virtual:repo-images') return null;
+      const files = readdirSync(IMAGE_DIR).filter((f) => /^jobb-.*\.(jpe?g|png|webp)$/i.test(f));
+      return `export default ${JSON.stringify(files)};`;
+    },
+    generateBundle() {
+      const hash = createHash('sha256').update(readFileSync(CONTENT_FILE)).digest('hex');
+      this.emitFile({ type: 'asset', fileName: 'content-version.txt', source: hash });
+    },
     configureServer(server) {
       server.watcher.add(CONTENT_FILE);
       server.watcher.on('change', (f) => f === CONTENT_FILE && server.ws.send({ type: 'full-reload' }));

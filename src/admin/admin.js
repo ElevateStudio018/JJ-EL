@@ -1,29 +1,18 @@
 import './admin.css';
-import { GitHub, REPO } from './github.js';
+import { createClient } from '@supabase/supabase-js';
+import repoImages from 'virtual:repo-images';
+import { SUPABASE_URL, SUPABASE_KEY, CONTENT_TABLE, IMAGE_BUCKET } from '../cms/supabase-config.js';
 
-const CONTENT_PATH = 'content/site.json';
-const IMAGE_DIR = 'public/images';
-const TOKEN_KEY = 'jjel-admin-token';
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { storageKey: 'jjel-admin-auth' } });
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-const store = {
-  get: () => {
-    try { return localStorage.getItem(TOKEN_KEY); } catch { return null; }
-  },
-  set: (v) => {
-    try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch {}
-  },
-};
-
-let gh = null;
 let content = null; // working copy
 let saved = ''; // JSON of last saved/loaded state
-let sha = null;
-let images = []; // file names in public/images
-const pending = new Map(); // image path → { blob, url } awaiting upload
-const uploaded = new Map(); // image path → { blob, url } committed this session (not yet on the live site)
+let updatedAt = null; // row version, to detect edits from another browser
+let images = []; // selectable image values: "images/x.jpg" (in the repo) or bucket URLs
+const pending = new Map(); // bucket URL → { blob, path, url } awaiting upload
 
 /* ---------- helpers ---------- */
 
@@ -51,10 +40,8 @@ function refreshDirty() {
   $('[data-savebar]').hidden = !isDirty();
 }
 
-const imgSrc = (image) => {
-  const path = `public/${image}`;
-  return (pending.get(path) || uploaded.get(path))?.url ?? image;
-};
+const imgSrc = (image) => pending.get(image)?.url ?? image;
+const imgLabel = (image) => decodeURIComponent(image.split('/').pop());
 
 const slug = (s) =>
   s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'bild';
@@ -68,6 +55,13 @@ async function prepareImage(file) {
   canvas.height = Math.round(bmp.height * scale);
   canvas.getContext('2d').drawImage(bmp, 0, 0, canvas.width, canvas.height);
   return new Promise((res) => canvas.toBlob(res, 'image/jpeg', 0.85));
+}
+
+/** Same text the sync job writes to content/site.json, hashed like the build's content-version.txt. */
+async function contentHash(data) {
+  const bytes = new TextEncoder().encode(`${JSON.stringify(data, null, 2)}\n`);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 /* ---------- rendering ---------- */
@@ -94,11 +88,8 @@ function renderList(key) {
       $$('[data-f]', li).forEach((el) => {
         const f = el.dataset.f;
         if (el.tagName === 'SELECT') {
-          const opts = [...new Set([item.image, ...images.map((n) => `images/${n}`)].filter(Boolean))];
-          el.replaceChildren(
-            new Option('— välj bild —', ''),
-            ...opts.map((o) => new Option(o.replace('images/', ''), o)),
-          );
+          const opts = [...new Set([item.image, ...images].filter(Boolean))];
+          el.replaceChildren(new Option('— välj bild —', ''), ...opts.map((o) => new Option(imgLabel(o), o)));
         }
         if (el.type === 'checkbox') el.checked = !!item[f];
         else el.value = item[f] ?? '';
@@ -154,12 +145,12 @@ document.addEventListener('change', async (e) => {
   const item = content[key][li.dataset.index];
   try {
     const blob = await prepareImage(input.files[0]);
-    const base = `jobb-${slug(item.caption || input.files[0].name.replace(/\.\w+$/, ''))}`;
-    let name = `${base}.jpg`;
-    for (let n = 2; images.includes(name) || pending.has(`${IMAGE_DIR}/${name}`); n++) name = `${base}-${n}.jpg`;
-    pending.set(`${IMAGE_DIR}/${name}`, { blob, url: URL.createObjectURL(blob) });
-    images.push(name);
-    item.image = `images/${name}`;
+    const base = slug(item.caption || input.files[0].name.replace(/\.\w+$/, ''));
+    const path = `jobb-${base}-${Date.now().toString(36)}.jpg`;
+    const url = sb.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+    pending.set(url, { blob, path, url: URL.createObjectURL(blob) });
+    images.unshift(url);
+    item.image = url;
     renderList(key);
     refreshDirty();
   } catch {
@@ -205,23 +196,39 @@ document.addEventListener('click', async (e) => {
   if ('discard' in t.dataset) {
     if (!confirm('Ångra alla osparade ändringar?')) return;
     content = JSON.parse(saved);
-    pending.forEach((p, path) => {
+    pending.forEach((p, image) => {
       URL.revokeObjectURL(p.url);
-      images = images.filter((n) => `${IMAGE_DIR}/${n}` !== path);
+      images = images.filter((i) => i !== image);
     });
     pending.clear();
     renderAll();
     return;
   }
+  if ('password' in t.dataset) return $('[data-pw-dialog]').showModal();
+  if ('pwCancel' in t.dataset) return $('[data-pw-dialog]').close();
   if ('logout' in t.dataset) {
     if (isDirty() && !confirm('Du har osparade ändringar. Logga ut ändå?')) return;
-    store.set(null);
+    await sb.auth.signOut();
     location.reload();
   }
 });
 
 window.addEventListener('beforeunload', (e) => {
   if (content && isDirty()) e.preventDefault();
+});
+
+$('[data-pw-form]').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const msg = $('[data-pw-msg]');
+  if (f.get('pw').length < 8) return (msg.textContent = 'Minst 8 tecken.');
+  if (f.get('pw') !== f.get('pw2')) return (msg.textContent = 'Lösenorden matchar inte.');
+  const { error } = await sb.auth.updateUser({ password: f.get('pw') });
+  if (error) return (msg.textContent = error.message);
+  e.target.reset();
+  msg.textContent = '';
+  $('[data-pw-dialog]').close();
+  toast('Lösenordet är bytt.', 'is-ok');
 });
 
 /* ---------- save / load ---------- */
@@ -246,25 +253,29 @@ async function save(btn) {
   btn.disabled = true;
   btn.textContent = 'Sparar…';
   try {
-    for (const [path, p] of pending) {
-      const bytes = new Uint8Array(await p.blob.arrayBuffer());
-      await gh.writeBytes(path, bytes, null, `Ladda upp bild ${path.split('/').pop()} via admin`);
-      uploaded.set(path, p);
-      pending.delete(path);
+    for (const [image, p] of pending) {
+      const { error } = await sb.storage.from(IMAGE_BUCKET).upload(p.path, p.blob, { contentType: 'image/jpeg' });
+      if (error) throw error;
+      pending.delete(image);
     }
-    const json = `${JSON.stringify(content, null, 2)}\n`;
-    sha = await gh.writeText(CONTENT_PATH, json, sha, 'Uppdatera innehåll via admin');
+    const { data, error } = await sb
+      .from(CONTENT_TABLE)
+      .update({ data: content })
+      .eq('id', 1)
+      .eq('updated_at', updatedAt)
+      .select('data, updated_at');
+    if (error) throw error;
+    if (!data.length) {
+      return toast('Innehållet har ändrats från en annan dator. Ladda om sidan och gör om ändringen.', 'is-error');
+    }
+    content = data[0].data;
+    updatedAt = data[0].updated_at;
     saved = JSON.stringify(content);
     renderAll();
-    toast('Sparat! Sidan publiceras om en minut eller två.', 'is-ok');
+    toast('Sparat! Ändringen syns på sajten inom 5–10 minuter.', 'is-ok');
     watchDeploy();
   } catch (e) {
-    toast(
-      e.status === 409
-        ? 'Innehållet har ändrats någon annanstans. Ladda om sidan och gör om ändringen.'
-        : `Kunde inte spara: ${e.message}`,
-      'is-error',
-    );
+    toast(`Kunde inte spara: ${e.message}`, 'is-error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Spara & publicera';
@@ -272,60 +283,68 @@ async function save(btn) {
 }
 
 let deployTimer;
+/** Compares the saved content with what the live site was built from (content-version.txt). */
 async function watchDeploy() {
   clearTimeout(deployTimer);
   const el = $('[data-deploy]');
-  const run = await gh.latestRun();
-  if (!run) return (el.textContent = '');
-  const busy = run.status !== 'completed';
-  const ok = run.conclusion === 'success';
-  el.dataset.state = busy ? 'busy' : ok ? 'ok' : 'fail';
-  el.textContent = busy ? 'Publicerar…' : ok ? 'Publicerad' : 'Publicering misslyckades';
-  el.title = `${run.display_title} — ${new Date(run.updated_at).toLocaleString('sv-SE')}`;
-  if (busy) deployTimer = setTimeout(watchDeploy, 8000);
+  const want = await contentHash(JSON.parse(saved));
+  const live = await fetch(`content-version.txt?t=${Date.now()}`, { cache: 'no-store' })
+    .then((r) => (r.ok ? r.text() : ''))
+    .catch(() => '');
+  const done = live.trim() === want;
+  el.dataset.state = done ? 'ok' : 'busy';
+  el.textContent = done ? 'Publicerad' : 'Publiceras…';
+  el.title = done ? 'Sajten visar det senast sparade innehållet.' : 'Sajten byggs om automatiskt inom 5–10 minuter.';
+  if (!done) deployTimer = setTimeout(watchDeploy, 30000);
 }
 
 async function load() {
-  const [{ data, sha: s }, files] = await Promise.all([gh.readJson(CONTENT_PATH), gh.listDir(IMAGE_DIR)]);
-  content = data;
-  sha = s;
+  const [{ data, error }, bucket] = await Promise.all([
+    sb.from(CONTENT_TABLE).select('data, updated_at').eq('id', 1).single(),
+    sb.storage.from(IMAGE_BUCKET).list('', { limit: 500, sortBy: { column: 'created_at', order: 'desc' } }),
+  ]);
+  if (error) throw error;
+  content = data.data;
+  updatedAt = data.updated_at;
   saved = JSON.stringify(content);
-  images = files.filter((n) => /\.(jpe?g|png|webp|avif)$/i.test(n));
+  images = [
+    ...(bucket.data || []).filter((f) => f.id).map((f) => sb.storage.from(IMAGE_BUCKET).getPublicUrl(f.name).data.publicUrl),
+    ...repoImages.map((n) => `images/${n}`),
+  ];
   renderAll();
   show('editor');
   watchDeploy();
 }
 
-async function login(token) {
-  gh = new GitHub(token);
-  await gh.verify();
-  store.set(token);
+/** Signed in and on the JJ El admin list → editor; otherwise back to the login form. */
+async function enter() {
+  const { data: isAdmin, error } = await sb.rpc('jjel_is_admin');
+  if (error || !isAdmin) {
+    await sb.auth.signOut();
+    throw new Error('Kontot har inte behörighet till den här sidan.');
+  }
   await load();
 }
-
-$$('[data-repo-name]').forEach((el) => (el.textContent = `${REPO.owner}/${REPO.name}`));
 
 $('[data-login]').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = $('button', e.target);
   const msg = $('[data-login-msg]');
+  const f = new FormData(e.target);
   btn.disabled = true;
   msg.textContent = '';
   try {
-    await login(new FormData(e.target).get('token').trim());
+    const { error } = await sb.auth.signInWithPassword({ email: f.get('email').trim(), password: f.get('password') });
+    if (error) throw new Error(error.status === 400 ? 'Fel e-post eller lösenord.' : error.message);
+    await enter();
   } catch (err) {
-    msg.textContent = err.status === 401 ? 'Ogiltig token.' : err.status === 404 ? 'Token har inte åtkomst till repot.' : err.message;
+    msg.textContent = err.message;
   } finally {
     btn.disabled = false;
   }
 });
 
-const storedToken = store.get();
-if (storedToken) {
-  login(storedToken).catch(() => {
-    store.set(null);
-    show('login');
-  });
-} else {
-  show('login');
-}
+sb.auth.getSession().then(({ data }) => {
+  if (data.session) enter().catch(() => show('login'));
+  else show('login');
+});
