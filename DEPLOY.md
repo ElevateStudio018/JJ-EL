@@ -14,7 +14,8 @@ på servern – bara att filerna serveras över HTTPS. Uppladdningen görs med `
 | `assets/` | CSS, JavaScript och typsnitt (filnamn med hash – cachas länge) |
 | `images/`, logotyp, favicon | Bilder |
 | `sitemap.xml`, `robots.txt` | Genereras för `https://jjel.se/` (ändra med `SITE_URL=` vid bygget) |
-| `.htaccess` | Komprimering, cache, säkerhetsheaders. HTTPS-omdirigering finns men är avstängd tills certifikatet är på plats |
+| `web.config` | För **IIS (Windows)** – jjel.se körs på IIS idag: `index.html` som startsida, MIME-typer, cache, säkerhetsheaders. Ger sajten 500-fel? Ta bort filen och kontakta internet.se |
+| `.htaccess` | Samma sak för Apache/LiteSpeed (ignoreras av IIS). HTTPS-omdirigering finns men är avstängd |
 | `.deploy-manifest.json` | Skrivs av deploy-skriptet: vilka filer vi har laddat upp (blockeras för besökare i `.htaccess`) |
 
 Alla länkar är relativa och kontrollerade, så sajten fungerar direkt på `jjel.se/` (och i en undermapp).
@@ -48,8 +49,10 @@ Inget av detta körs på webbhotellet – besökarens webbläsare pratar direkt 
    ligger på servern. Ingenting ändras. Spara fingeravtrycket som skrivs ut (SFTP) i `.env.deploy`.
 4. Gå igenom listan "BEFINTLIGA filer … som skulle skrivas över" (t.ex. en gammal `index.html`).
 5. `npm run deploy -- --overwrite-existing` när listan är godkänd. Övriga gamla filer lämnas orörda.
-6. Be internet.se peka `jjel.se`/`www.jjel.se` mot mappen och aktivera SSL. **Behåll MX-posterna** (e-posten).
-7. När `https://jjel.se` fungerar: ta bort `#` framför HTTPS-blocket i `public/.htaccess` och publicera igen.
+6. Öppna sajten. Visar den *500 – Internal Server Error* har webbhotellet låst någon inställning i `web.config`: ta bort den filen på servern och fråga internet.se.
+7. Be internet.se peka `jjel.se`/`www.jjel.se` mot mappen och aktivera SSL. **Behåll MX-posterna** (e-posten).
+8. HTTPS-omdirigeringen ordnar internet.se i IIS (på Apache: ta bort `#` framför HTTPS-blocket i `public/.htaccess`).
+9. Den ofärdiga WordPress-installationen som ligger på jjel.se idag (`wp-admin/setup-config.php`) ska tas bort – den kan annars kapas. Skriptet raderar aldrig främmande filer, så det görs av internet.se eller efter uttryckligt beslut.
 
 ## Uppdatera i framtiden – ett kommando
 
