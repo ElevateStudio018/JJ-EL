@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:check": "node scripts/deploy.mjs check",
+    "deploy": "node scripts/deploy.mjs upload"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -19,6 +21,8 @@
     "three": "^0.186.0"
   },
   "devDependencies": {
+    "basic-ftp": "6.2.3",
+    "ssh2-sftp-client": "12.1.1",
     "vite": "^8.3.0"
   }
 }

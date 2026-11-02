@@ -3,3 +3,7 @@ dist
 .DS_Store
 *.log
 screenshots/
+
+# Deploy till webbhotellet: inloggningsuppgifter och säkerhetskopior stannar lokalt
+.env.deploy
+deploy-backups/

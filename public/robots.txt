@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://elevatestudio018.github.io/lir/sitemap.xml

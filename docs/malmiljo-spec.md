@@ -58,6 +58,7 @@ Vad hostingleverantören behöver erbjuda för att köra webbplatsen.
 - **Admin-panelen kräver automatisk deploy.** Ändringar i `/admin.html` sparas som commits i GitHub-repot och publiceras genom att sajten byggs om.
   - Med **a)** sker det automatiskt. I dag gör GitHub Actions det mot GitHub Pages; Netlify, Cloudflare Pages och Vercel gör samma sak med sin Git-koppling.
   - Med **b)** måste webbhotellet ha **SFTP eller FTPS**, så att GitHub Actions kan ladda upp `dist/` efter varje bygge. Manuell uppladdning gör att admin-ändringar aldrig syns.
+- **Valt webbhotell: internet.se.** Publicering sker med `npm run deploy` eller GitHub-flödet "Publicera till jjel.se" över SFTP/FTPS – se `DEPLOY.md`.
 - **Länkar:** sajten använder relativa länkar (`base: './'`), så den fungerar både i domänroten och i en undermapp.
 
 ## 5. Externa tjänster som sajten använder
@@ -82,8 +83,7 @@ Inga av dessa körs hos hostingen. De måste bara vara nåbara från besökarens
 
 Följande pekar i dag på GitHub Pages-adressen och ska bytas till `https://jjel.se/` vid lansering:
 
-- `public/sitemap.xml` och `public/robots.txt`. De pekar fortfarande på `elevatestudio018.github.io/lir/`.
-- `og:image`-adresserna för bilddelning i sociala medier.
+- ~~`sitemap.xml`, `robots.txt` och `og:image`~~ – genereras nu för `https://jjel.se/` vid bygget.
 
 Övrigt:
 

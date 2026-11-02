@@ -7,6 +7,8 @@ npm install
 npm run dev      # utveckling
 npm run build    # produktion → dist/
 npm run preview  # förhandsgranska bygget
+npm run deploy:check  # visa vad som skulle publiceras på jjel.se
+npm run deploy        # publicera på jjel.se (se DEPLOY.md)
 ```
 
 ## Struktur
