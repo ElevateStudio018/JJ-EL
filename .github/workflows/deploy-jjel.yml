@@ -1,0 +1,69 @@
+name: Publicera till jjel.se
+
+# Manuell publicering till webbhotellet (internet.se) över SFTP/FTPS.
+# Kör från GitHub: Actions → "Publicera till jjel.se" → Run workflow,
+# eller i terminalen: gh workflow run deploy-jjel.yml -f action=upload
+#
+# Inloggningsuppgifterna ligger som krypterade secrets i GitHub (Settings → Secrets and variables
+# → Actions) och syns aldrig i koden eller loggarna. Se DEPLOY.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'check = visa vad som skulle hända (ändrar inget), upload = publicera'
+        type: choice
+        options: [check, upload]
+        default: check
+      overwrite_existing:
+        description: 'Tillåt att filer som redan fanns på servern skrivs över (säkerhetskopieras först)'
+        type: boolean
+        default: false
+      prune:
+        description: 'Radera filer vi själva laddat upp tidigare men som inte längre används'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-jjel
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: jjel-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Bygg och ${{ inputs.action == 'upload' && 'publicera' || 'kontrollera' }}
+        run: |
+          set -- "$ACTION" --yes
+          [ "$OVERWRITE" = "true" ] && set -- "$@" --overwrite-existing
+          [ "$PRUNE" = "true" ] && set -- "$@" --prune
+          node scripts/deploy.mjs "$@"
+        env:
+          ACTION: ${{ inputs.action }}
+          OVERWRITE: ${{ inputs.overwrite_existing }}
+          PRUNE: ${{ inputs.prune }}
+          DEPLOY_PROTOCOL: ${{ vars.DEPLOY_PROTOCOL }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          DEPLOY_SFTP_FINGERPRINT: ${{ vars.DEPLOY_SFTP_FINGERPRINT }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+      - name: Spara säkerhetskopior av överskrivna filer
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-backups-${{ github.run_number }}
+          path: deploy-backups/
+          if-no-files-found: ignore
+          retention-days: 90
