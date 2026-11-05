@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>JJ El &amp; Entreprenad AB — Elektriker i Västra Götaland</title>
-    <meta name="description" content="JJ El &amp; Entreprenad AB utför elinstallationer, elservice, smarta hem, laddboxar och data/nät åt privatpersoner, företag och fastighetsägare i hela Västra Götaland." />
+    <meta name="description" content="JJ El &amp; Entreprenad AB utför elinstallationer, elservice, smarta hem, laddboxar och data/nät åt privatpersoner och företag i Västra Götaland." />
     <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="preconnect" href="https://images.pexels.com" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="JJ El &amp; Entreprenad AB — Elektriker i Västra Götaland" />
-    <meta property="og:description" content="JJ El &amp; Entreprenad AB utför elinstallationer, elservice, smarta hem, laddboxar och data/nät åt privatpersoner, företag och fastighetsägare i hela Västra Götaland." />
+    <meta property="og:description" content="JJ El &amp; Entreprenad AB utför elinstallationer, elservice, smarta hem, laddboxar och data/nät åt privatpersoner och företag i Västra Götaland." />
     <meta property="og:image" content="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
@@ -68,9 +67,9 @@
       <section class="hero hero--full">
         <div class="hero__slides" data-slides>
           <img data-px="257736" data-ar="16/9" sizes="100vw" alt="Elektriker kontrollerar en elcentral" fetchpriority="high" decoding="async" />
-          <img data-px="442150" data-ar="16/9" sizes="100vw" alt="Nätverkskablar kopplas i ett serverrack" loading="lazy" decoding="async" />
-          <img data-px="8853502" data-ar="16/9" sizes="100vw" alt="Installation av solpaneler på tak" loading="lazy" decoding="async" />
-          <img src="images/jobb-elcentral.jpg" alt="Elcentral installerad av JJ El" loading="lazy" decoding="async" />
+          <img data-px="442150" data-ar="16/9" sizes="100vw" alt="Nätverkskablar kopplas i ett serverrack" data-defer loading="lazy" decoding="async" />
+          <img data-px="8853502" data-ar="16/9" sizes="100vw" alt="Installation av solpaneler på tak" data-defer loading="lazy" decoding="async" />
+          <img src="images/jobb-elcentral.jpg" alt="Elcentral installerad av JJ El" data-defer loading="lazy" decoding="async" />
         </div>
         <div class="wrap hero__inner">
           <h1>{{hero.title}}</h1>
@@ -215,7 +214,7 @@
       </section>
 
       <section class="mapband" aria-label="Karta">
-        <iframe src="https://www.google.com/maps?q=Gustavsbergsv%C3%A4gen%208%2C%20442%2053%20Ytterby&z=14&output=embed" title="Karta: Gustavsbergsvägen 8, 442 53 Ytterby" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <button type="button" class="mapband__map" data-map-src="https://www.google.com/maps?q=Gustavsbergsv%C3%A4gen%208%2C%20442%2053%20Ytterby&z=14&output=embed" data-map-title="Karta: Gustavsbergsvägen 8, 442 53 Ytterby"><span>Visa karta</span></button>
         <div class="mapcard">
           <h3>Hitta hit</h3>
           <ul>
@@ -231,15 +230,15 @@
       <div class="wrap">
         <div class="footer-cols">
           <div>
-            <h4>Kontakta oss</h4>
+            <h2>Kontakta oss</h2>
             <ul><li><a href="mailto:{{email}}">{{email}}</a></li><li><a href="tel:{{tel}}">{{phone}}</a></li></ul>
             <address><p style="margin-top:10px">Gustavsbergsvägen 8<br />442 53 Ytterby</p></address>
           </div>
-          <div><h4>Tjänster</h4><ul><li><a href="elinstallationer.html">Elinstallationer</a></li><li><a href="elservice.html">Elservice</a></li><li><a href="smarta-hem.html">Smarta hem</a></li><li><a href="laddbox.html">Laddbox</a></li><li><a href="data-och-nat.html">Data &amp; nät</a></li><li><a href="styr-och-reglerteknik.html">Styr- &amp; reglerteknik</a></li></ul></div>
-          <div><h4>Anlita oss</h4><ul><li><a href="process.html">Processen</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="serviceavtal.html">Serviceavtal</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></div>
-          <div><h4>Om oss</h4><ul><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></div>
-          <div><h4>Kontakt</h4><ul><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#felanmalan">Felanmälan</a></li><li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco</a></li></ul></div>
-          <div><h4>Om JJ El</h4><p>JJ El &amp; Entreprenad AB utför professionella elinstallationer för privatpersoner, företag och fastighetsägare — med fokus på kvalitet, säkerhet och kundnöjdhet i hela Västra Götaland.</p><img class="award award--footer" src="images/arets-elforetag.png" alt="Årets Elföretag – JJ El &amp; Entreprenad AB, maj 2026" loading="lazy" /></div>
+          <div><h2>Tjänster</h2><ul><li><a href="elinstallationer.html">Elinstallationer</a></li><li><a href="elservice.html">Elservice</a></li><li><a href="smarta-hem.html">Smarta hem</a></li><li><a href="laddbox.html">Laddbox</a></li><li><a href="data-och-nat.html">Data &amp; nät</a></li><li><a href="styr-och-reglerteknik.html">Styr- &amp; reglerteknik</a></li></ul></div>
+          <div><h2>Anlita oss</h2><ul><li><a href="process.html">Processen</a></li><li><a href="omdomen.html">Omdömen</a></li><li><a href="serviceavtal.html">Serviceavtal</a></li><li><a href="kontakt.html#offert">Begär offert</a></li></ul></div>
+          <div><h2>Om oss</h2><ul><li><a href="om-oss.html">Om JJ El</a></li><li><a href="om-oss.html#verksamhetsomrade">Verksamhetsområde</a></li><li><a href="om-oss.html#kontaktperson">Kontaktperson</a></li></ul></div>
+          <div><h2>Kontakt</h2><ul><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html#felanmalan">Felanmälan</a></li><li><a href="https://www.reco.se/jj-el-entreprenad-ab-ytterby" rel="noopener" target="_blank">Reco</a></li></ul></div>
+          <div><h2>Om JJ El</h2><p>JJ El &amp; Entreprenad AB utför professionella elinstallationer för privatpersoner, företag och fastighetsägare — med fokus på kvalitet, säkerhet och kundnöjdhet i hela Västra Götaland.</p><img class="award award--footer" src="images/arets-elforetag.png" alt="Årets Elföretag – JJ El &amp; Entreprenad AB, maj 2026" loading="lazy" /></div>
         </div>
         <div class="footer-bottom">
           <div class="social"><a href="https://www.instagram.com/jj_el_entreprenad_ab/" rel="noopener" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>

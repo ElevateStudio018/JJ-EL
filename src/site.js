@@ -1,7 +1,7 @@
-import '@fontsource/plus-jakarta-sans/400.css';
-import '@fontsource/plus-jakarta-sans/500.css';
-import '@fontsource/plus-jakarta-sans/700.css';
-import '@fontsource/plus-jakarta-sans/800.css';
+import '@fontsource/plus-jakarta-sans/latin-400.css';
+import '@fontsource/plus-jakarta-sans/latin-500.css';
+import '@fontsource/plus-jakarta-sans/latin-700.css';
+import '@fontsource/plus-jakarta-sans/latin-800.css';
 import './styles/site.css';
 import { company } from '../content/site.json';
 import { liveContent } from './cms/live.js';
@@ -24,7 +24,7 @@ const onScroll = () => {
   toTop?.classList.toggle('is-visible', y > 500);
 };
 window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+requestAnimationFrame(onScroll);
 toTop?.addEventListener('click', () => window.scrollTo({ top: 0 }));
 
 const menuBtn = document.querySelector('.menu-btn');
@@ -53,7 +53,7 @@ document.querySelectorAll('.carousel').forEach((c) => {
     const upd = () => (count.textContent = `${Math.round(track.scrollLeft / step()) + 1} / ${track.children.length}`);
     track.addEventListener('scroll', upd, { passive: true });
     document.addEventListener('cms:updated', upd);
-    upd();
+    requestAnimationFrame(upd);
   }
 });
 
@@ -166,6 +166,8 @@ document.querySelectorAll('[data-progress]').forEach((box) => {
   let len = 0;
   let marks = [];
   const vertical = () => matchMedia('(max-width: 900px)').matches;
+  // All layout reads happen first and all style writes last, inside one animation frame,
+  // so the browser never has to recalculate layout in the middle of the script.
   const measure = () => {
     const b = box.getBoundingClientRect();
     const v = vertical();
@@ -175,7 +177,6 @@ document.querySelectorAll('[data-progress]').forEach((box) => {
     });
     marks = pos.map((p) => p - pos[0]);
     len = marks[marks.length - 1];
-    box.style.setProperty('--len', len + 'px');
   };
   const update = () => {
     const v = vertical();
@@ -184,13 +185,25 @@ document.querySelectorAll('[data-progress]').forEach((box) => {
     const ref = innerHeight * 0.6;
     const px = v ? ref - first.top - 26 : ((ref - r.top) / (innerHeight * 0.3)) * len;
     const fill = len ? Math.min(1, Math.max(0, px / len)) : 0;
+    box.style.setProperty('--len', len + 'px');
     box.style.setProperty('--fill', fill);
-    steps.forEach((s, i) => s.classList.toggle('is-on', (v ? px : fill * len) >= marks[i] - 1 && (r.top < ref)));
+    steps.forEach((s, i) => s.classList.toggle('is-on', (v ? px : fill * len) >= marks[i] - 1 && r.top < ref));
   };
-  const all = () => { measure(); update(); };
-  addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', all);
-  all();
+  let frame = 0;
+  let remeasure = false;
+  const schedule = (m) => {
+    remeasure ||= m;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (remeasure) measure();
+      remeasure = false;
+      update();
+    });
+  };
+  addEventListener('scroll', () => schedule(false), { passive: true });
+  addEventListener('resize', () => schedule(true));
+  schedule(true);
 });
 
 // Hero slideshow: crossfade every 8 s.
@@ -199,10 +212,34 @@ document.querySelectorAll('[data-slides]').forEach((box) => {
   let i = 0;
   imgs[0]?.classList.add('is-active');
   if (imgs.length < 2) return;
+  // The other slides are only fetched once the page has loaded, so they never compete with the first view.
+  const loadRest = () =>
+    setTimeout(() => {
+      for (const im of box.querySelectorAll('img[data-srcset]')) {
+        im.srcset = im.dataset.srcset;
+        im.src = im.dataset.src;
+        im.removeAttribute('data-srcset');
+      }
+    }, 1500);
+  if (document.readyState === 'complete') loadRest();
+  else addEventListener('load', loadRest, { once: true });
   setInterval(() => {
     if (document.hidden) return;
     imgs[i].classList.remove('is-active');
     i = (i + 1) % imgs.length;
     imgs[i].classList.add('is-active');
   }, 8000);
+});
+
+// Map: swap the placeholder for the Google map when the visitor asks for it.
+document.querySelectorAll('[data-map-src]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const frame = document.createElement('iframe');
+    frame.src = btn.dataset.mapSrc;
+    frame.title = btn.dataset.mapTitle;
+    frame.referrerPolicy = 'no-referrer-when-downgrade';
+    frame.allowFullscreen = true;
+    btn.replaceWith(frame);
+    frame.focus();
+  });
 });

@@ -51,6 +51,7 @@ export const liveContent = (async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${CONTENT_TABLE}?id=eq.1&select=data`, {
       headers: { apikey: SUPABASE_KEY },
+      priority: 'low',
     });
     const c = res.ok ? (await res.json())[0]?.data : null;
     if (!c?.company || (await sha256(contentText(c))) === built) return c;
