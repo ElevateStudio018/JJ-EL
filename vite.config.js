@@ -3,6 +3,8 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { cms } from './src/cms/render.js';
 import { seo } from './src/build/seo.js';
+import { images } from './src/build/images.js';
+import { inlineCss } from './src/build/inline-css.js';
 
 // Pexels CDN — all imagery is royalty-free for commercial use (pexels.com/license).
 const PX = (id, w, h) =>
@@ -36,7 +38,7 @@ function pexelsImages() {
 
 export default defineConfig({
   base: './',
-  plugins: [seo({ root: import.meta.dirname }), cms(), pexelsImages()],
+  plugins: [seo({ root: import.meta.dirname }), cms(), pexelsImages(), images({ root: import.meta.dirname }), inlineCss()],
   build: {
     target: 'es2020',
     chunkSizeWarningLimit: 700,

@@ -10,6 +10,7 @@ AddDefaultCharset UTF-8
   AddType font/woff .woff
   AddType image/svg+xml .svg
   AddType image/webp .webp
+  AddType image/avif .avif
   AddType application/javascript .js
 </IfModule>
 
@@ -22,6 +23,8 @@ AddDefaultCharset UTF-8
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Strict-Transport-Security "max-age=63072000"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://eeasibbhydlpoaomjwsn.supabase.co https://images.pexels.com; font-src 'self'; connect-src 'self' https://eeasibbhydlpoaomjwsn.supabase.co wss://eeasibbhydlpoaomjwsn.supabase.co https://formsubmit.co; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'self'; upgrade-insecure-requests"
 
   # HTML hämtas alltid färskt, så en uppdatering syns direkt.
   <FilesMatch "\.html$">
@@ -29,6 +32,9 @@ AddDefaultCharset UTF-8
   </FilesMatch>
   # Filer med hash i namnet (assets/site-AbC123xy.js) ändras aldrig – cacha i ett år.
   <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "-[a-f0-9]{8}-\d+\.avif$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.(jpe?g|png|webp|svg|ico)$">
