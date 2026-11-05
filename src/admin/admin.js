@@ -262,7 +262,7 @@ function renderStatus() {
   const el = $('[data-status]');
   const state = isDirty() ? 'dirty' : 'ok';
   el.dataset.state = state;
-  el.textContent = state === 'dirty' ? 'Osparade ändringar' : 'Live på webbplatsen';
+  el.innerHTML = state === 'dirty' ? `${icon('upload')}Osparade ändringar` : `${icon('check')}Sparat och live ✓`;
 }
 
 /** Smart checks on the content, each with an optional fix. */
@@ -643,21 +643,14 @@ document.addEventListener('change', async (e) => {
 document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, [data-index], [data-nav]');
   if (!t) {
-    if (!e.target.closest('.user')) $('[data-menu]').hidden = true;
     return;
   }
-  if (!t.closest('.user')) $('[data-menu]').hidden = true;
   const d = t.dataset;
 
   if (d.nav) return go(d.nav);
   if (d.tip !== undefined) return tipActions[+d.tip]?.();
   if (d.filter) return setFilter(d.filter);
   if (d.joblist) return setJobList(d.joblist);
-  if ('userMenu' in d) {
-    const m = $('[data-menu]');
-    m.hidden = !m.hidden;
-    return t.setAttribute('aria-expanded', !m.hidden);
-  }
   if ('password' in d) return $('[data-pw]').showModal();
   if ('pwCancel' in d) return $('[data-pw]').close();
   if ('logout' in d) {
@@ -917,7 +910,6 @@ async function load() {
   saved = JSON.stringify(content);
   userEmail = user.data.user?.email || '';
   $('[data-user-email]').textContent = userEmail;
-  $('[data-avatar]').textContent = (userEmail[0] || '?').toUpperCase();
   images = [
     ...(bucket.data || []).filter((f) => f.id).map((f) => sb.storage.from(IMAGE_BUCKET).getPublicUrl(f.name).data.publicUrl),
     ...repoImages.map((n) => `images/${n}`),
