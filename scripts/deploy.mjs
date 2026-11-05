@@ -143,24 +143,40 @@ async function connect() {
   };
 }
 
-async function remoteFiles(conn) {
-  const out = new Map();
-  const walk = async (rel) => {
-    for (const e of await conn.list(posix.join(cfg.path, rel))) {
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Pause between transfers: web hosts block addresses that open many connections in a burst.
+const PAUSE = Number(process.env.DEPLOY_DELAY_MS ?? 250);
+
+/** Every directory that holds one of these paths ("assets/x.js" → "assets"). */
+const dirsOf = (paths) => new Set([...paths].flatMap((p) => p.split('/').slice(0, -1).map((_, i, a) => a.slice(0, i + 1).join('/'))));
+
+/**
+ * Lists the server files that matter: everything at the top level, and the contents of directories that
+ * this site uses or uploaded before. Other directories (e.g. an old CMS) are only noted, never opened,
+ * so a big foreign tree does not cost hundreds of connections.
+ */
+async function remoteFiles(conn, top, wanted) {
+  const files = new Map();
+  const foreignDirs = [];
+  const walk = async (rel, entries) => {
+    for (const e of entries) {
       if (e.name === '.' || e.name === '..') continue;
       const r = rel ? `${rel}/${e.name}` : e.name;
-      if (e.dir) await walk(r);
-      else out.set(r, { size: e.size });
+      if (!e.dir) files.set(r, { size: e.size });
+      else if (wanted.has(r)) {
+        await sleep(PAUSE);
+        await walk(r, await conn.list(posix.join(cfg.path, r)));
+      } else foreignDirs.push(`${r}/`);
     }
   };
-  await walk('');
-  return out;
+  await walk('', top);
+  return { files, foreignDirs };
 }
 
 /* ---------- plan ---------- */
 
-function makePlan(local, remote, manifest) {
-  const plan = { new: [], update: [], unchanged: [], conflict: [], obsolete: [], foreign: [] };
+function makePlan(local, remote, manifest, foreignDirs) {
+  const plan = { new: [], update: [], unchanged: [], conflict: [], obsolete: [], foreign: [], foreignDirs };
   for (const [rel, f] of local) {
     const r = remote.get(rel);
     if (!r) plan.new.push(rel);
@@ -188,6 +204,7 @@ function printPlan(plan) {
   show('⚠ BEFINTLIGA filer på servern som skulle skrivas över', plan.conflict, plan.conflict.length ? '  (kräver --overwrite-existing, säkerhetskopieras först)' : '');
   show('Tidigare uppladdade filer som inte längre används', plan.obsolete, plan.obsolete.length ? (flag('prune') ? '  (raderas, säkerhetskopieras först)' : '  (lämnas kvar – använd --prune för att radera)') : '');
   show('Andra filer på servern (rörs aldrig)', plan.foreign);
+  show('Andra mappar på servern (öppnas och rörs aldrig)', plan.foreignDirs);
   console.log('──────────────────────');
 }
 
@@ -204,17 +221,19 @@ const local = localFiles();
 console.log(`▸ ${local.size} filer i dist/. Ansluter till ${cfg.protocol.toUpperCase()} ${cfg.host}, mapp ${cfg.path} …`);
 
 const conn = await connect().catch((e) => fail(`Kunde inte ansluta: ${e.message}`));
+process.on('uncaughtException', (e) => fail(`Anslutningen bröts: ${e.message}. Inget mer har ändrats – kör igen om en stund.`));
 try {
-  const remote = await remoteFiles(conn);
+  const top = await conn.list(cfg.path);
   let manifest = {};
-  if (remote.has(MANIFEST)) {
+  if (top.some((e) => e.name === MANIFEST && !e.dir)) {
     try {
       manifest = JSON.parse(await conn.readText(posix.join(cfg.path, MANIFEST))).files || {};
     } catch {
       fail(`${MANIFEST} på servern går inte att läsa. Avbryter för säkerhets skull.`);
     }
   }
-  const plan = makePlan(local, remote, manifest);
+  const { files: remote, foreignDirs } = await remoteFiles(conn, top, dirsOf([...local.keys(), ...Object.keys(manifest)]));
+  const plan = makePlan(local, remote, manifest, foreignDirs);
   printPlan(plan);
 
   if (command === 'check') {
@@ -246,6 +265,7 @@ try {
   for (const rel of risky) {
     const dest = join(backupDir, rel);
     mkdirSync(dirname(dest), { recursive: true });
+    await sleep(PAUSE);
     await conn.get(posix.join(cfg.path, rel), dest);
   }
   if (risky.length) console.log(`\n▸ Säkerhetskopierade ${risky.length} filer till ${relative(ROOT, backupDir)}/`);
@@ -255,6 +275,7 @@ try {
   const order = [...toUpload.filter((r) => !isPage(r)), ...toUpload.filter(isPage)];
   let n = 0;
   for (const rel of order) {
+    await sleep(PAUSE);
     await conn.put(local.get(rel).abs, posix.join(cfg.path, rel));
     n++;
     if (process.stdout.isTTY) process.stdout.write(`\r▸ Laddar upp ${n}/${order.length}`);
@@ -270,6 +291,8 @@ try {
   if (toDelete.length) console.log(`▸ Raderade ${toDelete.length} gamla filer.`);
 
   console.log(`\n✔ Klart: ${order.length} filer uppladdade${toDelete.length ? `, ${toDelete.length} raderade` : ''}.\n`);
+} catch (e) {
+  fail(`FTP-fel: ${e.message}. Kör "npm run deploy:check" igen om en stund – det som redan laddats upp är oskadat.`);
 } finally {
   await conn.close();
 }
