@@ -43,9 +43,10 @@
     <!-- Login -->
     <section class="login" data-view="login" hidden>
       <div class="login__art" aria-hidden="true"><img src="images/jobb-elcentral.jpg" alt="" /></div>
+      <div class="login__wrap">
+      <div class="login__brand"><img src="jj-el-logo.png" alt="JJ El &amp; Entreprenad AB" width="64" height="64" /></div>
       <form class="login__card" data-login>
-        <img class="login__logo" src="jj-el-logo.png" alt="" width="52" height="52" />
-        <h1>Välkommen tillbaka</h1>
+        <h1>Logga in</h1>
         <p class="muted">Logga in för att uppdatera JJ El:s webbplats.</p>
         <label class="field"><span>E-post</span><input name="email" type="email" autocomplete="username" required /></label>
         <label class="field"><span>Lösenord</span><input name="password" type="password" autocomplete="current-password" required /></label>
@@ -53,12 +54,13 @@
         <p class="form-msg" data-login-msg role="alert"></p>
         <p class="login__foot muted">Glömt lösenordet? Kontakta Elevate Studio.</p>
       </form>
+      </div>
     </section>
 
     <!-- Editor -->
     <div class="app" data-view="editor" hidden>
       <aside class="side">
-        <div class="side__brand"><img src="jj-el-logo.png" alt="" width="34" height="34" /><div><b>JJ El</b><small>Webbplats</small></div></div>
+        <div class="side__brand"><img src="jj-el-logo.png" alt="" width="34" height="34" /><div><b>JJ El</b><small>Adminpanel</small></div></div>
         <nav class="nav" aria-label="Sektioner">
           <button class="nav__item" data-nav="oversikt"><svg><use href="#i-home"/></svg><span>Översikt</span><i class="nav__dot"></i></button>
           <button class="nav__item" data-nav="foretag"><svg><use href="#i-building"/></svg><span>Företag</span><i class="nav__dot"></i></button>
@@ -67,18 +69,18 @@
           <button class="nav__item" data-nav="jobb"><svg><use href="#i-image"/></svg><span>Jobb &amp; bilder</span><em data-count="jobs"></em><i class="nav__dot"></i></button>
         </nav>
         <div class="side__foot">
-          <a class="nav__item" href="./" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg><span>Visa webbplatsen</span></a>
-          <div class="user">
-            <button class="user__btn" data-user-menu aria-haspopup="menu" aria-expanded="false"><span class="avatar" data-avatar></span><span class="user__mail" data-user-email></span></button>
-            <div class="menu" data-menu role="menu" hidden>
-              <button role="menuitem" data-password><svg><use href="#i-key"/></svg>Byt lösenord</button>
-              <button role="menuitem" data-logout><svg><use href="#i-logout"/></svg>Logga ut</button>
-            </div>
-          </div>
+          <a class="acct" href="./" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg><span>Visa hemsidan</span></a>
+          <button class="acct" data-password><svg><use href="#i-key"/></svg><span>Byt lösenord</span></button>
+          <button class="acct" data-logout><svg><use href="#i-logout"/></svg><span>Logga ut<small data-user-email></small></span></button>
         </div>
       </aside>
 
       <main class="main">
+        <div class="topstatus">
+          <span class="topstatus__brand"><img src="jj-el-logo.png" alt="" width="28" height="28" />JJ El</span>
+          <span class="status" data-status></span>
+        </div>
+        <div class="main__in">
         <div class="banner" data-draft-banner hidden>
           <svg><use href="#i-undo"/></svg>
           <span data-draft-text></span>
@@ -90,7 +92,6 @@
         <section class="view" data-view-id="oversikt">
           <header class="head">
             <div><h1 data-greeting>Översikt</h1><p class="muted">Det här visas just nu på jjel.se – och vad som kan bli bättre.</p></div>
-            <span class="status" data-status></span>
           </header>
           <div class="stats" data-stats></div>
           <div class="grid-2">
@@ -193,6 +194,7 @@
           <ol class="jgrid" data-jobs></ol>
           <input type="file" accept="image/*" multiple hidden data-file-new />
         </section>
+        </div>
       </main>
 
       <!-- Drawer -->
