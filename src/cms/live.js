@@ -3,6 +3,7 @@
 // holds a newer version, the generated blocks are re-rendered and the old token values replaced.
 import { blocks, contentText, contentVars } from './templates.js';
 import { SUPABASE_URL, SUPABASE_KEY, CONTENT_TABLE } from './supabase-config.js';
+import { norm } from './texts.js';
 
 const ATTRS = ['href', 'aria-label', 'title', 'alt', 'content'];
 
@@ -38,6 +39,31 @@ function replaceText(pairs) {
   }
 }
 
+/**
+ * Applies the edited page texts. The page was built with `old` edits; each text node is traced back to
+ * its original text and shown as the newest edit (or the original if the edit was removed).
+ */
+function applyTexts(old = {}, next = {}) {
+  const original = new Map(Object.entries(old).map(([k, v]) => [norm(v), k]));
+  const want = (t) => {
+    const key = original.get(t) ?? t;
+    return next[key] ?? key;
+  };
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => (n.parentElement?.closest('script,style,svg,[data-cms-block]') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+  });
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+    const t = norm(n.nodeValue);
+    if (!t) continue;
+    const w = want(t);
+    if (w !== t) n.nodeValue = n.nodeValue.replace(/^(\s*)[\s\S]*?(\s*)$/, (_, a, b) => a + w + b);
+  }
+  const title = norm(document.title);
+  if (want(title) !== title) document.title = want(title);
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc && want(norm(desc.content)) !== norm(desc.content)) desc.content = want(norm(desc.content));
+}
+
 async function sha256(text) {
   const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -60,7 +86,9 @@ export const liveContent = (async () => {
       const render = blocks[el.dataset.cmsBlock];
       if (render) el.innerHTML = render(c);
     }
-    replaceText(replacements(JSON.parse(bakedEl.textContent), contentVars(c)));
+    const baked = JSON.parse(bakedEl.textContent);
+    replaceText(replacements(baked, contentVars(c)));
+    applyTexts(baked._texts, c.texts);
     document.dispatchEvent(new CustomEvent('cms:updated', { detail: c }));
     return c;
   } catch {

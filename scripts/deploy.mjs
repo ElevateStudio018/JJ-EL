@@ -231,9 +231,10 @@ async function op(fn, what) {
     try {
       return await fn(conn);
     } catch (e) {
-      if (attempt >= 5) throw e;
-      const wait = Number(process.env.DEPLOY_RETRY_MS ?? 15000) * attempt;
-      console.log(`  ⟳ ${what}: ${e.message} – ansluter igen om ${wait / 1000} s (försök ${attempt + 1}/5)`);
+      if (attempt >= 6) throw e;
+      // The host blocks an address for a few minutes after too many connections: wait that out.
+      const wait = Number(process.env.DEPLOY_RETRY_MS ?? 90000) * attempt;
+      console.log(`  ⟳ ${what}: ${e.message} – ansluter igen om ${wait / 1000} s (försök ${attempt + 1}/6)`);
       await Promise.resolve(conn.close()).catch(() => {});
       await sleep(wait);
       conn = await connect().catch((err) => {
@@ -281,8 +282,9 @@ try {
     if (answer.trim().toLowerCase() !== 'ja') fail('Avbrutet. Inget har ändrats.', 0);
   }
 
-  // Back up every server file we are about to overwrite or delete.
-  const risky = [...plan.update, ...plan.conflict, ...toDelete].filter((rel) => remote.has(rel));
+  // Back up every server file we did not upload ourselves and are about to overwrite. Our own earlier
+  // uploads are not downloaded again: they are in git, and fewer transfers keep the host from blocking us.
+  const risky = plan.conflict.filter((rel) => remote.has(rel));
   const backupDir = join(ROOT, 'deploy-backups', new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19));
   for (const rel of risky) {
     const dest = join(backupDir, rel);
