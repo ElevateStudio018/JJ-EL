@@ -38,7 +38,7 @@ const REMOTE = /^https:\/\/(images\.pexels\.com|[a-z0-9]+\.supabase\.co)\//;
 const GUTTER = 'calc(100vw - 48px)';
 const SIZES = {
   // Page heroes sit under a dark overlay: a slightly lighter file on phones is not noticeable.
-  hero: '(max-width: 767px) 75vw, 100vw',
+  hero: '(max-width: 767px) 62vw, 100vw',
   'hero__slides': '100vw',
   stile: `(max-width: 767px) ${GUTTER}, (max-width: 1023px) 352px, 236px`,
   job: '(max-width: 767px) calc(50vw - 30px), 236px',
