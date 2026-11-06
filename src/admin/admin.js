@@ -1,6 +1,8 @@
 import './admin.css';
 import { createClient } from '@supabase/supabase-js';
 import repoImages from 'virtual:repo-images';
+import siteTexts from 'virtual:site-texts';
+import { norm } from '../cms/texts.js';
 import { SUPABASE_URL, SUPABASE_KEY, CONTENT_TABLE, IMAGE_BUCKET } from '../cms/supabase-config.js';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { storageKey: 'jjel-admin-auth' } });
@@ -22,7 +24,7 @@ let userEmail = '';
 let images = []; // selectable images: "images/x.jpg" (in the repo) or bucket URLs
 const pending = new Map(); // bucket URL → { blob, path, url } awaiting upload
 const undoStack = [];
-const ui = { view: 'oversikt', filter: 'all', search: '', jobList: 'jobsHome', drawer: null, mediaPick: null };
+const ui = { view: 'oversikt', filter: 'all', search: '', jobList: 'jobsHome', drawer: null, mediaPick: null, textPage: 'index.html', textSearch: '', textEdited: false };
 
 /* ---------- helpers ---------- */
 
@@ -220,6 +222,7 @@ function changed() {
 function renderAll() {
   $$('[data-bind]').forEach((el) => (el.value = getPath(content, el.dataset.bind) ?? ''));
   renderDerived();
+  renderTexts();
 }
 
 function renderDerived() {
@@ -239,11 +242,13 @@ function renderNav() {
   const dirty = {
     foretag: diffCount(base.company, content.company) + diffCount(base.rating, content.rating) > 0,
     startsida: diffCount(base.hero, content.hero) > 0,
+    texter: diffCount(base.texts || {}, content.texts || {}) > 0,
     omdomen: diffCount(base.reviews, content.reviews) > 0,
     jobb: diffCount(base.jobsHome, content.jobsHome) + diffCount(base.jobsAll, content.jobsAll) > 0 || pending.size > 0,
   };
   $$('.nav__item[data-nav]').forEach((b) => b.classList.toggle('is-dirty', !!dirty[b.dataset.nav]));
   $$('[data-count="reviews"]').forEach((e) => (e.textContent = content.reviews.length));
+  $$('[data-count="texts"]').forEach((e) => (e.textContent = Object.keys(content.texts || {}).length || ''));
   $$('[data-count="jobs"]').forEach((e) => (e.textContent = content.jobsAll.length));
   $$('[data-count="jobsHome"]').forEach((e) => (e.textContent = content.jobsHome.length));
   $$('[data-count="jobsAll"]').forEach((e) => (e.textContent = content.jobsAll.length));
@@ -295,6 +300,9 @@ function insights() {
   const seen = new Set();
   const dupes = content.jobsAll.filter((j) => j.image && (seen.has(j.image) || !seen.add(j.image)));
   if (dupes.length) out.push({ kind: 'warn', text: `${dupes.length} bild${dupes.length === 1 ? '' : 'er'} förekommer två gånger på Om oss.`, label: 'Visa', fn: () => (go('jobb'), setJobList('jobsAll')) });
+  const empty = Object.entries(content.texts || {}).filter(([, v]) => !norm(v));
+  if (empty.length)
+    out.push({ kind: 'error', text: `${empty.length === 1 ? 'En text' : `${empty.length} texter`} på webbplatsen är tom${empty.length === 1 ? '' : 'ma'}.`, label: 'Visa', fn: () => (go('texter'), (ui.textEdited = true), renderTexts()) });
   if (content.hero.title.length > 70) out.push({ kind: 'warn', text: 'Rubriken på startsidan är lång och kan bli trång i mobilen.', label: 'Redigera', fn: () => go('startsida') });
   if (!/^\S+@\S+\.\S+$/.test(content.company.email)) out.push({ kind: 'error', text: 'E-postadressen ser inte giltig ut.', label: 'Redigera', fn: () => go('foretag') });
   return out;
@@ -404,6 +412,91 @@ function renderJobs() {
     </li>`,
       )
       .join('') + `<li><button class="jcard jcard--add" data-add-job>${icon('upload')}Lägg till bilder<span class="muted small">eller släpp dem här</span></button></li>`;
+}
+
+/* ---------- texter ---------- */
+
+// Texts that are on most pages (menu, footer, contact form) are edited once, under their own heading.
+const COMMON = '__common';
+const textPages = (() => {
+  const count = new Map();
+  for (const p of siteTexts) for (const t of p.texts) count.set(t.text, (count.get(t.text) || 0) + 1);
+  const shared = (t) => t.where === 'header' || t.where === 'footer' || count.get(t.text) > siteTexts.length / 2;
+  const common = new Map();
+  const label = (t) => (t.where === 'footer' ? 'Sidfot' : t.where === 'header' ? 'Meny' : 'Återkommer på flera sidor');
+  const pages = siteTexts.map((p) => ({
+    ...p,
+    texts: p.texts.filter((t) => {
+      if (!shared(t)) return true;
+      if (!common.has(t.text)) common.set(t.text, { ...t, section: label(t) });
+      return false;
+    }),
+  }));
+  return [...pages, { file: COMMON, name: 'Meny & sidfot (alla sidor)', texts: [...common.values()] }];
+})();
+const pagesWith = (text) => siteTexts.filter((p) => p.texts.some((t) => t.text === text)).length;
+
+function renderTextPages() {
+  const sel = $('[data-text-page]');
+  if (sel.options.length) return;
+  sel.innerHTML = textPages.map((p) => `<option value="${esc(p.file)}">${esc(p.name)}</option>`).join('');
+  sel.value = ui.textPage;
+}
+
+function textItem(t) {
+  const texts = content.texts || {};
+  const value = texts[t.text] ?? t.text;
+  const edited = t.text in texts;
+  const n = pagesWith(t.text);
+  return `<div class="titem${edited ? ' is-edited' : ''}" data-titem>
+    <div class="titem__top"><span class="titem__kind">${esc(t.kind)}</span>${n > 1 ? `<span>· finns på ${n} sidor</span>` : ''}<span class="titem__edited" ${edited ? '' : 'hidden'}>Ändrad</span>
+      <button class="titem__reset" data-text-reset="${esc(t.text)}" ${edited ? '' : 'hidden'}>Återställ</button></div>
+    <textarea rows="1" data-text="${esc(t.text)}" aria-label="${esc(t.kind)}">${esc(value)}</textarea>
+  </div>`;
+}
+
+function renderTexts() {
+  const box = $('[data-text-list]');
+  if (!box || !content) return;
+  renderTextPages();
+  const q = norm(ui.textSearch).toLowerCase();
+  const texts = content.texts || {};
+  const keep = (t) =>
+    (!ui.textEdited || t.text in texts) &&
+    (!q || t.text.toLowerCase().includes(q) || String(texts[t.text] || '').toLowerCase().includes(q));
+  const pages = q || ui.textEdited ? textPages : textPages.filter((p) => p.file === ui.textPage);
+  const groups = [];
+  for (const p of pages) {
+    const list = p.texts.filter(keep);
+    if (!list.length) continue;
+    if (q || ui.textEdited) {
+      groups.push({ title: p.name, sub: `${list.length} text${list.length === 1 ? '' : 'er'}`, items: list.slice(0, 80) });
+      continue;
+    }
+    for (const t of list) {
+      const head = /^(Sidtitel|Beskrivning)/.test(t.kind) ? 'Sidans titel och beskrivning' : t.section || 'Överst på sidan';
+      if (groups.at(-1)?.title !== head) groups.push({ title: head, items: [] });
+      groups.at(-1).items.push(t);
+    }
+  }
+  box.innerHTML = groups.length
+    ? groups.map((g) => `<div class="card tgroup"><h2>${esc(g.title)}${g.sub ? ` <small>${g.sub}</small>` : ''}</h2>${g.items.map(textItem).join('')}</div>`).join('')
+    : `<div class="card tempty">${q ? `Ingen text innehåller ”${esc(ui.textSearch)}”.` : 'Inga ändrade texter än.'}</div>`;
+}
+
+function setText(original, value) {
+  snapshotTyping();
+  content.texts ||= {};
+  if (norm(value) === original) delete content.texts[original];
+  else content.texts[original] = value;
+  const item = $(`[data-text="${CSS.escape(original)}"]`)?.closest('[data-titem]');
+  if (item) {
+    const edited = original in content.texts;
+    item.classList.toggle('is-edited', edited);
+    $('.titem__reset', item).hidden = !edited;
+    $('.titem__edited', item).hidden = !edited;
+  }
+  changed();
 }
 
 /* ---------- navigation ---------- */
@@ -584,6 +677,11 @@ document.addEventListener('input', (e) => {
   if (el.dataset.bind) {
     snapshotTyping();
     setPath(content, el.dataset.bind, el.value);
+  } else if (el.dataset.text !== undefined) {
+    return setText(el.dataset.text, el.value);
+  } else if (el.matches('[data-text-search]')) {
+    ui.textSearch = el.value;
+    return renderTexts();
   } else if (el.dataset.f && ui.drawer) {
     const item = content[ui.drawer.key][ui.drawer.index];
     const f = el.dataset.f;
@@ -640,6 +738,13 @@ document.addEventListener('change', async (e) => {
   }
 });
 
+document.addEventListener('change', (e) => {
+  if (!e.target.matches('[data-text-page]')) return;
+  ui.textPage = e.target.value;
+  renderTexts();
+  window.scrollTo({ top: 0 });
+});
+
 document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, [data-index], [data-nav]');
   if (!t) {
@@ -648,6 +753,17 @@ document.addEventListener('click', async (e) => {
   const d = t.dataset;
 
   if (d.nav) return go(d.nav);
+  if (d.textReset !== undefined) {
+    snapshot();
+    delete content.texts?.[d.textReset];
+    changed();
+    return renderTexts();
+  }
+  if ('textEdited' in d) {
+    ui.textEdited = !ui.textEdited;
+    t.setAttribute('aria-pressed', ui.textEdited);
+    return renderTexts();
+  }
   if (d.tip !== undefined) return tipActions[+d.tip]?.();
   if (d.filter) return setFilter(d.filter);
   if (d.joblist) return setJobList(d.joblist);

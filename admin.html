@@ -15,6 +15,7 @@
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
         <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M3 21h18M8 7h4M8 11h4M8 15h4"/></symbol>
         <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+        <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></symbol>
         <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
         <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
         <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
@@ -65,6 +66,7 @@
           <button class="nav__item" data-nav="oversikt"><svg><use href="#i-home"/></svg><span>Översikt</span><i class="nav__dot"></i></button>
           <button class="nav__item" data-nav="foretag"><svg><use href="#i-building"/></svg><span>Företag</span><i class="nav__dot"></i></button>
           <button class="nav__item" data-nav="startsida"><svg><use href="#i-layout"/></svg><span>Startsida</span><i class="nav__dot"></i></button>
+          <button class="nav__item" data-nav="texter"><svg><use href="#i-text"/></svg><span>Texter</span><em data-count="texts"></em><i class="nav__dot"></i></button>
           <button class="nav__item" data-nav="omdomen"><svg><use href="#i-star"/></svg><span>Omdömen</span><em data-count="reviews"></em><i class="nav__dot"></i></button>
           <button class="nav__item" data-nav="jobb"><svg><use href="#i-image"/></svg><span>Jobb &amp; bilder</span><em data-count="jobs"></em><i class="nav__dot"></i></button>
         </nav>
@@ -155,6 +157,17 @@
           </div>
         </section>
 
+        <!-- Texter -->
+        <section class="view" data-view-id="texter" hidden>
+          <header class="head"><div><h1>Texter</h1><p class="muted">Ändra vilken text som helst på webbplatsen – rubriker, stycken, knappar och listor. Välj sida, skriv i rutan och tryck på Spara &amp; publicera.</p></div></header>
+          <div class="toolbar">
+            <label class="field field--inline"><span class="sr-only">Sida</span><select data-text-page></select></label>
+            <label class="search"><svg><use href="#i-search"/></svg><input type="search" placeholder="Sök text på alla sidor…" data-text-search /></label>
+            <button class="chip" data-text-edited aria-pressed="false">Bara ändrade</button>
+          </div>
+          <div data-text-list></div>
+        </section>
+
         <!-- Omdömen -->
         <section class="view" data-view-id="omdomen" hidden>
           <header class="head">
@@ -226,6 +239,7 @@
         <button data-nav="oversikt"><svg><use href="#i-home"/></svg><span>Översikt</span></button>
         <button data-nav="foretag"><svg><use href="#i-building"/></svg><span>Företag</span></button>
         <button data-nav="startsida"><svg><use href="#i-layout"/></svg><span>Start</span></button>
+        <button data-nav="texter"><svg><use href="#i-text"/></svg><span>Texter</span></button>
         <button data-nav="omdomen"><svg><use href="#i-star"/></svg><span>Omdömen</span></button>
         <button data-nav="jobb"><svg><use href="#i-image"/></svg><span>Jobb</span></button>
       </nav>

@@ -34,8 +34,10 @@ Inget av detta körs på webbhotellet – besökarens webbläsare pratar direkt 
 - Inloggningsuppgifterna läses från `.env.deploy` (ignoreras av git) eller GitHub-secrets – aldrig från koden.
 - **Befintliga filer** på servern som skriptet inte själv har laddat upp skrivs **aldrig** över utan
   `--overwrite-existing`, och raderas aldrig.
-- Varje fil som ska skrivas över eller raderas **laddas först ned** till `deploy-backups/<datum>/`
-  (i GitHub: sparas som artefakt i 90 dagar).
+- Varje befintlig fil som vi inte själva har laddat upp och som ska skrivas över **laddas först ned** till
+  `deploy-backups/<datum>/` (i GitHub: sparas som artefakt i 90 dagar). Våra egna filer finns redan i git.
+- Bryts anslutningen (webbhotellet spärrar ibland en adress några minuter) ansluter skriptet igen och fortsätter.
+  En avbruten körning kan alltid startas om – den fortsätter där den slutade.
 - Filer som vi laddat upp tidigare men som inte längre finns i sajten raderas bara med `--prune`.
 - `check` ändrar ingenting. `upload` visar planen och frågar innan något ändras.
 - SFTP: serverns nyckel kan låsas med `DEPLOY_SFTP_FINGERPRINT`. FTPS: certifikatet verifieras.

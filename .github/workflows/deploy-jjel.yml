@@ -49,6 +49,8 @@ jobs:
           [ "$PRUNE" = "true" ] && set -- "$@" --prune
           node scripts/deploy.mjs "$@"
         env:
+          # Webbhotellet spärrar en adress som öppnar många anslutningar tätt: lugnt tempo från GitHub.
+          DEPLOY_DELAY_MS: 1500
           ACTION: ${{ inputs.action }}
           OVERWRITE: ${{ inputs.overwrite_existing }}
           PRUNE: ${{ inputs.prune }}
