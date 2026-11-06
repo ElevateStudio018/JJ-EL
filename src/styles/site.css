@@ -95,41 +95,6 @@ button {
 .site-header.is-scrolled {
   box-shadow: 0 2px 18px rgba(16, 24, 48, 0.1);
 }
-.topbar {
-  overflow: hidden;
-  max-height: 38px;
-  background: var(--navy);
-  color: #fff;
-  font-size: 14px;
-  transition: max-height 0.25s;
-}
-.site-header.is-scrolled .topbar {
-  max-height: 0;
-}
-.topbar__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 38px;
-}
-.topbar__links {
-  display: flex;
-  gap: 22px;
-}
-.topbar a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.92;
-}
-.topbar a:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-.topbar svg {
-  width: 14px;
-  height: 14px;
-}
 .site-header__inner {
   position: relative;
   display: flex;
@@ -368,9 +333,6 @@ button {
   right: 0;
   background: transparent;
   color: #fff;
-}
-.site-header--overlay .topbar {
-  background: rgba(16, 24, 48, 0.35);
 }
 .site-header--overlay:not(.is-scrolled) .brand,
 .site-header--overlay:not(.is-scrolled) .nav__top,
@@ -1923,7 +1885,6 @@ h2.title--center {
   }
 }
 @media (max-width: 900px) {
-  .topbar,
   .header-actions .header-phone,
   .header-actions .btn {
     display: none;
