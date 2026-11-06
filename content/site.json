@@ -124,14 +124,14 @@
       "name": "Ulrik E",
       "text": "Snabb, bra och trevlig service!",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "16 maj 2026",
       "name": "Rasmus B",
       "text": "Behövde hjälp med ett par el-saker och en av grejerna blev inte åtgärdad. Resten av tjänsterna är vi nöjda med.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "8 maj 2026",
@@ -146,7 +146,7 @@
       "name": "Bengt S",
       "text": "Trevligt bemötande av kunnig elektriker!",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "7 maj 2026",
@@ -161,14 +161,14 @@
       "name": "Hårkonst A",
       "text": "Hjälpsam. Trevlig. Lyssnar. Bra. Kommer i tid.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "6 maj 2026",
       "name": "Michael A",
       "text": "Mycket duktig och lyhörd. Kommer att använda honom igen.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "6 maj 2026",
@@ -190,7 +190,7 @@
       "name": "Joakim T",
       "text": "Bra service och alltid nån om kunden. Vi är supernöjda.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "6 maj 2026",
@@ -219,14 +219,14 @@
       "name": "Sara A",
       "text": "Allt skött väldigt bra. Inget att anmärka på. Skulle använda mig av dem igen.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     },
     {
       "date": "6 maj 2026",
       "name": "Patrick K",
       "text": "Väl utfört och fungerar perfekt.",
       "source": "Verifierad kund på Reco",
-      "featured": false
+      "featured": true
     }
   ],
   "jobsHome": [
