@@ -223,6 +223,7 @@ function renderAll() {
   $$('[data-bind]').forEach((el) => (el.value = getPath(content, el.dataset.bind) ?? ''));
   renderDerived();
   renderTexts();
+  liveRefresh();
 }
 
 function renderDerived() {
@@ -242,6 +243,7 @@ function renderNav() {
   const dirty = {
     foretag: diffCount(base.company, content.company) + diffCount(base.rating, content.rating) > 0,
     startsida: diffCount(base.hero, content.hero) > 0,
+    sida: diffCount(base.texts || {}, content.texts || {}) + diffCount(base.hero, content.hero) > 0,
     texter: diffCount(base.texts || {}, content.texts || {}) > 0,
     omdomen: diffCount(base.reviews, content.reviews) > 0,
     jobb: diffCount(base.jobsHome, content.jobsHome) + diffCount(base.jobsAll, content.jobsAll) > 0 || pending.size > 0,
@@ -499,6 +501,196 @@ function setText(original, value) {
   changed();
 }
 
+/* ---------- redigera sidan ---------- */
+
+// The real site is shown in an iframe (same domain, so the admin can reach into it). Every piece of
+// editable text is wrapped in a span that can be clicked and edited in place; changes go into the same
+// content.texts as the Texter view, so Spara & publicera works exactly as before.
+const ORIGINALS = new Set(siteTexts.flatMap((p) => p.texts.map((t) => t.text)));
+const HERO = { '@hero.title': 'hero.title', '@hero.lead': 'hero.lead' };
+const live = { file: 'index.html', size: 'desktop', loaded: false };
+const LIVE_CSS = `
+[data-jj]{cursor:text;border-radius:3px;transition:box-shadow .15s,background-color .15s}
+[data-jj]:hover{box-shadow:0 0 0 2px rgba(224,165,38,.9);background-color:rgba(224,165,38,.14)}
+[data-jj].jj-changed{box-shadow:0 0 0 2px rgba(224,165,38,.55)}
+[data-jj].jj-editing{box-shadow:0 0 0 2px #1c2817;background-color:#fff;color:#1e1e1c !important;text-shadow:none;outline:none;-webkit-text-fill-color:#1e1e1c}
+a,button,[role=button]{cursor:default}`;
+
+const liveValue = (key) => (HERO[key] ? getPath(content, HERO[key]) : (content.texts || {})[key] ?? key);
+const liveChanged = (key) =>
+  HERO[key] ? getPath(content, HERO[key]) !== getPath(JSON.parse(saved), HERO[key]) : key in (content.texts || {});
+
+/** Which editable text a piece of page text is: an original, the edited version of one, or the hero. */
+function liveKey(t, baked) {
+  const savedContent = JSON.parse(saved);
+  for (const [key, path] of Object.entries(HERO)) {
+    if (t === norm(getPath(savedContent, path) || '') || t === norm(getPath(content, path) || '')) return key;
+  }
+  for (const map of [savedContent.texts || {}, baked, content.texts || {}]) {
+    for (const [k, v] of Object.entries(map)) if (norm(String(v)) === t) return k;
+  }
+  return ORIGINALS.has(t) ? t : null;
+}
+
+function liveDoc() {
+  try {
+    return $('[data-live]').contentDocument;
+  } catch {
+    return null;
+  }
+}
+
+function liveMark(doc) {
+  if (!doc?.body) return;
+  let baked = {};
+  try {
+    baked = JSON.parse(doc.getElementById('cms-vars')?.textContent || '{}')._texts || {};
+  } catch {}
+  const skip = 'script,style,svg,noscript,textarea,select,option,[data-jj],[data-cms-block]';
+  const walker = doc.createTreeWalker(doc.body, 4, {
+    acceptNode: (n) => (n.parentElement?.closest(skip) ? 2 : 1),
+  });
+  const nodes = [];
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+  for (const n of nodes) {
+    const t = norm(n.nodeValue);
+    if (!t) continue;
+    const key = liveKey(t, baked);
+    if (!key) continue;
+    const span = doc.createElement('span');
+    span.dataset.jj = key;
+    span.textContent = liveValue(key);
+    span.classList.toggle('jj-changed', liveChanged(key));
+    const lead = n.nodeValue.match(/^\s*/)[0];
+    const trail = n.nodeValue.match(/\s*$/)[0];
+    n.replaceWith(...[lead && doc.createTextNode(lead), span, trail && doc.createTextNode(trail)].filter(Boolean));
+  }
+}
+
+/** Shows the working copy (unsaved edits included) in the page. */
+function liveRefresh() {
+  const doc = liveDoc();
+  if (!doc?.body) return;
+  for (const span of doc.querySelectorAll('[data-jj]')) {
+    if (span.classList.contains('jj-editing')) continue;
+    const v = liveValue(span.dataset.jj);
+    if (span.textContent !== v) span.textContent = v;
+    span.classList.toggle('jj-changed', liveChanged(span.dataset.jj));
+  }
+}
+
+function liveSet(key, value) {
+  if (HERO[key]) {
+    snapshotTyping();
+    setPath(content, HERO[key], value);
+    const field = $(`[data-bind="${HERO[key]}"]`);
+    if (field) field.value = value;
+    changed();
+  } else setText(key, value);
+  // The same text can be on the page more than once (menu, buttons): keep them all in step.
+  const doc = liveDoc();
+  doc?.querySelectorAll(`[data-jj="${CSS.escape(key)}"]`).forEach((s) => {
+    if (!s.classList.contains('jj-editing')) s.textContent = value;
+    s.classList.toggle('jj-changed', liveChanged(key));
+  });
+}
+
+function liveStartEdit(span) {
+  const doc = span.ownerDocument;
+  doc.querySelectorAll('.jj-editing').forEach((s) => s !== span && s.blur());
+  const before = span.textContent;
+  span.classList.add('jj-editing');
+  try {
+    span.contentEditable = 'plaintext-only';
+  } catch {
+    span.contentEditable = 'true';
+  }
+  if (span.contentEditable !== 'plaintext-only') span.contentEditable = 'true';
+  span.focus();
+  const hint = $('[data-live-hint]');
+  hint.textContent = 'Skriv den nya texten · Enter = klar · Esc = ångra';
+  hint.classList.add('is-editing');
+  const onInput = () => liveSet(span.dataset.jj, span.textContent.replace(/\s+/g, ' '));
+  const onKey = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      span.blur();
+    } else if (e.key === 'Escape') {
+      span.textContent = before;
+      liveSet(span.dataset.jj, before);
+      span.blur();
+    }
+  };
+  const onPaste = (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData?.getData('text/plain') || '').replace(/\s+/g, ' ');
+    doc.execCommand('insertText', false, text);
+  };
+  const onBlur = () => {
+    span.contentEditable = 'false';
+    span.classList.remove('jj-editing');
+    span.classList.toggle('jj-changed', liveChanged(span.dataset.jj));
+    hint.textContent = 'Klicka på en text för att ändra den';
+    hint.classList.remove('is-editing');
+    span.removeEventListener('input', onInput);
+    span.removeEventListener('keydown', onKey);
+    span.removeEventListener('paste', onPaste);
+  };
+  span.addEventListener('input', onInput);
+  span.addEventListener('keydown', onKey);
+  span.addEventListener('paste', onPaste);
+  span.addEventListener('blur', onBlur, { once: true });
+}
+
+function liveSetup() {
+  const frame = $('[data-live]');
+  const doc = liveDoc();
+  if (!doc?.body) return;
+  const style = doc.createElement('style');
+  style.textContent = LIVE_CSS;
+  doc.head.append(style);
+  // Nothing on the page navigates or submits while editing.
+  doc.addEventListener(
+    'click',
+    (e) => {
+      const span = e.target.closest?.('[data-jj]');
+      if (span) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!span.classList.contains('jj-editing')) liveStartEdit(span);
+        return;
+      }
+      if (e.target.closest?.('a')) e.preventDefault();
+    },
+    true,
+  );
+  doc.addEventListener('submit', (e) => e.preventDefault(), true);
+  liveMark(doc);
+  // The page brings itself up to date from Supabase right after loading: mark again once it has.
+  doc.addEventListener('cms:updated', () => setTimeout(() => (liveMark(doc), liveRefresh()), 50));
+  setTimeout(() => (liveMark(doc), liveRefresh()), 1200);
+  frame.dataset.ready = '1';
+}
+
+function liveLoad() {
+  const frame = $('[data-live]');
+  const sel = $('[data-live-page]');
+  if (!sel.options.length) {
+    sel.innerHTML = siteTexts.map((p) => `<option value="${esc(p.file)}">${esc(p.name)}</option>`).join('');
+  }
+  sel.value = live.file;
+  frame.dataset.ready = '';
+  frame.onload = liveSetup;
+  frame.src = `${live.file}?redigera=${Date.now()}`;
+  live.loaded = true;
+}
+
+function setLiveSize(size) {
+  live.size = size;
+  $$('[data-live-size]').forEach((b) => b.setAttribute('aria-selected', b.dataset.liveSize === size));
+  $('[data-livebox]').classList.toggle('is-mobile', size === 'mobile');
+}
+
 /* ---------- navigation ---------- */
 
 function go(view) {
@@ -509,6 +701,8 @@ function go(view) {
     b.dataset.nav === view ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'),
   );
   closeDrawer();
+  if (view === 'sida' && !live.loaded) liveLoad();
+  if (view === 'sida') liveRefresh();
   if (location.hash.slice(1) !== view) history.replaceState(null, '', `#${view}`);
   window.scrollTo({ top: 0 });
 }
@@ -739,6 +933,10 @@ document.addEventListener('change', async (e) => {
 });
 
 document.addEventListener('change', (e) => {
+  if (e.target.matches('[data-live-page]')) {
+    live.file = e.target.value;
+    return liveLoad();
+  }
   if (!e.target.matches('[data-text-page]')) return;
   ui.textPage = e.target.value;
   renderTexts();
@@ -753,6 +951,7 @@ document.addEventListener('click', async (e) => {
   const d = t.dataset;
 
   if (d.nav) return go(d.nav);
+  if (d.liveSize) return setLiveSize(d.liveSize);
   if (d.textReset !== undefined) {
     snapshot();
     delete content.texts?.[d.textReset];

@@ -576,3 +576,13 @@ kbd { background: rgba(255, 255, 255, 0.18); }
 .titem__orig s { text-decoration-color: var(--subtle); }
 .tempty { padding: 28px; text-align: center; color: var(--muted); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- Redigera sidan ---------- */
+.seg .ic { width: 16px; height: 16px; margin-right: 6px; vertical-align: -3px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.livehint { margin-left: auto; font-size: 13.5px; color: var(--muted); }
+.livehint.is-editing { color: var(--accent); font-weight: 600; }
+.livebox { height: calc(100vh - 250px); min-height: 560px; margin-bottom: 96px; border: 1px solid var(--line); border-radius: var(--r); background: #fff; overflow: hidden; box-shadow: var(--shadow); }
+.livebox iframe { display: block; width: 100%; height: 100%; border: 0; margin: 0 auto; background: #fff; transition: width .3s var(--ease); }
+.livebox.is-mobile { background: var(--bg); }
+.livebox.is-mobile iframe { width: 390px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+@media (max-width: 760px) { .livehint { display: none; } .livebox { height: calc(100vh - 230px); } }
