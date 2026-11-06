@@ -220,19 +220,41 @@ if (!flag('no-build')) {
 const local = localFiles();
 console.log(`▸ ${local.size} filer i dist/. Ansluter till ${cfg.protocol.toUpperCase()} ${cfg.host}, mapp ${cfg.path} …`);
 
-const conn = await connect().catch((e) => fail(`Kunde inte ansluta: ${e.message}`));
+let conn = await connect().catch((e) => fail(`Kunde inte ansluta: ${e.message}`));
+
+/**
+ * Runs one server operation; if the connection drops or a data connection times out (some web hosts
+ * refuse a connection now and then), it reconnects after a pause and tries again, up to 5 times.
+ */
+async function op(fn, what) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fn(conn);
+    } catch (e) {
+      if (attempt >= 5) throw e;
+      const wait = Number(process.env.DEPLOY_RETRY_MS ?? 15000) * attempt;
+      console.log(`  ⟳ ${what}: ${e.message} – ansluter igen om ${wait / 1000} s (försök ${attempt + 1}/5)`);
+      await Promise.resolve(conn.close()).catch(() => {});
+      await sleep(wait);
+      conn = await connect().catch((err) => {
+        console.log(`  ⟳ kunde inte ansluta: ${err.message}`);
+        return conn;
+      });
+    }
+  }
+}
 process.on('uncaughtException', (e) => fail(`Anslutningen bröts: ${e.message}. Inget mer har ändrats – kör igen om en stund.`));
 try {
-  const top = await conn.list(cfg.path);
+  const top = await op((c) => c.list(cfg.path), 'lista webbroten');
   let manifest = {};
   if (top.some((e) => e.name === MANIFEST && !e.dir)) {
     try {
-      manifest = JSON.parse(await conn.readText(posix.join(cfg.path, MANIFEST))).files || {};
+      manifest = JSON.parse(await op((c) => c.readText(posix.join(cfg.path, MANIFEST)), 'läsa manifestet')).files || {};
     } catch {
       fail(`${MANIFEST} på servern går inte att läsa. Avbryter för säkerhets skull.`);
     }
   }
-  const { files: remote, foreignDirs } = await remoteFiles(conn, top, dirsOf([...local.keys(), ...Object.keys(manifest)]));
+  const { files: remote, foreignDirs } = await remoteFiles({ list: (d) => op((c) => c.list(d), `lista ${d}`) }, top, dirsOf([...local.keys(), ...Object.keys(manifest)]));
   const plan = makePlan(local, remote, manifest, foreignDirs);
   printPlan(plan);
 
@@ -266,18 +288,27 @@ try {
     const dest = join(backupDir, rel);
     mkdirSync(dirname(dest), { recursive: true });
     await sleep(PAUSE);
-    await conn.get(posix.join(cfg.path, rel), dest);
+    await op((c) => c.get(posix.join(cfg.path, rel), dest), `säkerhetskopiera ${rel}`);
   }
   if (risky.length) console.log(`\n▸ Säkerhetskopierade ${risky.length} filer till ${relative(ROOT, backupDir)}/`);
 
   // Assets first and pages last, so no page ever points at a file that is not there yet.
   const isPage = (rel) => rel.endsWith('.html') || rel === '.htaccess';
   const order = [...toUpload.filter((r) => !isPage(r)), ...toUpload.filter(isPage)];
+  // Before uploading, every file in the plan is claimed as "pending", so an interrupted run can simply be
+  // started again: those files count as ours (already backed up) and are uploaded again, never skipped.
+  const saveManifest = (files) =>
+    op((c) => c.putText(JSON.stringify({ deployedAt: new Date().toISOString(), files }, null, 1), posix.join(cfg.path, MANIFEST)), 'spara manifestet');
+  const uploaded = { ...manifest };
+  for (const rel of order) uploaded[rel] = 'pending';
+  if (order.length) await saveManifest(uploaded);
   let n = 0;
   for (const rel of order) {
     await sleep(PAUSE);
-    await conn.put(local.get(rel).abs, posix.join(cfg.path, rel));
+    await op((c) => c.put(local.get(rel).abs, posix.join(cfg.path, rel)), `ladda upp ${rel}`);
+    uploaded[rel] = local.get(rel).hash;
     n++;
+    if (n % 50 === 0) await saveManifest(uploaded);
     if (process.stdout.isTTY) process.stdout.write(`\r▸ Laddar upp ${n}/${order.length}`);
     else console.log(`  ↑ ${rel}`);
   }
@@ -285,9 +316,9 @@ try {
 
   const files = Object.fromEntries([...local].map(([rel, f]) => [rel, f.hash]));
   for (const rel of plan.obsolete) if (!toDelete.includes(rel)) files[rel] = manifest[rel];
-  await conn.putText(JSON.stringify({ deployedAt: new Date().toISOString(), files }, null, 1), posix.join(cfg.path, MANIFEST));
+  await saveManifest(files);
 
-  for (const rel of toDelete) await conn.remove(posix.join(cfg.path, rel));
+  for (const rel of toDelete) await op((c) => c.remove(posix.join(cfg.path, rel)), `radera ${rel}`);
   if (toDelete.length) console.log(`▸ Raderade ${toDelete.length} gamla filer.`);
 
   console.log(`\n✔ Klart: ${order.length} filer uppladdade${toDelete.length ? `, ${toDelete.length} raderade` : ''}.\n`);
