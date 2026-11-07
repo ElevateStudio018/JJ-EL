@@ -24,7 +24,7 @@ AddDefaultCharset UTF-8
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Strict-Transport-Security "max-age=63072000"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://eeasibbhydlpoaomjwsn.supabase.co https://images.pexels.com; font-src 'self'; connect-src 'self' https://eeasibbhydlpoaomjwsn.supabase.co wss://eeasibbhydlpoaomjwsn.supabase.co https://formsubmit.co; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'self'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://eeasibbhydlpoaomjwsn.supabase.co https://images.pexels.com; font-src 'self'; connect-src 'self' https://eeasibbhydlpoaomjwsn.supabase.co wss://eeasibbhydlpoaomjwsn.supabase.co; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
 
   # HTML hämtas alltid färskt, så en uppdatering syns direkt.
   <FilesMatch "\.html$">
