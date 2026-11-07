@@ -571,7 +571,7 @@ async function deleteLead(id) {
 
 // The guide video opens by itself the first time someone signs in (remembered on the account, so it does
 // not come back on another device), and can always be opened again from Översikt.
-const INTRO_KEY = 'jjel-admin-intro-seen';
+const INTRO_KEY = 'jjel-admin-intro-seen-v2';
 let introTimer = 0;
 
 function openIntro(first) {
