@@ -586,3 +586,12 @@ kbd { background: rgba(255, 255, 255, 0.18); }
 .livebox.is-mobile { background: var(--bg); }
 .livebox.is-mobile iframe { width: 390px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
 @media (max-width: 760px) { .livehint { display: none; } .livebox { height: calc(100vh - 230px); } }
+
+/* ---------- Välkomstguide ---------- */
+.modal.intro { width: min(860px, calc(100% - 24px)); padding: 30px; }
+.intro__eb { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.intro h2 { margin: 6px 0 8px; font-size: 26px; letter-spacing: -.01em; }
+.intro video { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 18px 0; border-radius: 14px; background: #1c2817; }
+.intro__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.intro__acts .btn[disabled] { opacity: .55; cursor: default; }
+.head .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }

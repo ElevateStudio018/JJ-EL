@@ -501,6 +501,50 @@ function setText(original, value) {
   changed();
 }
 
+/* ---------- välkomstguide ---------- */
+
+// The guide video opens by itself the first time someone signs in (remembered on the account, so it does
+// not come back on another device), and can always be opened again from Översikt.
+const INTRO_KEY = 'jjel-admin-intro-seen';
+let introTimer = 0;
+
+function openIntro(first) {
+  const dlg = $('[data-intro]');
+  const btn = $('[data-intro-close]');
+  const video = $('[data-intro-video]');
+  clearInterval(introTimer);
+  let left = first ? 15 : 0;
+  const tick = () => {
+    btn.disabled = left > 0;
+    btn.textContent = left > 0 ? `Hoppa över om ${left} s` : first ? 'Hoppa över' : 'Stäng';
+  };
+  tick();
+  if (left) introTimer = setInterval(() => (left--, tick(), left <= 0 && clearInterval(introTimer)), 1000);
+  video.onended = () => {
+    clearInterval(introTimer);
+    btn.disabled = false;
+    btn.textContent = 'Kom igång';
+  };
+  dlg.showModal();
+  video.currentTime = 0;
+  video.play().catch(() => {});
+}
+
+async function closeIntro() {
+  const dlg = $('[data-intro]');
+  if ($('[data-intro-close]').disabled) return;
+  clearInterval(introTimer);
+  $('[data-intro-video]').pause();
+  dlg.close();
+  try { localStorage.setItem(INTRO_KEY, '1'); } catch {}
+  sb.auth.updateUser({ data: { jjel_intro_seen: true } }).catch(() => {});
+}
+
+$('[data-intro]').addEventListener('cancel', (e) => {
+  e.preventDefault();
+  closeIntro();
+});
+
 /* ---------- redigera sidan ---------- */
 
 // The real site is shown in an iframe (same domain, so the admin can reach into it). Every piece of
@@ -951,6 +995,8 @@ document.addEventListener('click', async (e) => {
   const d = t.dataset;
 
   if (d.nav) return go(d.nav);
+  if ('guide' in d) return openIntro(false);
+  if ('introClose' in d) return closeIntro();
   if (d.liveSize) return setLiveSize(d.liveSize);
   if (d.textReset !== undefined) {
     snapshot();
@@ -1224,6 +1270,8 @@ async function load() {
   updatedBy = data.updated_by || '';
   saved = JSON.stringify(content);
   userEmail = user.data.user?.email || '';
+  let introSeen = !!user.data.user?.user_metadata?.jjel_intro_seen;
+  try { introSeen ||= localStorage.getItem(INTRO_KEY) === '1'; } catch {}
   $('[data-user-email]').textContent = userEmail;
   images = [
     ...(bucket.data || []).filter((f) => f.id).map((f) => sb.storage.from(IMAGE_BUCKET).getPublicUrl(f.name).data.publicUrl),
@@ -1233,6 +1281,7 @@ async function load() {
   renderAll();
   $$('[data-view]').forEach((v) => (v.hidden = v.dataset.view !== 'editor'));
   go(location.hash.slice(1) || 'oversikt');
+  if (!introSeen) setTimeout(() => openIntro(true), 400);
   try {
     const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
     if (draft && JSON.stringify(draft.content) !== saved) {
