@@ -5,10 +5,12 @@ import '@fontsource/plus-jakarta-sans/latin-800.css';
 import './styles/site.css';
 import { company } from '../content/site.json';
 import { liveContent } from './cms/live.js';
+import { SUPABASE_URL, SUPABASE_KEY } from './cms/supabase-config.js';
 
-// FormSubmit relays the form as an e-mail to the company address (no account needed); it follows
-// the admin as soon as the page has the live content. The very first submission to a new address
-// triggers a one-time activation e-mail to that inbox.
+// Every quote request is saved in the database (shown under Förfrågningar in the admin) and also
+// e-mailed to the company address through FormSubmit. The request counts as sent when either works,
+// so a mail hiccup never loses a customer. The very first FormSubmit mail to a new address asks the
+// inbox to confirm (activate) once.
 let contact = company;
 liveContent.then((c) => c && (contact = c.company));
 const formEndpoint = () => `https://formsubmit.co/ajax/${contact.email}`;
@@ -135,7 +137,25 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
     const labelEl = submit.querySelector('span') || submit;
     const label = labelEl.textContent;
     labelEl.textContent = 'Skickar…';
-    try {
+    const clip = (v, n) => String(v || '').trim().slice(0, n) || null;
+    const lead = {
+      name: clip(d.get('namn'), 120),
+      phone: clip(d.get('telefon'), 40),
+      email: clip(d.get('epost'), 160),
+      city: clip(d.get('ort'), 80),
+      service: clip(d.get('tjanst'), 80),
+      message: clip(d.get('meddelande'), 4000),
+      page: clip(payload.Sida, 80),
+    };
+    const saveLead = async () => {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/jjel_leads`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify(lead),
+      });
+      if (!res.ok) throw new Error(res.status);
+    };
+    const mailLead = async () => {
       const res = await fetch(formEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -143,6 +163,10 @@ document.querySelectorAll('[data-offert]').forEach((form) => {
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || res.status);
+    };
+    try {
+      const [saved, mailed] = await Promise.allSettled([saveLead(), mailLead()]);
+      if (saved.status === 'rejected' && mailed.status === 'rejected') throw new Error('not sent');
       form.innerHTML = `<div class="form-done" role="status">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
           <h3>Tack för din förfrågan!</h3>

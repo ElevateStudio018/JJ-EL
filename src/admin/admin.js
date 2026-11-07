@@ -501,6 +501,72 @@ function setText(original, value) {
   changed();
 }
 
+/* ---------- förfrågningar ---------- */
+
+// Quote requests from the website form, stored in jjel_leads (only admins can read them).
+const leads = { list: [], filter: 'open', loaded: false };
+const LEAD_TABLE = 'jjel_leads';
+
+async function loadLeads() {
+  const { data, error } = await sb.from(LEAD_TABLE).select('*').order('created_at', { ascending: false }).limit(500);
+  if (error) {
+    toast(`Kunde inte hämta förfrågningar: ${error.message}`, 'error');
+    return;
+  }
+  leads.list = data;
+  leads.loaded = true;
+  renderLeads();
+}
+
+function renderLeads() {
+  const open = leads.list.filter((l) => !l.handled).length;
+  $$('[data-count="leads"]').forEach((e) => (e.textContent = open || ''));
+  $('[data-lead-mail]').textContent = content?.company?.email || 'jesper@jjel.se';
+  const box = $('[data-lead-list]');
+  if (!box) return;
+  const list = leads.list.filter((l) => leads.filter === 'all' || (leads.filter === 'done' ? l.handled : !l.handled));
+  if (!leads.loaded) return void (box.innerHTML = '<div class="lead__empty">Hämtar förfrågningar…</div>');
+  if (!list.length) {
+    box.innerHTML = `<div class="lead__empty">${leads.filter === 'open' ? 'Inga nya förfrågningar just nu. När någon fyller i offertformuläret på hemsidan dyker det upp här.' : 'Inga förfrågningar här.'}</div>`;
+    return;
+  }
+  const when = (d) => new Date(d).toLocaleString('sv-SE', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  box.innerHTML = list
+    .map((l) => {
+      const subject = encodeURIComponent(`Ang. din förfrågan${l.service ? ` – ${l.service}` : ''}`);
+      return `<article class="lead${l.handled ? ' is-done' : ''}">
+        <div class="lead__top"><b>${esc(l.name)}</b>${l.handled ? '' : '<span class="lead__new">Ny</span>'}${l.service ? `<span class="lead__tag">${esc(l.service)}</span>` : ''}<time>${when(l.created_at)}</time>${l.city ? `<span>${esc(l.city)}</span>` : ''}</div>
+        <div class="lead__contact">${l.phone ? `<a href="tel:${esc(l.phone.replace(/[^\d+]/g, ''))}">${esc(l.phone)}</a>` : ''}<a href="mailto:${esc(l.email)}?subject=${subject}">${esc(l.email)}</a>${l.page ? `<span class="muted">från ${esc(l.page)}</span>` : ''}</div>
+        <div class="lead__acts">
+          <button class="btn btn--sm ${l.handled ? '' : 'btn--primary'}" data-lead-done="${l.id}">${l.handled ? 'Markera som ny' : 'Markera som hanterad'}</button>
+          <button class="btn btn--sm btn--ghost" data-lead-del="${l.id}">Ta bort</button>
+        </div>
+        <p class="lead__msg">${esc(l.message)}</p>
+      </article>`;
+    })
+    .join('');
+}
+
+async function setLeadHandled(id) {
+  const l = leads.list.find((x) => x.id === id);
+  if (!l) return;
+  const { error } = await sb.from(LEAD_TABLE).update({ handled: !l.handled }).eq('id', id);
+  if (error) return toast(`Kunde inte spara: ${error.message}`, 'error');
+  l.handled = !l.handled;
+  renderLeads();
+  toast(l.handled ? 'Markerad som hanterad.' : 'Markerad som ny.');
+}
+
+async function deleteLead(id) {
+  const l = leads.list.find((x) => x.id === id);
+  if (!l || !confirm(`Ta bort förfrågan från ${l.name}? Det går inte att ångra.`)) return;
+  const { error } = await sb.from(LEAD_TABLE).delete().eq('id', id);
+  if (error) return toast(`Kunde inte ta bort: ${error.message}`, 'error');
+  leads.list = leads.list.filter((x) => x.id !== id);
+  renderLeads();
+  toast('Förfrågan borttagen.');
+}
+
 /* ---------- välkomstguide ---------- */
 
 // The guide video opens by itself the first time someone signs in (remembered on the account, so it does
@@ -746,6 +812,7 @@ function go(view) {
   );
   closeDrawer();
   if (view === 'sida' && !live.loaded) liveLoad();
+  if (view === 'leads') loadLeads();
   if (view === 'sida') liveRefresh();
   if (location.hash.slice(1) !== view) history.replaceState(null, '', `#${view}`);
   window.scrollTo({ top: 0 });
@@ -998,6 +1065,14 @@ document.addEventListener('click', async (e) => {
   if ('guide' in d) return openIntro(false);
   if ('introClose' in d) return closeIntro();
   if (d.liveSize) return setLiveSize(d.liveSize);
+  if (d.leadFilter) {
+    leads.filter = d.leadFilter;
+    $$('[data-lead-filter]').forEach((b) => b.setAttribute('aria-selected', b.dataset.leadFilter === d.leadFilter));
+    return renderLeads();
+  }
+  if (d.leadDone) return setLeadHandled(Number(d.leadDone));
+  if (d.leadDel) return deleteLead(Number(d.leadDel));
+  if ('leadsRefresh' in d) return loadLeads();
   if (d.textReset !== undefined) {
     snapshot();
     delete content.texts?.[d.textReset];
@@ -1281,6 +1356,7 @@ async function load() {
   renderAll();
   $$('[data-view]').forEach((v) => (v.hidden = v.dataset.view !== 'editor'));
   go(location.hash.slice(1) || 'oversikt');
+  loadLeads();
   if (!introSeen) setTimeout(() => openIntro(true), 400);
   try {
     const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
